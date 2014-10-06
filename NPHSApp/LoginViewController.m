@@ -24,6 +24,7 @@
     passwordField.clearsOnBeginEditing = YES;
     passwordField.clearButtonMode = YES;
     passwordField.secureTextEntry = YES;
+    self.navigationItem.hidesBackButton = YES;
     if([PFUser currentUser])
     {
         [self dismissViewControllerAnimated:NO completion:nil];

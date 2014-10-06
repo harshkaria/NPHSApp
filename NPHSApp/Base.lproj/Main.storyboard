@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361p" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v94-sC-YXG">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -199,11 +198,12 @@
                     <connections>
                         <outlet property="notificationField" destination="qpP-6E-Fub" id="D1U-Cc-P8u"/>
                         <outlet property="sendLabel" destination="Drw-Gs-Zar" id="92H-k8-vdm"/>
+                        <segue destination="Mxs-wS-yuf" kind="show" identifier="logOut" id="ufe-lB-YPN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQF-1E-Cp3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="620.5" y="-101.5"/>
+            <point key="canvasLocation" x="400.5" y="-90.5"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="8A8-oB-Eu2">
@@ -304,4 +304,7 @@
             <point key="canvasLocation" x="-823" y="-116"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ufe-lB-YPN"/>
+    </inferredMetricsTieBreakers>
 </document>

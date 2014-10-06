@@ -14,5 +14,7 @@
 - (IBAction)sendButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *sendLabel;
 @property (weak, nonatomic) IBOutlet UITextField *notificationField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logOut;
+
 
 @end
