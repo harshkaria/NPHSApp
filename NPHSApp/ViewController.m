@@ -19,7 +19,7 @@
 @synthesize installation;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
         UIImage *image = [UIImage imageNamed:@"nphs1.jpeg"];
         CGSize imageSize = [image size];
         
