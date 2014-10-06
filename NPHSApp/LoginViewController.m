@@ -24,7 +24,7 @@
     passwordField.clearsOnBeginEditing = YES;
     passwordField.clearButtonMode = YES;
     passwordField.secureTextEntry = YES;
-    if(![PFUser currentUser])
+    if([PFUser currentUser])
     {
         [self dismissViewControllerAnimated:NO completion:nil];
         [self performSegueWithIdentifier:@"goLogin" sender:nil];
