@@ -39,6 +39,9 @@
 		AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */; };
 		AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AF219D80988002207E1 /* LoginViewController.m */; };
 		AE44B71419DFB34E003776AC /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44B71319DFB34E003776AC /* RKDropdownAlert.m */; };
+		AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DC19EA350000CC7FE2 /* Foundation.framework */; };
+		AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DA19EA34C700CC7FE2 /* UIKit.framework */; };
+		AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */; };
 		AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA625E419DE9F4A00200AA6 /* notification.jpg */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +100,10 @@
 		AE3B5AF219D80988002207E1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AE44B71219DFB34E003776AC /* RKDropdownAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKDropdownAlert.h; sourceTree = "<group>"; };
 		AE44B71319DFB34E003776AC /* RKDropdownAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKDropdownAlert.m; sourceTree = "<group>"; };
+		AE6919DA19EA34C700CC7FE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AE6919DC19EA350000CC7FE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsTableViewController.h; sourceTree = "<group>"; };
+		AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsTableViewController.m; sourceTree = "<group>"; };
 		AEA625E419DE9F4A00200AA6 /* notification.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */,
+				AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */,
 				AE1A222019C67FC8009D5019 /* Bolts.framework in Frameworks */,
 				AE1A222119C67FC8009D5019 /* Parse.framework in Frameworks */,
 				AE1A221D19C67F0A009D5019 /* SystemConfiguration.framework in Frameworks */,
@@ -136,6 +145,7 @@
 		AE1A21D219C66EEF009D5019 = {
 			isa = PBXGroup;
 			children = (
+				AE6919DC19EA350000CC7FE2 /* Foundation.framework */,
 				AE1A21DD19C66EEF009D5019 /* NPHSApp */,
 				AE1A21F719C66EF0009D5019 /* NPHSAppTests */,
 				AE1A21DC19C66EEF009D5019 /* Products */,
@@ -169,6 +179,8 @@
 				AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */,
 				AE3B5AEE19D7BCF8002207E1 /* NotificationViewController.h */,
 				AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */,
+				AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */,
+				AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */,
 				AE1A21DE19C66EEF009D5019 /* Supporting Files */,
 			);
 			path = NPHSApp;
@@ -177,6 +189,7 @@
 		AE1A21DE19C66EEF009D5019 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE6919DA19EA34C700CC7FE2 /* UIKit.framework */,
 				AE1A220419C6751A009D5019 /* Bolts.framework */,
 				AE1A220519C6751A009D5019 /* Parse.framework */,
 				AE1A220619C6751A009D5019 /* ParseFacebookUtils.framework */,
@@ -348,6 +361,7 @@
 				AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */,
 				AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */,
 				AE1B0FAC19DBD0850061FD4D /* OnboardingViewController.m in Sources */,
+				AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */,
 				AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */,
 				AE3B5AEC19D7AA59002207E1 /* OverlayView.m in Sources */,
 				AE1A21E419C66EEF009D5019 /* AppDelegate.m in Sources */,
@@ -477,8 +491,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -495,8 +509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Karia Sanjay (9E9GT25VA2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",

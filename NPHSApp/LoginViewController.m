@@ -63,7 +63,7 @@
     NSString *usernameText = [usernameField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     if(usernameField.text.length > 0 && passwordField.text.length > 0)
     {
-    [PFUser logInWithUsernameInBackground:usernameText password:passwordField.text                                    block:^(PFUser *user, NSError *error) {
+    [PFUser logInWithUsernameInBackground:[usernameText lowercaseString] password:passwordField.text                                    block:^(PFUser *user, NSError *error) {
             if (user)
             {
                 

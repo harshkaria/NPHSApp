@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "OnboardingViewController.h"
 #import "OnboardingContentViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -52,6 +53,7 @@
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+   
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     if(currentInstallation.badge != 0)
     {
