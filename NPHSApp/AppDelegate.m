@@ -40,6 +40,8 @@
                          UIRemoteNotificationTypeAlert |
                          UIRemoteNotificationTypeSound)];
     }
+    [[UINavigationBar appearance]setBackgroundColor:[UIColor blackColor]];
+    [[UINavigationBar appearance]setTranslucent:NO]; 
     
     
     return YES;
@@ -48,7 +50,7 @@
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global", @"asg" ];
+    currentInstallation.channels = @[ @"global", @"asg", @"football" ];
     [currentInstallation saveInBackground];
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -59,6 +61,7 @@
     {
     currentInstallation.badge = 0;
     }
+    
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -82,6 +85,8 @@
         currentInstallation.badge = 0;
         [currentInstallation saveInBackground];
     }
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

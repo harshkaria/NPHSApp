@@ -33,6 +33,7 @@
 		AE1B0FAC19DBD0850061FD4D /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B0FAA19DBD0850061FD4D /* OnboardingViewController.m */; };
 		AE1B0FAF19DBD3E30061FD4D /* nphs1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE1B0FAE19DBD3E30061FD4D /* nphs1.jpeg */; };
 		AE1B0FB119DBD3E80061FD4D /* nphs2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE1B0FB019DBD3E80061FD4D /* nphs2.jpg */; };
+		AE315F1119EBA6160021D539 /* CreditsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE315F1019EBA6160021D539 /* CreditsTableViewController.m */; };
 		AE3B5AEA19D7AA59002207E1 /* DraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AE519D7AA59002207E1 /* DraggableView.m */; };
 		AE3B5AEB19D7AA59002207E1 /* DraggableViewBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AE719D7AA59002207E1 /* DraggableViewBackground.m */; };
 		AE3B5AEC19D7AA59002207E1 /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AE919D7AA59002207E1 /* OverlayView.m */; };
@@ -88,6 +89,8 @@
 		AE1B0FAA19DBD0850061FD4D /* OnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingViewController.m; sourceTree = "<group>"; };
 		AE1B0FAE19DBD3E30061FD4D /* nphs1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nphs1.jpeg; sourceTree = "<group>"; };
 		AE1B0FB019DBD3E80061FD4D /* nphs2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nphs2.jpg; sourceTree = "<group>"; };
+		AE315F0F19EBA6160021D539 /* CreditsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsTableViewController.h; sourceTree = "<group>"; };
+		AE315F1019EBA6160021D539 /* CreditsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsTableViewController.m; sourceTree = "<group>"; };
 		AE3B5AE419D7AA59002207E1 /* DraggableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableView.h; sourceTree = "<group>"; };
 		AE3B5AE519D7AA59002207E1 /* DraggableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableView.m; sourceTree = "<group>"; };
 		AE3B5AE619D7AA59002207E1 /* DraggableViewBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableViewBackground.h; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */,
 				AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */,
 				AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */,
+				AE315F0F19EBA6160021D539 /* CreditsTableViewController.h */,
+				AE315F1019EBA6160021D539 /* CreditsTableViewController.m */,
 				AE1A21DE19C66EEF009D5019 /* Supporting Files */,
 			);
 			path = NPHSApp;
@@ -360,6 +365,7 @@
 				AE1B0FAB19DBD0850061FD4D /* OnboardingContentViewController.m in Sources */,
 				AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */,
 				AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */,
+				AE315F1119EBA6160021D539 /* CreditsTableViewController.m in Sources */,
 				AE1B0FAC19DBD0850061FD4D /* OnboardingViewController.m in Sources */,
 				AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */,
 				AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */,
