@@ -43,7 +43,13 @@
 		AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DC19EA350000CC7FE2 /* Foundation.framework */; };
 		AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DA19EA34C700CC7FE2 /* UIKit.framework */; };
 		AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */; };
+		AE818EB91A2041FF0054631E /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE818EB81A2041FF0054631E /* SplashViewController.m */; };
+		AE818EC91A20444C0054631E /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE818EC61A20444C0054631E /* FBShimmeringLayer.m */; };
+		AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE818EC81A20444C0054631E /* FBShimmeringView.m */; };
+		AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECB1A204E890054631E /* AROMA-Light.ttf */; };
+		AE818ECF1A2051EA0054631E /* Dekar Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECE1A2051EA0054631E /* Dekar Light.otf */; };
 		AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA625E419DE9F4A00200AA6 /* notification.jpg */; };
+		AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED7D9521A20251400016D3D /* SplashViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,7 +113,18 @@
 		AE6919DC19EA350000CC7FE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsTableViewController.h; sourceTree = "<group>"; };
 		AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsTableViewController.m; sourceTree = "<group>"; };
+		AE818EB81A2041FF0054631E /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
+		AE818EC31A20444C0054631E /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
+		AE818EC41A20444C0054631E /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
+		AE818EC51A20444C0054631E /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
+		AE818EC61A20444C0054631E /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
+		AE818EC71A20444C0054631E /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
+		AE818EC81A20444C0054631E /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
+		AE818ECB1A204E890054631E /* AROMA-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AROMA-Light.ttf"; sourceTree = "<group>"; };
+		AE818ECE1A2051EA0054631E /* Dekar Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dekar Light.otf"; sourceTree = "<group>"; };
 		AEA625E419DE9F4A00200AA6 /* notification.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification.jpg; sourceTree = "<group>"; };
+		AED7D9501A20251400016D3D /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashViewController.h; path = ../SplashViewController.h; sourceTree = "<group>"; };
+		AED7D9521A20251400016D3D /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashViewController.xib; path = ../SplashViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +184,8 @@
 		AE1A21DD19C66EEF009D5019 /* NPHSApp */ = {
 			isa = PBXGroup;
 			children = (
+				AE818ECE1A2051EA0054631E /* Dekar Light.otf */,
+				AE818ECB1A204E890054631E /* AROMA-Light.ttf */,
 				AEA625E419DE9F4A00200AA6 /* notification.jpg */,
 				AE1B0FAE19DBD3E30061FD4D /* nphs1.jpeg */,
 				AE1B0FB019DBD3E80061FD4D /* nphs2.jpg */,
@@ -186,6 +205,15 @@
 				AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */,
 				AE315F0F19EBA6160021D539 /* CreditsTableViewController.h */,
 				AE315F1019EBA6160021D539 /* CreditsTableViewController.m */,
+				AED7D9501A20251400016D3D /* SplashViewController.h */,
+				AE818EB81A2041FF0054631E /* SplashViewController.m */,
+				AED7D9521A20251400016D3D /* SplashViewController.xib */,
+				AE818EC31A20444C0054631E /* FBShimmering-Prefix.pch */,
+				AE818EC41A20444C0054631E /* FBShimmering.h */,
+				AE818EC51A20444C0054631E /* FBShimmeringLayer.h */,
+				AE818EC61A20444C0054631E /* FBShimmeringLayer.m */,
+				AE818EC71A20444C0054631E /* FBShimmeringView.h */,
+				AE818EC81A20444C0054631E /* FBShimmeringView.m */,
 				AE1A21DE19C66EEF009D5019 /* Supporting Files */,
 			);
 			path = NPHSApp;
@@ -339,12 +367,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */,
 				AE1B0FB119DBD3E80061FD4D /* nphs2.jpg in Resources */,
 				AE1B0FAF19DBD3E30061FD4D /* nphs1.jpeg in Resources */,
+				AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */,
 				AE1A21EA19C66EEF009D5019 /* Main.storyboard in Resources */,
 				AE1A21EF19C66EEF009D5019 /* LaunchScreen.xib in Resources */,
 				AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */,
 				AE1A21EC19C66EEF009D5019 /* Images.xcassets in Resources */,
+				AE818ECF1A2051EA0054631E /* Dekar Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +396,8 @@
 				AE1B0FAB19DBD0850061FD4D /* OnboardingContentViewController.m in Sources */,
 				AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */,
 				AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */,
+				AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */,
+				AE818EB91A2041FF0054631E /* SplashViewController.m in Sources */,
 				AE315F1119EBA6160021D539 /* CreditsTableViewController.m in Sources */,
 				AE1B0FAC19DBD0850061FD4D /* OnboardingViewController.m in Sources */,
 				AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */,
@@ -373,6 +406,7 @@
 				AE1A21E419C66EEF009D5019 /* AppDelegate.m in Sources */,
 				AE3B5AEA19D7AA59002207E1 /* DraggableView.m in Sources */,
 				AE1A21E119C66EEF009D5019 /* main.m in Sources */,
+				AE818EC91A20444C0054631E /* FBShimmeringLayer.m in Sources */,
 				AE3B5AEB19D7AA59002207E1 /* DraggableViewBackground.m in Sources */,
 				AE44B71419DFB34E003776AC /* RKDropdownAlert.m in Sources */,
 			);
@@ -433,7 +467,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -474,8 +508,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -497,8 +531,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -507,7 +541,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "34123215-126c-4cdb-a687-c1c477c79a65";
+				PROVISIONING_PROFILE = "c167b939-2644-4a5c-86db-fd7f2ab8e22f";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -515,7 +550,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -524,7 +560,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "34123215-126c-4cdb-a687-c1c477c79a65";
+				PROVISIONING_PROFILE = "c167b939-2644-4a5c-86db-fd7f2ab8e22f";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

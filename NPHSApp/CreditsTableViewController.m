@@ -16,8 +16,10 @@
 @synthesize people;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Michael Weingarden", @"Claire Monro", @"Matthew Mangawang", @"James Lin", @"Victoria Juan", @"👳 Adam Aziz", nil];
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
+    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Michael Weingarden", @"Claire Monro", @"Matthew Mangawang", @"😍 James Lin", @"Victoria Juan", @"👳 Adam Aziz", @"👨 Ernesto Ambrocio", @"😍 Suraj Palaparty",  nil];
     
     
 }
@@ -43,34 +45,59 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    tableView.scrollEnabled = YES;
+    tableView.bounces = YES;
+    tableView.userInteractionEnabled = YES;
+    
     static NSString *cellIdentifier = @"Person";
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    
+    
 
-    tableView.userInteractionEnabled = NO;
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.text = [people objectAtIndex:indexPath.row];
+    
     cell.textLabel.textColor = [UIColor yellowColor];
-    cell.detailTextLabel.text = @"Team Members";
+    cell.detailTextLabel.text = @"Team Member";
     //cell.textLabel.textAlignment = NSTextAlignmentRight;
     cell.detailTextLabel.textColor = [UIColor yellowColor];
     //[[cell appearance]setBackgroundColor:[UIColor blackColor]];
     
+    
+    //tableView.userInteractionEnabled = YES;
     if([cell.textLabel.text isEqualToString:@"Harsh Karia"])
     {
         cell.backgroundColor = [UIColor blackColor];
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.detailTextLabel.text = @"Main Developer";
+        cell.detailTextLabel.text = @"Team Leader and Lead Developer";
         cell.detailTextLabel.textColor = [UIColor whiteColor];
         
         
     }
     if([cell.textLabel.text isEqualToString:@"Michael Weingarden"])
     {
-        cell.detailTextLabel.text = @"Advisor";
+        cell.detailTextLabel.text = @"Faggot";
         
     }
+    if([cell.textLabel.text isEqualToString:@"👳 Adam Aziz"])
+    {
+        cell.detailTextLabel.text = @"ISIS Affiliate";
+    }
+    if([cell.textLabel.text isEqualToString:@"👨 Ernesto Ambrocio"])
+    {
+        cell.detailTextLabel.text = @"Cartel Affiliate";
+    }
+    if([cell.textLabel.text isEqualToString:@"😍 Suraj Palaparty"])
+    {
+        cell.detailTextLabel.text = @"Bae";
+    }
+    if([cell.textLabel.text isEqualToString:@"😍 James Lin"])
+    {
+        cell.detailTextLabel.text = @"Soulmate";
+    }
+    
+    cell.userInteractionEnabled = NO;
        return cell;
 }
-
 
 @end

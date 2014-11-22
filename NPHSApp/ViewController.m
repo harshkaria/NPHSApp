@@ -11,6 +11,7 @@
 #import "DraggableViewBackground.h"
 #import "OnboardingContentViewController.h"
 #import "OnboardingViewController.h"
+#import "SplashViewController.h"
 @interface ViewController ()
 @property (nonatomic) PFInstallation *installation;
 @end
@@ -19,7 +20,10 @@
 @synthesize installation;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
+    installation = [PFInstallation currentInstallation];
+    [self checkDay];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
         UIImage *image = [UIImage imageNamed:@"nphs1.jpeg"];
         CGSize imageSize = [image size];
         
@@ -39,22 +43,96 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         };
         onboardingVC.shouldFadeTransitions = YES;
-        [self presentViewController:onboardingVC animated:NO completion:nil];
+        
         
         // Set the "hasPerformedFirstLaunch" key so this block won't execute again
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"date"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        [self presentViewController:onboardingVC animated:NO completion:nil];
+        
+        
     }
-    installation = [PFInstallation currentInstallation];
+    
+    UIViewController *splash = [[SplashViewController alloc] init];
+    [self presentViewController:splash animated:NO completion:nil];
+    [self performSelector:@selector(hideMe) withObject:nil afterDelay:4.0];
     if(installation.badge != 0)
     {
         installation.badge = 0;
         [installation saveInBackground];
     }
-    DraggableViewBackground *draggableBackground = [[DraggableViewBackground alloc]initWithFrame:self.view.frame];
-    [self.view addSubview:draggableBackground];
+   // DraggableViewBackground *draggableBackground = [[DraggableViewBackground alloc]initWithFrame:self.view.frame];
+    
+    //[self.view addSubview:draggableBackground];
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
+  
+    [self background];
     
 }
+-(void)background
+{
+    UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    backgroundView.image = [UIImage imageNamed:@"nphs2.jpg"];
+    [self.view addSubview:backgroundView];
+    UIButton *buttonOne = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [buttonOne setTitle:@"Subscribe to App Club" forState:UIControlStateNormal];
+    buttonOne.frame = CGRectMake(124, 110, 156, 30);
+    [buttonOne addTarget:self action:@selector(subApp:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:buttonOne];
+    
+
+}
+-(void)hideMe
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+-(void)checkDay
+{
+
+NSDate *saved = [[NSUserDefaults standardUserDefaults]objectForKey:@"date"];
+   
+    int plusDays =  2;
+    NSDateComponents *dateComponents = [[NSDateComponents alloc]init];
+    [dateComponents setDay:plusDays];
+   
+    NSCalendar *calender = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDate *bDay = [calender dateByAddingComponents:dateComponents toDate:saved options:0];
+   NSComparisonResult dComp =[calender compareDate:bDay toDate:[NSDate date] toUnitGranularity:(NSDayCalendarUnit)];
+  NSInteger day = [calender component:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    NSLog(@"%ld", day);
+    
+   
+    
+    
+    
+    
+    
+   
+   if(dComp == NSOrderedSame)
+   {
+       NSLog(@"hi");
+       
+       [[NSUserDefaults standardUserDefaults]setObject:[NSDate date] forKey:@"date"];
+       [[NSUserDefaults standardUserDefaults]synchronize];
+     
+       
+       
+       
+   }
+    else
+    {
+        
+        
+        
+    }
+   
+   }
+    
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -70,7 +148,8 @@
     NSLog(@"Pressed");
 }
 
-- (IBAction)subApp:(id)sender {
+- (void)subApp:(UIButton *)button
+{
    
     [installation addUniqueObject:@"appClub" forKey:@"channels"];
     [installation saveInBackground];

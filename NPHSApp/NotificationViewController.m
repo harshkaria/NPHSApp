@@ -25,6 +25,9 @@
         currentInstallation.badge = 0;
         [currentInstallation saveInBackground];
     }
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
     username = [[PFUser currentUser]username];
     // Do any additional setup after loading the view.
     self.navigationItem.hidesBackButton = YES;

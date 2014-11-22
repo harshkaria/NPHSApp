@@ -26,17 +26,25 @@
         //self.parseClassName = @"User";
         self.paginationEnabled = NO;
         self.pullToRefreshEnabled = YES;
-        
+        ;
        
         
     }
     return self;
+}
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
 }
 -(PFQuery *)queryForTable
 {
     PFQuery *clubs = [PFUser query];
     return clubs;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
 
@@ -45,43 +53,24 @@
     
     static NSString *CellIdentifier = @"Clubs";
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    
-    clubRow = [object objectForKey:@"username"];
-    cell.backgroundColor = [UIColor blackColor];
-    cell.textLabel.textColor = [UIColor yellowColor];
-    cell.detailTextLabel.textColor = [UIColor redColor];
-    cell.detailTextLabel.text = @"Not subscribed";
+    //UITableViewCell *cellClub = [tableView cellForRowAtIndexPath:indexPath];
     cell.userInteractionEnabled = YES;
-    cell.textLabel.text = clubRow;
-    if([(NSString *)[currentChannels objectAtIndex:indexPath.row] isEqualToString:clubRow])
-    {
-    cell.detailTextLabel.text = @"Subscribed";
+    cell.backgroundColor = [UIColor blackColor];
+
     
-   
-    cell.detailTextLabel.textColor = [UIColor greenColor];
-   
-    }
-    else
-    {
-        
-    }
-    NSString *fag = (NSString *)[currentChannels objectAtIndex:indexPath.row];
-    NSLog(@"%@", fag);
-                     
-   
-   
+    cell.textLabel.text = [object objectForKey:@"username"];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    
+    
     return cell;
    
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation addUniqueObject:cell.textLabel.text forKey:@"channels"];
     
-    [currentInstallation saveInBackground];
-    NSLog(@"%@", currentInstallation.channels);
-    cell.selected = NO;
+    PFInstallation *myInstall = [PFInstallation currentInstallation];
+    
    // [currentInstallation refresh];
 }
 
