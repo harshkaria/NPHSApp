@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     CGRect labelRect = [[UIScreen mainScreen]bounds];
-     labelRect.size.height = labelRect.size.height * 0.5;
+     labelRect.size.height = labelRect.size.height / 2;
     
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.view.bounds];
     
@@ -26,10 +26,10 @@
     imageView.image = [UIImage imageNamed:@"nphs2.jpg"];
     imageView.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:imageView];
-    UILabel  *myText = [[UILabel alloc] initWithFrame:CGRectMake(labelRect.size.height / 2, labelRect.size.width / 2, labelRect.size.height, labelRect.size.width)];
+    UILabel  *myText = [[UILabel alloc] init];
     myText.text = @"NPHS";
     myText.textAlignment = NSTextAlignmentCenter;
-    myText.font = [UIFont fontWithName:@"Dekar Light" size:50];
+    myText.font = [UIFont fontWithName:@"Dekar Light" size:125];
     myText.textColor = [UIColor yellowColor];
     
     
@@ -39,7 +39,7 @@
     
     // Start shimmering.
     shimmeringView.shimmering = YES;
-    shimmeringView.shimmeringSpeed = 240;
+    shimmeringView.shimmeringSpeed = 250;
     shimmeringView.shimmeringOpacity = 0.1;
 
     shimmeringView.shimmeringDirection = FBShimmerDirectionRight;

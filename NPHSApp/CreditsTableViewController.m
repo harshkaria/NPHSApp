@@ -69,14 +69,14 @@
     {
         cell.backgroundColor = [UIColor blackColor];
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.detailTextLabel.text = @"Team Leader and Lead Developer";
+        cell.detailTextLabel.text = @"Team Leader and Lead Developer. Overlord.";
         cell.detailTextLabel.textColor = [UIColor whiteColor];
         
         
     }
     if([cell.textLabel.text isEqualToString:@"Michael Weingarden"])
     {
-        cell.detailTextLabel.text = @"Faggot";
+        cell.detailTextLabel.text = @"Advisor";
         
     }
     if([cell.textLabel.text isEqualToString:@"👳 Adam Aziz"])

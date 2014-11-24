@@ -42,8 +42,13 @@
     }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-     CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.nphs.org/images/pic3.png"]];
+     CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:IMAGE_BG]];
       [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithCIImage:image] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance]setTranslucent:NO];
+    [[UITabBar appearance]setTranslucent:YES];
+    [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
+    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor yellowColor]}forState:UIControlStateNormal];
+    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blueColor]} forState:UIControlStateSelected];
 
     
     
