@@ -42,6 +42,7 @@
 		AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */; };
 		AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AF219D80988002207E1 /* LoginViewController.m */; };
 		AE44B71419DFB34E003776AC /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44B71319DFB34E003776AC /* RKDropdownAlert.m */; };
+		AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE451EC01A319A5E00399E1C /* CreditsCell.m */; };
 		AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DC19EA350000CC7FE2 /* Foundation.framework */; };
 		AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DA19EA34C700CC7FE2 /* UIKit.framework */; };
 		AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */; };
@@ -50,6 +51,7 @@
 		AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE818EC81A20444C0054631E /* FBShimmeringView.m */; };
 		AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECB1A204E890054631E /* AROMA-Light.ttf */; };
 		AE818ECF1A2051EA0054631E /* Dekar Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECE1A2051EA0054631E /* Dekar Light.otf */; };
+		AE83E0B81A469EB40040D422 /* nphs3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AE83E0B71A469EB40040D422 /* nphs3.JPG */; };
 		AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA625E419DE9F4A00200AA6 /* notification.jpg */; };
 		AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED7D9521A20251400016D3D /* SplashViewController.xib */; };
 /* End PBXBuildFile section */
@@ -115,6 +117,8 @@
 		AE3B5AF219D80988002207E1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AE44B71219DFB34E003776AC /* RKDropdownAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKDropdownAlert.h; sourceTree = "<group>"; };
 		AE44B71319DFB34E003776AC /* RKDropdownAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKDropdownAlert.m; sourceTree = "<group>"; };
+		AE451EBF1A319A5E00399E1C /* CreditsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsCell.h; sourceTree = "<group>"; };
+		AE451EC01A319A5E00399E1C /* CreditsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsCell.m; sourceTree = "<group>"; };
 		AE6919DA19EA34C700CC7FE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE6919DC19EA350000CC7FE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsTableViewController.h; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 		AE818EC81A20444C0054631E /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		AE818ECB1A204E890054631E /* AROMA-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AROMA-Light.ttf"; sourceTree = "<group>"; };
 		AE818ECE1A2051EA0054631E /* Dekar Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dekar Light.otf"; sourceTree = "<group>"; };
+		AE83E0B71A469EB40040D422 /* nphs3.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nphs3.JPG; sourceTree = "<group>"; };
 		AEA625E419DE9F4A00200AA6 /* notification.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification.jpg; sourceTree = "<group>"; };
 		AED7D9501A20251400016D3D /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashViewController.h; path = ../SplashViewController.h; sourceTree = "<group>"; };
 		AED7D9521A20251400016D3D /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashViewController.xib; path = ../SplashViewController.xib; sourceTree = "<group>"; };
@@ -190,6 +195,7 @@
 		AE1A21DD19C66EEF009D5019 /* NPHSApp */ = {
 			isa = PBXGroup;
 			children = (
+				AE83E0B71A469EB40040D422 /* nphs3.JPG */,
 				AE818ECE1A2051EA0054631E /* Dekar Light.otf */,
 				AE818ECB1A204E890054631E /* AROMA-Light.ttf */,
 				AEA625E419DE9F4A00200AA6 /* notification.jpg */,
@@ -213,6 +219,8 @@
 				AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */,
 				AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */,
 				AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */,
+				AE451EBF1A319A5E00399E1C /* CreditsCell.h */,
+				AE451EC01A319A5E00399E1C /* CreditsCell.m */,
 				AE315F0F19EBA6160021D539 /* CreditsTableViewController.h */,
 				AE315F1019EBA6160021D539 /* CreditsTableViewController.m */,
 				AED7D9501A20251400016D3D /* SplashViewController.h */,
@@ -380,6 +388,7 @@
 				AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */,
 				AE1B0FB119DBD3E80061FD4D /* nphs2.jpg in Resources */,
 				AE1B0FAF19DBD3E30061FD4D /* nphs1.jpeg in Resources */,
+				AE83E0B81A469EB40040D422 /* nphs3.JPG in Resources */,
 				AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */,
 				AE1A21EA19C66EEF009D5019 /* Main.storyboard in Resources */,
 				AE1A21EF19C66EEF009D5019 /* LaunchScreen.xib in Resources */,
@@ -409,6 +418,7 @@
 				AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */,
 				AE818EB91A2041FF0054631E /* SplashViewController.m in Sources */,
 				AE315F1119EBA6160021D539 /* CreditsTableViewController.m in Sources */,
+				AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */,
 				AE1B0FAC19DBD0850061FD4D /* OnboardingViewController.m in Sources */,
 				AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */,
 				AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */,
@@ -479,6 +489,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -520,7 +531,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -543,8 +554,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Karia Sanjay (9E9GT25VA2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -553,7 +564,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "069e3cea-9795-4710-8799-492fea6bbdd2";
+				PROVISIONING_PROFILE = "6d54954e-706e-4f37-9b37-d306cc186097";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -562,8 +573,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Karia Sanjay (9E9GT25VA2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -572,7 +583,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "069e3cea-9795-4710-8799-492fea6bbdd2";
+				PROVISIONING_PROFILE = "6d54954e-706e-4f37-9b37-d306cc186097";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

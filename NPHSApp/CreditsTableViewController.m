@@ -7,7 +7,8 @@
 //
 
 #import "CreditsTableViewController.h"
-
+#import "CreditsCell.h"
+#import "AppDelegate.h"
 @interface CreditsTableViewController ()
 @property NSMutableArray *people;
 @end
@@ -19,7 +20,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
-    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Michael Weingarden", @"Claire Monro", @"Matthew Mangawang", @"😍 James Lin", @"Victoria Juan", @"👳 Adam Aziz", @"👨 Ernesto Ambrocio", @"😍 Suraj Palaparty",  nil];
+    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Michael Weingarden", @"Claire Monro & Matthew Mangawang",  nil];
     
     
 }
@@ -48,53 +49,43 @@
     tableView.scrollEnabled = YES;
     tableView.bounces = YES;
     tableView.userInteractionEnabled = YES;
-    
-    static NSString *cellIdentifier = @"Person";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    
+    tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    CreditsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Credits" forIndexPath:indexPath];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 
-    cell.backgroundColor = [UIColor blackColor];
-    cell.textLabel.text = [people objectAtIndex:indexPath.row];
     
-    cell.textLabel.textColor = [UIColor yellowColor];
-    cell.detailTextLabel.text = @"Team Member";
-    //cell.textLabel.textAlignment = NSTextAlignmentRight;
-    cell.detailTextLabel.textColor = [UIColor yellowColor];
+    cell.creditLabel.textAlignment = NSTextAlignmentCenter;
+    cell.creditLabel.text = [people objectAtIndex:indexPath.row];
+    cell.backgroundColor = [UIColor blackColor];
+    
+    cell.creditLabel.textColor = [UIColor yellowColor];
+    cell.biography.text = @"Team Member";
+    //cell.creditLabel.textAlignment = NSTextAlignmentRight;
+    //cell.biography = [UIColor yellowColor];
     //[[cell appearance]setBackgroundColor:[UIColor blackColor]];
     
     
     //tableView.userInteractionEnabled = YES;
-    if([cell.textLabel.text isEqualToString:@"Harsh Karia"])
+    if([cell.creditLabel.text isEqualToString:@"Harsh Karia"])
     {
-        cell.backgroundColor = [UIColor blackColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.detailTextLabel.text = @"Team Leader and Lead Developer. Overlord.";
-        cell.detailTextLabel.textColor = [UIColor whiteColor];
+        //cell.backgroundColor = [UIColor blackColor];
+        //cell.creditLabel.textColor = [UIColor whiteColor];
+        cell.biography.text = @"Team Leader and Lead Developer. Overlord.";
+        //cell.biography.t = [UIColor whiteColor];
         
         
     }
-    if([cell.textLabel.text isEqualToString:@"Michael Weingarden"])
+    if([cell.creditLabel.text isEqualToString:@"Michael Weingarden"])
     {
-        cell.detailTextLabel.text = @"Advisor";
+        cell.biography.text = @"Advisor";
         
     }
-    if([cell.textLabel.text isEqualToString:@"👳 Adam Aziz"])
+    if([cell.creditLabel.text isEqualToString:@"Claire Monro & Matthew Mangawang"])
     {
-        cell.detailTextLabel.text = @"ISIS Affiliate";
+         cell.biography.text = @"Publicity and Operations";
     }
-    if([cell.textLabel.text isEqualToString:@"👨 Ernesto Ambrocio"])
-    {
-        cell.detailTextLabel.text = @"Cartel Affiliate";
-    }
-    if([cell.textLabel.text isEqualToString:@"😍 Suraj Palaparty"])
-    {
-        cell.detailTextLabel.text = @"Bae";
-    }
-    if([cell.textLabel.text isEqualToString:@"😍 James Lin"])
-    {
-        cell.detailTextLabel.text = @"Soulmate";
-    }
+   
     
     cell.userInteractionEnabled = NO;
        return cell;

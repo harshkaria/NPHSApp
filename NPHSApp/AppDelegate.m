@@ -42,13 +42,17 @@
     }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-     CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:IMAGE_BG]];
+     CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:NAV_BG]];
       [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithCIImage:image] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor yellowColor]}];
     [[UINavigationBar appearance]setTranslucent:NO];
     [[UITabBar appearance]setTranslucent:YES];
     [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
-    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor yellowColor]}forState:UIControlStateNormal];
+    
+    [[UITabBarItem appearance]setTitleTextAttributes:
+    @{NSForegroundColorAttributeName: [UIColor yellowColor]} forState:UIControlStateNormal];
     [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blueColor]} forState:UIControlStateSelected];
+    
 
     
     
@@ -60,8 +64,8 @@
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global", @"asg", @"football" ];
-    
+    currentInstallation.channels = @[ @"global", @"asg", ];
+    [currentInstallation addUniqueObject:@"test" forKey:@"channels"];
     
     [currentInstallation saveInBackground];
 }

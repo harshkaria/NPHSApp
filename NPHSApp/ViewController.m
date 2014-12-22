@@ -13,6 +13,7 @@
 #import "OnboardingViewController.h"
 #import "SplashViewController.h"
 #import "AppDelegate.h"
+#import "FeedController.h"
 //#import "FeedViewController.h";
 @interface ViewController ()
 @property (nonatomic) PFInstallation *installation;
@@ -27,8 +28,8 @@
     [self checkDay];
    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
-        UIImage *image = [UIImage imageNamed:@"nphs1.jpeg"];
-        CGSize imageSize = [image size];
+        self.navigationController.navigationBar.hidden = YES;
+        
         
         OnboardingContentViewController *firstPage = [[OnboardingContentViewController alloc] initWithTitle:@"Welcome" body:@"This NPHS app will rock yo socks off" image:nil buttonText:nil action:nil];
         OnboardingContentViewController *secondPage = [[OnboardingContentViewController alloc] initWithTitle:@"Introducing Smart Notfications" body:@"Subscribe to the activites you are involved in, and follow football games, etc as they happen" image:[UIImage imageNamed:@"nphs2.jpg"] buttonText:nil action:nil];
@@ -54,6 +55,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"date"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        //
         [self presentViewController:onboardingVC animated:NO completion:nil];
         [self background];
         
@@ -77,11 +79,13 @@
     [self presentViewController:splash animated:NO completion:nil];
     [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
     [self background];
+   
     
     }
     
     
 }
+// child view controller
 -(void)background
 {
     UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -92,8 +96,11 @@
     buttonOne.frame = CGRectMake(124, 110, 156, 30);
     [buttonOne addTarget:self action:@selector(subApp:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonOne];*/
-    //UIViewController *feed = [[FeedViewController alloc] init];
-    //[self presentViewController:feed animated:NO completion:nil];
+    UIViewController *feed = [[FeedController alloc] init];
+    
+    //UIViewController *feed = [[FeedController alloc] init];
+    [self presentViewController:feed animated:NO completion:nil];
+    
     
 
 }

@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *clubName;
 @property (weak, nonatomic) IBOutlet UITextView *clubText;
 
+
 @end

@@ -9,6 +9,7 @@
 #import "FeedController.h"
 #import "FeedCell.h"
 #import "AppDelegate.h"
+
 @interface FeedController ()
 @property NSMutableArray *clubNames;
 @property NSMutableArray *clubText;
@@ -19,8 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    clubNames = [[NSMutableArray alloc] initWithObjects:@"App Club", @"ASG",  nil];
-    clubText = [[NSMutableArray alloc]initWithObjects:@"You have a meeting next Friday", @"Remember to show up to ASG on Thanksgiving day", nil];
+    clubNames = [[NSMutableArray alloc] initWithObjects:@"App Club", @"ASG", @"Interact", @"Interact",  nil];
+    clubText = [[NSMutableArray alloc]initWithObjects:@"You have a meeting next Friday", @"Remember to show up to ASG on Thanksgiving day", @"You have a Fundraiser coming up on Saturday", @"We have a guest speaker at lunch on Monday, so be there!", nil];
      self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
     
 }
@@ -42,17 +43,34 @@
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [clubNames count];
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Feed" forIndexPath:indexPath];
+    tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    self.tableView.separatorColor = [UIColor yellowColor];
+    
+    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    UIImageView *cellBG = [[UIImageView alloc] initWithFrame:cell.feedView.bounds];
+    cellBG.image = [UIImage imageNamed:VIEW_BG];
+    
+    
     
     cell.clubName.text = [clubNames objectAtIndex:indexPath.row];
     cell.clubText.text = [clubText objectAtIndex:indexPath.row];
+    
+    cellBG.alpha = 0.4;
+    cell.clubName.alpha = 1;
+    cell.clubText.alpha = 1;
+    [cell.feedView addSubview:cellBG];
+    [cell.feedView addSubview:cell.clubName];
+    [cell.feedView addSubview:cell.clubText];
+    cellBG.userInteractionEnabled = NO;
     cell.userInteractionEnabled = NO;
-    tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
     return cell;
+    
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "SplashViewController.h"
 #import "FBShimmeringView.h"
+#import "AppDelegate.h"
 @interface SplashViewController ()
 
 @end
@@ -17,13 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    CGRect labelRect = [[UIScreen mainScreen]bounds];
-     labelRect.size.height = labelRect.size.height / 2;
+    
     
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.view.bounds];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    imageView.image = [UIImage imageNamed:@"nphs2.jpg"];
+    imageView.image = [UIImage imageNamed:VIEW_BG];
     imageView.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:imageView];
     UILabel  *myText = [[UILabel alloc] init];
@@ -31,7 +31,14 @@
     myText.textAlignment = NSTextAlignmentCenter;
     myText.font = [UIFont fontWithName:@"Dekar Light" size:125];
     myText.textColor = [UIColor yellowColor];
-    
+    NSURL *url = [NSURL URLWithString:@"http://pannaeyebrow.com/test/pic.txt"];
+    NSString *string = [NSString stringWithContentsOfURL:url
+                                                encoding:NSUTF8StringEncoding error:nil];
+    UILabel *picBy = [[UILabel alloc]initWithFrame:CGRectMake(80, 434, 495, 46)];
+    picBy.text = string;
+    picBy.textColor = [UIColor whiteColor];
+    picBy.font = [UIFont fontWithName:@"HelveticaNeueStrong" size:30];
+    [self.view addSubview:picBy];
     
     [self.view addSubview:myText];
     shimmeringView.contentView = myText;
