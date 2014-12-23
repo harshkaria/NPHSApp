@@ -79,6 +79,9 @@
     self.onOff = [[UISwitch alloc]initWithFrame:CGRectZero];
     cell.accessoryView = onOff;
     [onOff addTarget:self action:@selector(actioned:)forControlEvents:UIControlEventValueChanged];
+    onOff.onTintColor = [UIColor blackColor];
+    onOff.tintColor = [UIColor blackColor];
+    onOff.thumbTintColor = [UIColor redColor];
     [cell.contentView addSubview:onOff];
     
     
@@ -89,8 +92,10 @@
     [cell.contentView addSubview:self.onOff];
     if([currentChannels containsObject:cell.clubLabel.text])
     {
-        
+        [onOff setOnTintColor:[UIColor blackColor]];
+        [onOff setThumbTintColor:[UIColor yellowColor]];
             [self.onOff setOn:YES];
+        
     
     }
     
