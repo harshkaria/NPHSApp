@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AE068F961A22C0050007634E /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE068F951A22C0050007634E /* FeedController.m */; };
 		AE068F991A22C7E60007634E /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE068F981A22C7E60007634E /* FeedCell.m */; };
+		AE10A6D61A49501A008A6C44 /* SubscriptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE10A6D51A49501A008A6C44 /* SubscriptionsCell.m */; };
 		AE1A21E119C66EEF009D5019 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E019C66EEF009D5019 /* main.m */; };
 		AE1A21E419C66EEF009D5019 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E319C66EEF009D5019 /* AppDelegate.m */; };
 		AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E619C66EEF009D5019 /* ViewController.m */; };
@@ -71,6 +72,8 @@
 		AE068F951A22C0050007634E /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
 		AE068F971A22C7E60007634E /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
 		AE068F981A22C7E60007634E /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
+		AE10A6D41A49501A008A6C44 /* SubscriptionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionsCell.h; path = ../SubscriptionsCell.h; sourceTree = "<group>"; };
+		AE10A6D51A49501A008A6C44 /* SubscriptionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionsCell.m; path = ../SubscriptionsCell.m; sourceTree = "<group>"; };
 		AE1A21DB19C66EEF009D5019 /* NPHSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NPHSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1A21DF19C66EEF009D5019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1A21E019C66EEF009D5019 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -176,7 +179,6 @@
 		AE1A21D219C66EEF009D5019 = {
 			isa = PBXGroup;
 			children = (
-				AE6919DC19EA350000CC7FE2 /* Foundation.framework */,
 				AE1A21DD19C66EEF009D5019 /* NPHSApp */,
 				AE1A21F719C66EF0009D5019 /* NPHSAppTests */,
 				AE1A21DC19C66EEF009D5019 /* Products */,
@@ -217,6 +219,8 @@
 				AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */,
 				AE3B5AEE19D7BCF8002207E1 /* NotificationViewController.h */,
 				AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */,
+				AE10A6D41A49501A008A6C44 /* SubscriptionsCell.h */,
+				AE10A6D51A49501A008A6C44 /* SubscriptionsCell.m */,
 				AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */,
 				AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */,
 				AE451EBF1A319A5E00399E1C /* CreditsCell.h */,
@@ -240,6 +244,7 @@
 		AE1A21DE19C66EEF009D5019 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE6919DC19EA350000CC7FE2 /* Foundation.framework */,
 				AE6919DA19EA34C700CC7FE2 /* UIKit.framework */,
 				AE1A220419C6751A009D5019 /* Bolts.framework */,
 				AE1A220519C6751A009D5019 /* Parse.framework */,
@@ -414,6 +419,7 @@
 			files = (
 				AE1B0FAB19DBD0850061FD4D /* OnboardingContentViewController.m in Sources */,
 				AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */,
+				AE10A6D61A49501A008A6C44 /* SubscriptionsCell.m in Sources */,
 				AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */,
 				AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */,
 				AE818EB91A2041FF0054631E /* SplashViewController.m in Sources */,
@@ -554,8 +560,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -564,7 +570,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "6d54954e-706e-4f37-9b37-d306cc186097";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -573,8 +579,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -583,7 +589,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "6d54954e-706e-4f37-9b37-d306cc186097";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

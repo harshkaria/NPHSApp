@@ -9,6 +9,7 @@
 #import "SplashViewController.h"
 #import "FBShimmeringView.h"
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 @interface SplashViewController ()
 
 @end
@@ -26,18 +27,21 @@
     imageView.image = [UIImage imageNamed:VIEW_BG];
     imageView.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:imageView];
+    
+    PFQuery *picLabel = [PFQuery queryWithClassName:@"Pics"];
+    PFObject *name = [picLabel getFirstObject];
+    NSString *picByLabel = [name objectForKey:@"picBy"];
     UILabel  *myText = [[UILabel alloc] init];
+
     myText.text = @"NPHS";
     myText.textAlignment = NSTextAlignmentCenter;
     myText.font = [UIFont fontWithName:@"Dekar Light" size:125];
     myText.textColor = [UIColor yellowColor];
-    NSURL *url = [NSURL URLWithString:@"http://pannaeyebrow.com/test/pic.txt"];
-    NSString *string = [NSString stringWithContentsOfURL:url
-                                                encoding:NSUTF8StringEncoding error:nil];
-    UILabel *picBy = [[UILabel alloc]initWithFrame:CGRectMake(80, 434, 495, 46)];
-    picBy.text = string;
+    UILabel *picBy = [[UILabel alloc]initWithFrame:CGRectMake(80, 626, 495, 60)];
+    picBy.text = picByLabel;
     picBy.textColor = [UIColor whiteColor];
-    picBy.font = [UIFont fontWithName:@"HelveticaNeueStrong" size:30];
+    picBy.font = [UIFont fontWithName:@"HelveticaNeueStrong" size:40];
+    picBy.alpha = 0.8;
     [self.view addSubview:picBy];
     
     [self.view addSubview:myText];

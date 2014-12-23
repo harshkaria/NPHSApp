@@ -10,5 +10,9 @@
 #import <Parse/Parse.h>
 @interface SubscriptionsTableViewController : PFQueryTableViewController
 @property (weak, nonatomic) IBOutlet UITableView *SubscriptionTableView;
+@property (weak, nonatomic) IBOutlet UISwitch *test;
+@property (weak, nonatomic) IBOutlet UIView *greenView;
+
+
 
 @end

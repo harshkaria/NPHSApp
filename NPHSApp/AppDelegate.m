@@ -43,6 +43,7 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
      CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:NAV_BG]];
+    
       [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithCIImage:image] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor yellowColor]}];
     [[UINavigationBar appearance]setTranslucent:NO];

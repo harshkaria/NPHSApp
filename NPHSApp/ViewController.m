@@ -107,6 +107,7 @@
 -(void)hideMe
 {
     [self dismissViewControllerAnimated:NO completion:nil];
+   
 }
 -(void)checkDay
 {
