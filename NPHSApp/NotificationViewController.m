@@ -83,14 +83,12 @@
 {
    
     
-    if(notifcationField.text.
-       length == 0 || [notificationField.text isEqualToString:@"Enter Notification Here:"])
+    /*if(notifcationField.text.length == 0 || [notificationField.text isEqualToString:@"Enter Notification Here:"])
     {
         [RKDropdownAlert show];
          [RKDropdownAlert title:[NSString stringWithFormat:@"Please enter a notification."]  backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
-    }
-    else
-    {
+    }*/
+   
     
     PFPush *push = [[PFPush alloc] init];
    
@@ -107,7 +105,7 @@
                           nil];
     [push setData:data];
     [push sendPushInBackground];
-    }
+    
     
 }
 -(void)logOutAction

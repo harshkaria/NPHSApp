@@ -76,10 +76,8 @@
    
     
     // ADD ON OFF SWITCH
-   self.onOff = [[UISwitch alloc]initWithFrame:CGRectZero];
+    self.onOff = [[UISwitch alloc]initWithFrame:CGRectZero];
     cell.accessoryView = onOff;
-    
-    
     [onOff addTarget:self action:@selector(actioned:)forControlEvents:UIControlEventValueChanged];
     [cell.contentView addSubview:onOff];
     
@@ -89,12 +87,11 @@
     cell.clubLabel.textColor = [UIColor whiteColor];
     [cell.contentView addSubview:cell.clubLabel];
     [cell.contentView addSubview:self.onOff];
-    for(NSString *club in currentChannels)
+    if([currentChannels containsObject:cell.clubLabel.text])
     {
-        if([club isEqualToString:cell.clubLabel.text])
-        {
-            [onOff setOn:YES];
-        }
+        
+            [self.onOff setOn:YES];
+    
     }
     
     
@@ -126,23 +123,22 @@
     SubscriptionsCell * cell = (SubscriptionsCell*) mySwitch.superview;
     
     
-    
-    if([onOff isOn])
-    {
+   if(!([myInstall.channels containsObject:cell.clubLabel.text]))
+   {
         NSLog(@"on");
     [myInstall addUniqueObject:cell.clubLabel.text forKey:@"channels"];
     [myInstall saveInBackground];
-        
-    }
-    else
-    {
-   
+    [self.tableView reloadData];
+   }
+   else
+   {
+       [myInstall removeObject:cell.clubLabel.text forKey:@"channels"];
+       [myInstall save];
+       [self.tableView reloadData];
+   }
     
-        NSLog(@"Toggled off");
-        [onOff setOn:NO];
-        [myInstall removeObject:cell.clubLabel.text forKey:@"channels"];
-        [myInstall saveInBackground];
-    }
+    
+   
     
         
     
