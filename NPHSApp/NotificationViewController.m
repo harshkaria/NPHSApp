@@ -27,9 +27,7 @@
         currentInstallation.badge = 0;
         [currentInstallation saveInBackground];
     }
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
+    
     
     self.navigationItem.title = [NSString stringWithFormat:@"Send: %@", [username uppercaseString]];
     self.view.backgroundColor = [UIColor blackColor];
@@ -89,6 +87,10 @@
          [RKDropdownAlert title:[NSString stringWithFormat:@"Please enter a notification."]  backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
     }*/
    
+    PFObject *feed = [PFObject objectWithClassName:@"feed"];
+    feed[@"clubName"] = username;
+    feed[@"feedPost"] = notificationField.text;
+    [feed saveInBackground];
     
     PFPush *push = [[PFPush alloc] init];
    

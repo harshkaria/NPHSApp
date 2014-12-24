@@ -44,8 +44,11 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
      CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:NAV_BG]];
     
-      [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithCIImage:image] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor yellowColor]}];
+     // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAV_BG] forBarMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor yellowColor], NSFontAttributeName: [UIFont fontWithName:@"Dekar Light" size:36]}];
+    [[UINavigationBar appearance]setBackgroundColor:[UIColor blackColor]];
+    [[UINavigationBar appearance]setBarTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance]setTranslucent:NO];
     [[UITabBar appearance]setTranslucent:YES];
     [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
@@ -65,8 +68,10 @@
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global", @"asg", ];
-    [currentInstallation addUniqueObject:@"test" forKey:@"channels"];
+    //currentInstallation.channels = @[ @"global", @"asg", ];
+    [currentInstallation addUniqueObject:@"global" forKey:@"channels"];
+    [currentInstallation addUniqueObject:@"asg" forKey:@"channels"];
+    [currentInstallation addUniqueObject:@"admin" forKey:@"channels"];
     
     [currentInstallation saveInBackground];
 }

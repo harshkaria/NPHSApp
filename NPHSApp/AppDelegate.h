@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#define NAV_BG @"http://www.nphs.org/images/pic3.png"
+#define NAV_BG @"nphs2.JPG"
 #define VIEW_BG @"nphs3.JPG"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

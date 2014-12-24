@@ -71,9 +71,6 @@
    // DraggableViewBackground *draggableBackground = [[DraggableViewBackground alloc]initWithFrame:self.view.frame];
     
     //[self.view addSubview:draggableBackground];
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
     self.view.translatesAutoresizingMaskIntoConstraints = YES;
     UIViewController *splash = [[SplashViewController alloc] init];
     [self presentViewController:splash animated:NO completion:nil];

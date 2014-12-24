@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "NotificationViewController.h"
 #import "RKDropdownAlert.h"
@@ -19,20 +20,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
+   
     usernameField.clearButtonMode = YES;
     usernameField.clearsOnBeginEditing = YES;
     passwordField.clearsOnBeginEditing = YES;
     passwordField.clearButtonMode = YES;
     passwordField.secureTextEntry = YES;
+    
     self.navigationItem.hidesBackButton = YES;
     if([PFUser currentUser])
     {
         [self dismissViewControllerAnimated:NO completion:nil];
         [self performSegueWithIdentifier:@"goLogin" sender:nil];
     }
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    
        
     
     

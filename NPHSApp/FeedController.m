@@ -10,76 +10,116 @@
 #import "FeedCell.h"
 #import "SplashViewController.h"
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 @interface FeedController ()
 @property NSMutableArray *clubNames;
 @property NSMutableArray *clubText;
+@property NSInteger count;
 @end
 
 @implementation FeedController
-@synthesize  clubNames, clubText;
+@synthesize  clubNames, clubText, count;
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self)
+    {
+        //self.parseClassName = @"User";
+        self.paginationEnabled = NO;
+        self.pullToRefreshEnabled = YES;
+        //self.count = 0;
+        
+        
+        
+    }
+    return self;
+}
 - (void)viewDidLoad {
     
-    [super viewDidLoad];
     
+[super viewDidLoad];
     
-    
-    
-    clubNames = [[NSMutableArray alloc] initWithObjects:@"App Club", @"ASG", @"Interact", @"Interact",  nil];
-    clubText = [[NSMutableArray alloc]initWithObjects:@"You have a meeting next Friday", @"Remember to show up to ASG on Thanksgiving day", @"You have a Fundraiser coming up on Saturday", @"We have a guest speaker at lunch on Monday, so be there!", nil];
-     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor yellowColor]};
-    
-}
--(void)hideMe
-{
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+-(PFQuery *)queryForTable
+{
+    PFInstallation *installation = [PFInstallation currentInstallation];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"feed"];
+    [query whereKey:@"clubName" containedIn:installation.channels];
+    [query orderByDescending:@"createdAt"];
+    return query;
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
 #warning Potentially incomplete method implementation.
+    
     // Return the number of sections.
+    
     return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return [clubNames count];
     
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(FeedCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
 {
-    FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Feed" forIndexPath:indexPath];
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Feed" forIndexPath:indexPath];
+    
     tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    
+    UIImageView *cellBG = [[UIImageView alloc] initWithFrame:cell.feedView.bounds];
+    
+    cellBG.image = [UIImage imageNamed:NAV_BG];
+    
+    cellBG.alpha = 0.4;
+    
+    [cell.feedView addSubview:cellBG];
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+{
+
+    FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Feed" forIndexPath:indexPath];
     
     
     
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
     UIImageView *cellBG = [[UIImageView alloc] initWithFrame:cell.feedView.bounds];
-    cellBG.image = [UIImage imageNamed:VIEW_BG];
     
-    
-    
-    cell.clubName.text = [clubNames objectAtIndex:indexPath.row];
-    cell.clubText.text = [clubText objectAtIndex:indexPath.row];
+    cellBG.image = [UIImage imageNamed:NAV_BG];
     
     cellBG.alpha = 0.4;
-    cell.clubName.alpha = 1;
-    cell.clubText.alpha = 1;
+    
     [cell.feedView addSubview:cellBG];
+    
+    
+    
+    cell.clubName.text = [object objectForKey:@"clubName"];
+    
+    cell.clubText.text = [object objectForKey:@"feedPost"];
+    
+    cell.clubName.alpha = 1;
+    
+    cell.clubText.alpha = 1;
+    
     [cell.feedView addSubview:cell.clubName];
+    
     [cell.feedView addSubview:cell.clubText];
-    cellBG.userInteractionEnabled = NO;
+    
+    
+    
     cell.userInteractionEnabled = NO;
+    
     return cell;
     
+    
+    
 }
-
 @end

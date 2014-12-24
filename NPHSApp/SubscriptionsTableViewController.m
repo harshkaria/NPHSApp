@@ -49,6 +49,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     PFQuery *clubs = [PFUser query];
     self.count = [clubs countObjects];
+    
     return clubs;
 }
 
@@ -78,10 +79,10 @@
     // ADD ON OFF SWITCH
     self.onOff = [[UISwitch alloc]initWithFrame:CGRectZero];
     cell.accessoryView = onOff;
-    [onOff addTarget:self action:@selector(actioned:)forControlEvents:UIControlEventValueChanged];
-    onOff.onTintColor = [UIColor blackColor];
-    onOff.tintColor = [UIColor blackColor];
+    onOff.tintColor = [UIColor whiteColor];
     onOff.thumbTintColor = [UIColor redColor];
+    //onOff.backgroundColor = [UIColor whiteColor];
+    [onOff addTarget:self action:@selector(actioned:) forControlEvents:UIControlEventValueChanged];
     [cell.contentView addSubview:onOff];
     
     
@@ -94,9 +95,18 @@
     {
         [onOff setOnTintColor:[UIColor blackColor]];
         [onOff setThumbTintColor:[UIColor yellowColor]];
-            [self.onOff setOn:YES];
+        [self.onOff setOn:YES];
         
-    
+        
+    }
+    if([cell.clubLabel.text isEqualToString:@"asg"] || [cell.clubLabel.text isEqualToString:@"admin"])
+    {
+        
+        [onOff setOnTintColor:[UIColor blackColor]];
+        [onOff setThumbTintColor:[UIColor yellowColor]];
+        [self.onOff setOn:YES];
+        //[self.onOff setUserInteractionEnabled:NO];
+        [self.onOff setEnabled:NO];
     }
     
     
@@ -130,7 +140,7 @@
     
    if(!([myInstall.channels containsObject:cell.clubLabel.text]))
    {
-        NSLog(@"on");
+       NSLog(@"on");
     [myInstall addUniqueObject:cell.clubLabel.text forKey:@"channels"];
     [myInstall saveInBackground];
     [self.tableView reloadData];
