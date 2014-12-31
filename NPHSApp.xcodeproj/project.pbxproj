@@ -55,6 +55,8 @@
 		AE83E0B81A469EB40040D422 /* nphs3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AE83E0B71A469EB40040D422 /* nphs3.JPG */; };
 		AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA625E419DE9F4A00200AA6 /* notification.jpg */; };
 		AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED7D9521A20251400016D3D /* SplashViewController.xib */; };
+		AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733A1A535A2F00B79DFE /* feedIcon.png */; };
+		AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733C1A535B6100B79DFE /* rss-7.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,8 @@
 		AEA625E419DE9F4A00200AA6 /* notification.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification.jpg; sourceTree = "<group>"; };
 		AED7D9501A20251400016D3D /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashViewController.h; path = ../SplashViewController.h; sourceTree = "<group>"; };
 		AED7D9521A20251400016D3D /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashViewController.xib; path = ../SplashViewController.xib; sourceTree = "<group>"; };
+		AEEF733A1A535A2F00B79DFE /* feedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedIcon.png; sourceTree = "<group>"; };
+		AEEF733C1A535B6100B79DFE /* rss-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rss-7.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,8 @@
 		AE1A21DD19C66EEF009D5019 /* NPHSApp */ = {
 			isa = PBXGroup;
 			children = (
+				AEEF733C1A535B6100B79DFE /* rss-7.png */,
+				AEEF733A1A535A2F00B79DFE /* feedIcon.png */,
 				AE83E0B71A469EB40040D422 /* nphs3.JPG */,
 				AE818ECE1A2051EA0054631E /* Dekar Light.otf */,
 				AE818ECB1A204E890054631E /* AROMA-Light.ttf */,
@@ -390,8 +396,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */,
 				AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */,
 				AE1B0FB119DBD3E80061FD4D /* nphs2.jpg in Resources */,
+				AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */,
 				AE1B0FAF19DBD3E30061FD4D /* nphs1.jpeg in Resources */,
 				AE83E0B81A469EB40040D422 /* nphs3.JPG in Resources */,
 				AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */,
@@ -570,7 +578,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bb3f9d1b-e3b3-4da3-a6ae-4ab3e3c15473";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -589,7 +597,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bb3f9d1b-e3b3-4da3-a6ae-4ab3e3c15473";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

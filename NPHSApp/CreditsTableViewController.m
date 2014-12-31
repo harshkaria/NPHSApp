@@ -55,6 +55,7 @@
     
     cell.creditLabel.textAlignment = NSTextAlignmentCenter;
     cell.creditLabel.text = [people objectAtIndex:indexPath.row];
+    
     cell.backgroundColor = [UIColor blackColor];
     
     cell.creditLabel.textColor = [UIColor yellowColor];

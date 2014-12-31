@@ -46,17 +46,23 @@
     
      // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAV_BG] forBarMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor yellowColor], NSFontAttributeName: [UIFont fontWithName:@"Dekar Light" size:36]}];
+    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor yellowColor], NSFontAttributeName: [UIFont fontWithName:@"Dekar Light" size:32]}];
     [[UINavigationBar appearance]setBackgroundColor:[UIColor blackColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance]setTranslucent:NO];
-    [[UITabBar appearance]setTranslucent:YES];
+    [[UITabBar appearance]setTranslucent:NO];
     [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    UITabBar *tabBar = tabBarController.tabBar;
+    
+    UITabBarItem *one = [tabBar.items objectAtIndex:1];
+    UIImage *img = [UIImage imageNamed:@"rss-7.png"];
+    [one setFinishedSelectedImage:[img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] withFinishedUnselectedImage:[img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     [[UITabBarItem appearance]setTitleTextAttributes:
     @{NSForegroundColorAttributeName: [UIColor yellowColor]} forState:UIControlStateNormal];
     [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blueColor]} forState:UIControlStateSelected];
-    
+   
 
     
     
@@ -82,6 +88,7 @@
     if(currentInstallation.badge != 0)
     {
     currentInstallation.badge = 0;
+    [currentInstallation saveInBackground];
     }
     
 }
@@ -107,6 +114,16 @@
         currentInstallation.badge = 0;
         [currentInstallation saveInBackground];
     }
+    if(!([currentInstallation.channels containsObject:@"global"] && [currentInstallation.channels containsObject:@"asg"] && [currentInstallation.channels containsObject:@"admin"]))
+    {
+        
+    [currentInstallation addUniqueObject:@"global" forKey:@"channels"];
+    [currentInstallation addUniqueObject:@"asg" forKey:@"channels"];
+    [currentInstallation addUniqueObject:@"admin" forKey:@"channels"];
+    
+    [currentInstallation saveInBackground];
+    }
+
     
     
 }

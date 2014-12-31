@@ -63,8 +63,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y7x-An-Dpe" id="UcX-8R-8g0">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-MB-zlC">
-                                            <rect key="frame" x="8" y="8" width="178" height="41"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6q3-0e-h7k">
+                                            <rect key="frame" x="8" y="9" width="215" height="39"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -73,8 +73,8 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="clubLabel" destination="o5n-MB-zlC" id="K5T-Md-ytm"/>
-                                    <outlet property="contentView" destination="UcX-8R-8g0" id="SlT-QR-A0o"/>
+                                    <outlet property="clubLabel" destination="6q3-0e-h7k" id="yUB-aT-pe3"/>
+                                    <outlet property="contentView" destination="UcX-8R-8g0" id="eIP-4O-Zrg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -117,26 +117,30 @@
         <scene sceneID="kPW-Sv-r8l">
             <objects>
                 <tableViewController id="OQb-3c-ecg" customClass="FeedController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" alpha="0.85000000000000031" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="225" sectionHeaderHeight="22" sectionFooterHeight="22" id="CSm-DQ-wm7">
+                    <tableView key="view" clipsSubviews="YES" alpha="0.85000000000000031" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="162" sectionHeaderHeight="22" sectionFooterHeight="22" id="CSm-DQ-wm7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Feed" rowHeight="189" id="X8m-40-Zhq" customClass="FeedCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Feed" rowHeight="162" id="X8m-40-Zhq" customClass="FeedCell">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X8m-40-Zhq" id="p5M-g5-9cl">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVU-iD-Roo">
-                                            <rect key="frame" x="142" y="8" width="145" height="35"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ttR-Xd-k7Z">
+                                            <rect key="frame" x="-7" y="0.0" width="382" height="162"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kk-bQ-50f">
+                                            <rect key="frame" x="154" y="8" width="124" height="28"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Text" translatesAutoresizingMaskIntoConstraints="NO" id="LYm-WD-153">
-                                            <rect key="frame" x="0.0" y="59" width="317" height="89"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0y-wl-PyV">
+                                            <rect key="frame" x="0.0" y="36" width="367" height="110"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -145,9 +149,10 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <outlet property="clubName" destination="bVU-iD-Roo" id="pHk-PJ-BN6"/>
-                                    <outlet property="clubText" destination="LYm-WD-153" id="DgE-pI-5iH"/>
-                                    <outlet property="feedView" destination="p5M-g5-9cl" id="xPr-jw-xg8"/>
+                                    <outlet property="bg" destination="ttR-Xd-k7Z" id="hDO-dA-fDi"/>
+                                    <outlet property="clubName" destination="4kk-bQ-50f" id="QXZ-6e-5cl"/>
+                                    <outlet property="clubText" destination="o0y-wl-PyV" id="Dtd-EI-Idh"/>
+                                    <outlet property="feedView" destination="p5M-g5-9cl" id="PL4-5k-MTg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -416,7 +421,7 @@
         <scene sceneID="U8G-In-vN1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s9p-0y-htw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" id="J9D-zt-Qof"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="rss-7.png" selectedImage="rss-7.png" id="J9D-zt-Qof"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9kd-wO-Dx6">
@@ -433,6 +438,9 @@
             <point key="canvasLocation" x="5363" y="-1388"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="rss-7.png" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ufe-lB-YPN"/>
     </inferredMetricsTieBreakers>

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface FeedCell : UITableViewCell
+#import <Parse/Parse.h>
+@interface FeedCell : PFTableViewCell
 @property (weak, nonatomic) IBOutlet UIView *feedView;
+@property (weak, nonatomic) IBOutlet UIImageView *bg;
 @property (weak, nonatomic) IBOutlet UILabel *clubName;
 @property (weak, nonatomic) IBOutlet UITextView *clubText;
 

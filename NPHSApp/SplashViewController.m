@@ -31,12 +31,13 @@
     PFQuery *picLabel = [PFQuery queryWithClassName:@"Pics"];
     PFObject *name = [picLabel getFirstObject];
     NSString *picByLabel = [name objectForKey:@"picBy"];
+    
     UILabel  *myText = [[UILabel alloc] init];
-
     myText.text = @"NPHS";
     myText.textAlignment = NSTextAlignmentCenter;
     myText.font = [UIFont fontWithName:@"Dekar Light" size:125];
     myText.textColor = [UIColor yellowColor];
+    
     UILabel *picBy = [[UILabel alloc]initWithFrame:CGRectMake(80, 626, 495, 60)];
     picBy.text = picByLabel;
     picBy.textColor = [UIColor whiteColor];

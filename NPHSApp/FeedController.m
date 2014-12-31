@@ -37,8 +37,11 @@
 }
 - (void)viewDidLoad {
     
-    
-[super viewDidLoad];
+
+    [super viewDidLoad];
+    self.tableView.separatorColor = [UIColor yellowColor];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    self.tableView.scrollsToTop = YES;
     
 }
 
@@ -68,46 +71,36 @@
 
 {
     
-    cell = [tableView dequeueReusableCellWithIdentifier:@"Feed" forIndexPath:indexPath];
     
-    tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Feed"];
+    cell.bg.image = [UIImage imageNamed:VIEW_BG];
+    cell.bg.alpha = 0.4;
     
-    UIImageView *cellBG = [[UIImageView alloc] initWithFrame:cell.feedView.bounds];
-    
-    cellBG.image = [UIImage imageNamed:NAV_BG];
-    
-    cellBG.alpha = 0.4;
-    
-    [cell.feedView addSubview:cellBG];
     
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
-
-    FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Feed" forIndexPath:indexPath];
     
+
+    FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Feed"];
+    cell.bg.image = [UIImage imageNamed:VIEW_BG];
+    cell.bg.alpha = 0.4;
     
     
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
-    UIImageView *cellBG = [[UIImageView alloc] initWithFrame:cell.feedView.bounds];
-    
-    cellBG.image = [UIImage imageNamed:NAV_BG];
-    
-    cellBG.alpha = 0.4;
-    
-    [cell.feedView addSubview:cellBG];
     
     
     
-    cell.clubName.text = [object objectForKey:@"clubName"];
+    cell.clubName.text = object[@"clubName"];
     
     cell.clubText.text = [object objectForKey:@"feedPost"];
     
     cell.clubName.alpha = 1;
     
     cell.clubText.alpha = 1;
+    cell.clubText.scrollsToTop = NO;
     
     [cell.feedView addSubview:cell.clubName];
     

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 @interface NotificationViewController ()
 @property NSString *username;
+@property NSString *kaboom;
 @end
 
 @implementation NotificationViewController
@@ -72,6 +73,7 @@
        [notifcationField resignFirstResponder];
         NSLog(@"OK");
         [self.view endEditing:YES];
+        
         return NO;
         
     }
@@ -79,14 +81,16 @@
 }
 - (IBAction)sendButton:(id)sender
 {
-   
     
-    /*if(notifcationField.text.length == 0 || [notificationField.text isEqualToString:@"Enter Notification Here:"])
+    if(notificationField.text.length == 0 || [notificationField.text isEqualToString:@"Enter Notification Here:"])
     {
         [RKDropdownAlert show];
-         [RKDropdownAlert title:[NSString stringWithFormat:@"Please enter a notification."]  backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
-    }*/
-   
+        [RKDropdownAlert title:@"Oops!" message:@"Please enter something" backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
+
+    }
+    else
+    {
+ 
     PFObject *feed = [PFObject objectWithClassName:@"feed"];
     feed[@"clubName"] = username;
     feed[@"feedPost"] = notificationField.text;
@@ -107,6 +111,7 @@
                           nil];
     [push setData:data];
     [push sendPushInBackground];
+    }
     
     
 }
