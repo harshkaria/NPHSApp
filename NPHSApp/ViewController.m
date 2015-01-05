@@ -22,10 +22,15 @@
 @implementation ViewController
 @synthesize installation;
 - (void)viewDidLoad {
+    self.view.translatesAutoresizingMaskIntoConstraints = YES;
+    UIViewController *splash = [[SplashViewController alloc] init];
+    [self presentViewController:splash animated:NO completion:nil];
+    [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"date"];
     
     [super viewDidLoad];
     installation = [PFInstallation currentInstallation];
-    [self checkDay];
+    
    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
         self.navigationController.navigationBar.hidden = YES;
@@ -59,6 +64,7 @@
         [self presentViewController:onboardingVC animated:NO completion:nil];
         [self background];
         
+        
     }
     else
     {
@@ -71,14 +77,13 @@
    // DraggableViewBackground *draggableBackground = [[DraggableViewBackground alloc]initWithFrame:self.view.frame];
     
     //[self.view addSubview:draggableBackground];
-    self.view.translatesAutoresizingMaskIntoConstraints = YES;
-    UIViewController *splash = [[SplashViewController alloc] init];
-    [self presentViewController:splash animated:NO completion:nil];
-    [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
-    [self background];
+  
+    //[self background];
+    
    
     
     }
+    
     
     
 }
@@ -93,10 +98,6 @@
     buttonOne.frame = CGRectMake(124, 110, 156, 30);
     [buttonOne addTarget:self action:@selector(subApp:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonOne];*/
-    UIViewController *feed = [[FeedController alloc] init];
-    
-    //UIViewController *feed = [[FeedController alloc] init];
-    [self presentViewController:feed animated:NO completion:nil];
     
     
 
@@ -106,49 +107,7 @@
     [self dismissViewControllerAnimated:NO completion:nil];
    
 }
--(void)checkDay
-{
 
-NSDate *saved = [[NSUserDefaults standardUserDefaults]objectForKey:@"date"];
-   
-    int plusDays =  2;
-    NSDateComponents *dateComponents = [[NSDateComponents alloc]init];
-    [dateComponents setDay:plusDays];
-   
-    NSCalendar *calender = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    
-    NSDate *bDay = [calender dateByAddingComponents:dateComponents toDate:saved options:0];
-   NSComparisonResult dComp =[calender compareDate:bDay toDate:[NSDate date] toUnitGranularity:(NSDayCalendarUnit)];
-  NSInteger day = [calender component:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    NSLog(@"%ld", day);
-    
-   
-    
-    
-    
-    
-    
-   
-   if(dComp == NSOrderedSame)
-   {
-       NSLog(@"hi");
-       
-       [[NSUserDefaults standardUserDefaults]setObject:[NSDate date] forKey:@"date"];
-       [[NSUserDefaults standardUserDefaults]synchronize];
-     
-       
-       
-       
-   }
-    else
-    {
-        
-        
-        
-    }
-   
-   }
-    
 
 
 
@@ -158,23 +117,5 @@ NSDate *saved = [[NSUserDefaults standardUserDefaults]objectForKey:@"date"];
 }
 
 
-- (IBAction)football:(id)sender {
-    
-    [installation addUniqueObject:@"football" forKey:@"channels"];
-    [installation saveInBackground];
-    NSLog(@"Pressed");
-}
 
-- (void)subApp:(UIButton *)button
-{
-   
-    [installation addUniqueObject:@"appClub" forKey:@"channels"];
-    [installation saveInBackground];
-    NSLog(@"Pressed");
-}
-- (IBAction)unSub:(id)sender {
-    
-    [installation removeObject:@"football" forKey:@"channels"];
-    [installation saveInBackground];
-}
 @end

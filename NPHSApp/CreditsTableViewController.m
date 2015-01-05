@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Michael Weingarden", @"Claire Monro & Matthew Mangawang",  nil];
+    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Michael Weingarden", @"Matthew Mangawang", @"Claire Monro",  nil];
     
     
 }
@@ -42,6 +42,7 @@
     return [people count];
 }
 
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     tableView.scrollEnabled = YES;
@@ -53,7 +54,7 @@
     
 
     
-    cell.creditLabel.textAlignment = NSTextAlignmentCenter;
+    //cell.creditLabel.textAlignment = NSTextAlignmentCenter;
     cell.creditLabel.text = [people objectAtIndex:indexPath.row];
     
     cell.backgroundColor = [UIColor blackColor];
@@ -80,11 +81,14 @@
         cell.biography.text = @"Advisor";
         
     }
-    if([cell.creditLabel.text isEqualToString:@"Claire Monro & Matthew Mangawang"])
+    if([cell.creditLabel.text isEqualToString:@"Matthew Mangawang"])
     {
          cell.biography.text = @"Publicity and Operations";
     }
-   
+    if([cell.creditLabel.text isEqualToString:@"Claire Monro"])
+    {
+        cell.biography.text = @"Publicity and operations";
+    }
     
     cell.userInteractionEnabled = NO;
        return cell;

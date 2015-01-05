@@ -10,7 +10,8 @@
 #import <Parse/Parse.h>
 #import "OnboardingViewController.h"
 #import "OnboardingContentViewController.h"
-
+#import "FeedController.h"
+#import "RKDropdownAlert.h"
 @interface AppDelegate ()
 
 @end
@@ -46,23 +47,38 @@
     
      // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAV_BG] forBarMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor yellowColor], NSFontAttributeName: [UIFont fontWithName:@"Dekar Light" size:32]}];
+    [[UINavigationBar appearance]setTitleTextAttributes:
+    @{
+      NSForegroundColorAttributeName:[UIColor yellowColor],
+      NSFontAttributeName: [UIFont fontWithName:@"Dekar Light" size:32
+     ]}];
+    
     [[UINavigationBar appearance]setBackgroundColor:[UIColor blackColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance]setTranslucent:NO];
+    
+    
     [[UITabBar appearance]setTranslucent:NO];
     [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UITabBar *tabBar = tabBarController.tabBar;
     
-    UITabBarItem *one = [tabBar.items objectAtIndex:1];
-    UIImage *img = [UIImage imageNamed:@"rss-7.png"];
-    [one setFinishedSelectedImage:[img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] withFinishedUnselectedImage:[img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     [[UITabBarItem appearance]setTitleTextAttributes:
-    @{NSForegroundColorAttributeName: [UIColor yellowColor]} forState:UIControlStateNormal];
-    [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blueColor]} forState:UIControlStateSelected];
-   
+     @{
+       NSForegroundColorAttributeName: [UIColor yellowColor],
+       NSFontAttributeName: [UIFont fontWithName:@"Helvetica" size:12]
+      } forState:UIControlStateNormal];
+    [[UITabBarItem appearance]setTitleTextAttributes:
+       @{
+       NSForegroundColorAttributeName: [UIColor whiteColor]
+       } forState:UIControlStateSelected];
+   NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if(notificationPayload)
+    {
+        FeedController *feed = [[FeedController alloc]init];
+        [feed loadObjects];
+    }
 
     
     
@@ -82,8 +98,13 @@
     [currentInstallation saveInBackground];
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
-   
+    
+    // if push is recieved in the app, while app is running
+    // gets it from 'aps' dictionairy
+    NSDictionary *notification = [userInfo objectForKey:@"aps"];
+    [RKDropdownAlert show];
+    [RKDropdownAlert title:@"Notification" message:[notification objectForKey:@"alert"] backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
+    
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     if(currentInstallation.badge != 0)
     {

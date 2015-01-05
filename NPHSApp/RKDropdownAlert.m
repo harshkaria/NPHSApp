@@ -39,10 +39,10 @@ NSString *DEFAULT_TITLE;
 // your default color will be used (which is currently orange)
 -(void)setupDefaultAttributes
 {
-    defaultViewColor = [UIColor colorWithRed:0.98 green:0.66 blue:0.2 alpha:1];//%%% default color from slingshot
+    defaultViewColor = [UIColor colorWithRed:0 green:0 blue:0 alpha: 1];//%%% default color from slingshot
     
-    defaultTextColor = [UIColor whiteColor];
-    DEFAULT_TITLE = @"NPHS"; //%%% this text can only be edited if you do not use the pod solution. check the repo's README for more information
+    defaultTextColor = [UIColor yellowColor];
+    DEFAULT_TITLE = @"Newbury Park High School"; //%%% this text can only be edited if you do not use the pod solution. check the repo's README for more information
     
     //%%% to change the default time, height, animation speed, fonts, etc check the top of the this file
 }

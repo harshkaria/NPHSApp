@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE01B43F1A54BB8E006BFB38 /* icon.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AE01B43E1A54BB8E006BFB38 /* icon.JPG */; };
 		AE068F961A22C0050007634E /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE068F951A22C0050007634E /* FeedController.m */; };
 		AE068F991A22C7E60007634E /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE068F981A22C7E60007634E /* FeedCell.m */; };
+		AE0CEE5F1A54BE3000C32CB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE0CEE5E1A54BE3000C32CB1 /* Images.xcassets */; };
+		AE0CEE611A54E01B00C32CB1 /* office_chair@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE0CEE601A54E01B00C32CB1 /* office_chair@3x.png */; };
+		AE0CEE631A54E1F000C32CB1 /* users_three_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE0CEE621A54E1F000C32CB1 /* users_three_2@3x.png */; };
+		AE0CEE651A54E28A00C32CB1 /* top_charts@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE0CEE641A54E28A00C32CB1 /* top_charts@3x.png */; };
+		AE0CEE671A54E35D00C32CB1 /* arrows_in@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE0CEE661A54E35D00C32CB1 /* arrows_in@3x.png */; };
 		AE10A6D61A49501A008A6C44 /* SubscriptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE10A6D51A49501A008A6C44 /* SubscriptionsCell.m */; };
 		AE1A21E119C66EEF009D5019 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E019C66EEF009D5019 /* main.m */; };
 		AE1A21E419C66EEF009D5019 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E319C66EEF009D5019 /* AppDelegate.m */; };
 		AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E619C66EEF009D5019 /* ViewController.m */; };
 		AE1A21EA19C66EEF009D5019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21E819C66EEF009D5019 /* Main.storyboard */; };
-		AE1A21EC19C66EEF009D5019 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21EB19C66EEF009D5019 /* Images.xcassets */; };
 		AE1A21EF19C66EEF009D5019 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */; };
 		AE1A21FB19C66EF0009D5019 /* NPHSAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21FA19C66EF0009D5019 /* NPHSAppTests.m */; };
 		AE1A220719C6751A009D5019 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220419C6751A009D5019 /* Bolts.framework */; };
@@ -70,10 +75,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE01B43E1A54BB8E006BFB38 /* icon.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.JPG; sourceTree = "<group>"; };
 		AE068F941A22C0050007634E /* FeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedController.h; sourceTree = "<group>"; };
 		AE068F951A22C0050007634E /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
 		AE068F971A22C7E60007634E /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
 		AE068F981A22C7E60007634E /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
+		AE0CEE5E1A54BE3000C32CB1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AE0CEE601A54E01B00C32CB1 /* office_chair@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "office_chair@3x.png"; sourceTree = "<group>"; };
+		AE0CEE621A54E1F000C32CB1 /* users_three_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "users_three_2@3x.png"; sourceTree = "<group>"; };
+		AE0CEE641A54E28A00C32CB1 /* top_charts@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_charts@3x.png"; sourceTree = "<group>"; };
+		AE0CEE661A54E35D00C32CB1 /* arrows_in@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrows_in@3x.png"; sourceTree = "<group>"; };
 		AE10A6D41A49501A008A6C44 /* SubscriptionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionsCell.h; path = ../SubscriptionsCell.h; sourceTree = "<group>"; };
 		AE10A6D51A49501A008A6C44 /* SubscriptionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionsCell.m; path = ../SubscriptionsCell.m; sourceTree = "<group>"; };
 		AE1A21DB19C66EEF009D5019 /* NPHSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NPHSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,7 +95,6 @@
 		AE1A21E519C66EEF009D5019 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AE1A21E619C66EEF009D5019 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AE1A21E919C66EEF009D5019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AE1A21EB19C66EEF009D5019 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AE1A21EE19C66EEF009D5019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AE1A21F419C66EF0009D5019 /* NPHSAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NPHSAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1A21F919C66EF0009D5019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -201,6 +211,8 @@
 		AE1A21DD19C66EEF009D5019 /* NPHSApp */ = {
 			isa = PBXGroup;
 			children = (
+				AE0CEE601A54E01B00C32CB1 /* office_chair@3x.png */,
+				AE01B43E1A54BB8E006BFB38 /* icon.JPG */,
 				AEEF733C1A535B6100B79DFE /* rss-7.png */,
 				AEEF733A1A535A2F00B79DFE /* feedIcon.png */,
 				AE83E0B71A469EB40040D422 /* nphs3.JPG */,
@@ -209,6 +221,9 @@
 				AEA625E419DE9F4A00200AA6 /* notification.jpg */,
 				AE1B0FAE19DBD3E30061FD4D /* nphs1.jpeg */,
 				AE1B0FB019DBD3E80061FD4D /* nphs2.jpg */,
+				AE0CEE641A54E28A00C32CB1 /* top_charts@3x.png */,
+				AE0CEE621A54E1F000C32CB1 /* users_three_2@3x.png */,
+				AE0CEE661A54E35D00C32CB1 /* arrows_in@3x.png */,
 				AE3B5AED19D7AA71002207E1 /* Cards */,
 				AE1A21E219C66EEF009D5019 /* AppDelegate.h */,
 				AE1A21E319C66EEF009D5019 /* AppDelegate.m */,
@@ -221,7 +236,6 @@
 				AE068F941A22C0050007634E /* FeedController.h */,
 				AE068F951A22C0050007634E /* FeedController.m */,
 				AE1A21E819C66EEF009D5019 /* Main.storyboard */,
-				AE1A21EB19C66EEF009D5019 /* Images.xcassets */,
 				AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */,
 				AE3B5AEE19D7BCF8002207E1 /* NotificationViewController.h */,
 				AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */,
@@ -242,6 +256,7 @@
 				AE818EC61A20444C0054631E /* FBShimmeringLayer.m */,
 				AE818EC71A20444C0054631E /* FBShimmeringView.h */,
 				AE818EC81A20444C0054631E /* FBShimmeringView.m */,
+				AE0CEE5E1A54BE3000C32CB1 /* Images.xcassets */,
 				AE1A21DE19C66EEF009D5019 /* Supporting Files */,
 			);
 			path = NPHSApp;
@@ -399,14 +414,19 @@
 				AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */,
 				AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */,
 				AE1B0FB119DBD3E80061FD4D /* nphs2.jpg in Resources */,
+				AE0CEE5F1A54BE3000C32CB1 /* Images.xcassets in Resources */,
 				AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */,
+				AE0CEE611A54E01B00C32CB1 /* office_chair@3x.png in Resources */,
+				AE0CEE651A54E28A00C32CB1 /* top_charts@3x.png in Resources */,
 				AE1B0FAF19DBD3E30061FD4D /* nphs1.jpeg in Resources */,
+				AE01B43F1A54BB8E006BFB38 /* icon.JPG in Resources */,
+				AE0CEE671A54E35D00C32CB1 /* arrows_in@3x.png in Resources */,
 				AE83E0B81A469EB40040D422 /* nphs3.JPG in Resources */,
 				AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */,
 				AE1A21EA19C66EEF009D5019 /* Main.storyboard in Resources */,
 				AE1A21EF19C66EEF009D5019 /* LaunchScreen.xib in Resources */,
 				AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */,
-				AE1A21EC19C66EEF009D5019 /* Images.xcassets in Resources */,
+				AE0CEE631A54E1F000C32CB1 /* users_three_2@3x.png in Resources */,
 				AE818ECF1A2051EA0054631E /* Dekar Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +588,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -587,6 +608,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

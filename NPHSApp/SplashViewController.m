@@ -20,9 +20,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+    self.view.translatesAutoresizingMaskIntoConstraints = YES;
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.view.bounds];
-    
+    shimmeringView.translatesAutoresizingMaskIntoConstraints = YES;
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageView.image = [UIImage imageNamed:VIEW_BG];
     imageView.contentMode = UIViewContentModeScaleToFill;

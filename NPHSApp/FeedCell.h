@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bg;
 @property (weak, nonatomic) IBOutlet UILabel *clubName;
 @property (weak, nonatomic) IBOutlet UITextView *clubText;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 
 @end

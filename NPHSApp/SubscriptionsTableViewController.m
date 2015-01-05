@@ -31,26 +31,34 @@
         self.paginationEnabled = NO;
         self.pullToRefreshEnabled = YES;
         self.count = 0;
-        
+      
         
         
     }
     return self;
 }
+
 -(void)viewDidLoad
 {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorColor = [UIColor yellowColor];
+    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [super viewDidLoad];
-    
-
+       
     
 }
 -(PFQuery *)queryForTable
 {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     PFQuery *clubs = [PFUser query];
     self.count = [clubs countObjects];
     
     return clubs;
+}
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorColor = [UIColor yellowColor];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
@@ -60,21 +68,19 @@
 
     PFInstallation *install = [PFInstallation currentInstallation];
     NSArray *currentChannels = install.channels;
-    
-    
     static NSString *CellIdentifier = @"Clubs";
     
-    
-    
-    
-    
     SubscriptionsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.backgroundColor = [UIColor colorWithPatternImage:background];
+    cell.backgroundColor = [UIColor blackColor];
     
-    //UITableViewCell *cellClub = [tableView cellForRowAtIndexPath:indexPath];
+  
     cell.userInteractionEnabled = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-   
+    cell.clubLabel.text = [object objectForKey:@"username"];
+    cell.clubLabel.font = [UIFont fontWithName:@"HelveticaStrong" size:20];
+    cell.clubLabel.textColor = [UIColor whiteColor];
+    
+    
     
     // ADD ON OFF SWITCH
     self.onOff = [[UISwitch alloc]initWithFrame:CGRectZero];
@@ -86,15 +92,11 @@
     [cell.contentView addSubview:onOff];
     
     
-    cell.clubLabel.text = [object objectForKey:@"username"];
-    cell.clubLabel.font = [UIFont fontWithName:@"HelveticaStrong" size:20];
-    cell.clubLabel.textColor = [UIColor whiteColor];
     [cell.contentView addSubview:cell.clubLabel];
     [cell.contentView addSubview:self.onOff];
     if([currentChannels containsObject:cell.clubLabel.text])
     {
-        [onOff setOnTintColor:[UIColor blackColor]];
-        [onOff setThumbTintColor:[UIColor yellowColor]];
+        [self setOn];
         [self.onOff setOn:YES];
         
         
@@ -102,9 +104,7 @@
     if([cell.clubLabel.text isEqualToString:@"asg"] || [cell.clubLabel.text isEqualToString:@"admin"])
     {
         
-        [onOff setOnTintColor:[UIColor blackColor]];
-        [onOff setThumbTintColor:[UIColor yellowColor]];
-        [self.onOff setOn:YES];
+        [self setOn];
         //[self.onOff setUserInteractionEnabled:NO];
         [self.onOff setEnabled:NO];
     }
@@ -112,6 +112,13 @@
     
     return cell;
    
+}
+-(void)setOn
+{
+    [onOff setOnTintColor:[UIColor blackColor]];
+    [onOff setThumbTintColor:[UIColor yellowColor]];
+    [self.onOff setOn:YES];
+
 }
 
 

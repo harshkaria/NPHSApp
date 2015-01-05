@@ -9,16 +9,25 @@
 #import "FeedCell.h"
 #import "AppDelegate.h"
 @implementation FeedCell
-@synthesize feedView, clubName, clubText;
+@synthesize feedView, clubName, clubText, dateLabel, bg;
 - (void)awakeFromNib {
     // Initialization code
+   clubText.dataDetectorTypes = UIDataDetectorTypeLink;
+    clubText.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"Helvetica" size:14]};
+    clubText.scrollEnabled = NO;
+    
     
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+    [super setSelected:NO animated:animated];
     
     // Configure the view for the selected state
+    //self.selected = NO;
+}
+- (UIEdgeInsets)layoutMargins
+{
+    return UIEdgeInsetsZero;
 }
 
 @end
