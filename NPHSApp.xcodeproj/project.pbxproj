@@ -58,6 +58,16 @@
 		AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECB1A204E890054631E /* AROMA-Light.ttf */; };
 		AE818ECF1A2051EA0054631E /* Dekar Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECE1A2051EA0054631E /* Dekar Light.otf */; };
 		AE83E0B81A469EB40040D422 /* nphs3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = AE83E0B71A469EB40040D422 /* nphs3.JPG */; };
+		AE92214E1A5FDED1003687A2 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92213A1A5FDED1003687A2 /* DetailTableViewController.m */; };
+		AE92214F1A5FDED1003687A2 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92213C1A5FDED1003687A2 /* GTMNSString+HTML.m */; };
+		AE9221501A5FDED1003687A2 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92213E1A5FDED1003687A2 /* MWFeedInfo.m */; };
+		AE9221511A5FDED1003687A2 /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9221401A5FDED1003687A2 /* MWFeedItem.m */; };
+		AE9221521A5FDED1003687A2 /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9221431A5FDED1003687A2 /* MWFeedParser.m */; };
+		AE9221531A5FDED1003687A2 /* MWFeedParserAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9221451A5FDED1003687A2 /* MWFeedParserAppDelegate.m */; };
+		AE9221541A5FDED1003687A2 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9221471A5FDED1003687A2 /* NSDate+InternetDateTime.m */; };
+		AE9221551A5FDED1003687A2 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9221491A5FDED1003687A2 /* NSString+HTML.m */; };
+		AE9221561A5FDED1003687A2 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92214B1A5FDED1003687A2 /* NSString+XMLEntities.m */; };
+		AE9221571A5FDED1003687A2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92214D1A5FDED1003687A2 /* RootViewController.m */; };
 		AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA625E419DE9F4A00200AA6 /* notification.jpg */; };
 		AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED7D9521A20251400016D3D /* SplashViewController.xib */; };
 		AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733A1A535A2F00B79DFE /* feedIcon.png */; };
@@ -148,6 +158,27 @@
 		AE818ECB1A204E890054631E /* AROMA-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AROMA-Light.ttf"; sourceTree = "<group>"; };
 		AE818ECE1A2051EA0054631E /* Dekar Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dekar Light.otf"; sourceTree = "<group>"; };
 		AE83E0B71A469EB40040D422 /* nphs3.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nphs3.JPG; sourceTree = "<group>"; };
+		AE9221391A5FDED1003687A2 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		AE92213A1A5FDED1003687A2 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		AE92213B1A5FDED1003687A2 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		AE92213C1A5FDED1003687A2 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		AE92213D1A5FDED1003687A2 /* MWFeedInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedInfo.h; sourceTree = "<group>"; };
+		AE92213E1A5FDED1003687A2 /* MWFeedInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedInfo.m; sourceTree = "<group>"; };
+		AE92213F1A5FDED1003687A2 /* MWFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedItem.h; sourceTree = "<group>"; };
+		AE9221401A5FDED1003687A2 /* MWFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedItem.m; sourceTree = "<group>"; };
+		AE9221411A5FDED1003687A2 /* MWFeedParser_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser_Private.h; sourceTree = "<group>"; };
+		AE9221421A5FDED1003687A2 /* MWFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser.h; sourceTree = "<group>"; };
+		AE9221431A5FDED1003687A2 /* MWFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParser.m; sourceTree = "<group>"; };
+		AE9221441A5FDED1003687A2 /* MWFeedParserAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParserAppDelegate.h; sourceTree = "<group>"; };
+		AE9221451A5FDED1003687A2 /* MWFeedParserAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParserAppDelegate.m; sourceTree = "<group>"; };
+		AE9221461A5FDED1003687A2 /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
+		AE9221471A5FDED1003687A2 /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
+		AE9221481A5FDED1003687A2 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		AE9221491A5FDED1003687A2 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		AE92214A1A5FDED1003687A2 /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
+		AE92214B1A5FDED1003687A2 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
+		AE92214C1A5FDED1003687A2 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		AE92214D1A5FDED1003687A2 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		AEA625E419DE9F4A00200AA6 /* notification.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification.jpg; sourceTree = "<group>"; };
 		AED7D9501A20251400016D3D /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashViewController.h; path = ../SplashViewController.h; sourceTree = "<group>"; };
 		AED7D9521A20251400016D3D /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashViewController.xib; path = ../SplashViewController.xib; sourceTree = "<group>"; };
@@ -225,6 +256,7 @@
 				AE0CEE621A54E1F000C32CB1 /* users_three_2@3x.png */,
 				AE0CEE661A54E35D00C32CB1 /* arrows_in@3x.png */,
 				AE3B5AED19D7AA71002207E1 /* Cards */,
+				AE9221591A5FDF1E003687A2 /* Parser */,
 				AE1A21E219C66EEF009D5019 /* AppDelegate.h */,
 				AE1A21E319C66EEF009D5019 /* AppDelegate.m */,
 				AE1A21E519C66EEF009D5019 /* ViewController.h */,
@@ -235,6 +267,8 @@
 				AE068F981A22C7E60007634E /* FeedCell.m */,
 				AE068F941A22C0050007634E /* FeedController.h */,
 				AE068F951A22C0050007634E /* FeedController.m */,
+				AE92214C1A5FDED1003687A2 /* RootViewController.h */,
+				AE92214D1A5FDED1003687A2 /* RootViewController.m */,
 				AE1A21E819C66EEF009D5019 /* Main.storyboard */,
 				AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */,
 				AE3B5AEE19D7BCF8002207E1 /* NotificationViewController.h */,
@@ -328,6 +362,32 @@
 				AE1B0FAD19DBD08A0061FD4D /* Onboard */,
 			);
 			name = Cards;
+			sourceTree = "<group>";
+		};
+		AE9221591A5FDF1E003687A2 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				AE9221391A5FDED1003687A2 /* DetailTableViewController.h */,
+				AE92213A1A5FDED1003687A2 /* DetailTableViewController.m */,
+				AE92213B1A5FDED1003687A2 /* GTMNSString+HTML.h */,
+				AE92213C1A5FDED1003687A2 /* GTMNSString+HTML.m */,
+				AE92213D1A5FDED1003687A2 /* MWFeedInfo.h */,
+				AE92213E1A5FDED1003687A2 /* MWFeedInfo.m */,
+				AE92213F1A5FDED1003687A2 /* MWFeedItem.h */,
+				AE9221401A5FDED1003687A2 /* MWFeedItem.m */,
+				AE9221411A5FDED1003687A2 /* MWFeedParser_Private.h */,
+				AE9221421A5FDED1003687A2 /* MWFeedParser.h */,
+				AE9221431A5FDED1003687A2 /* MWFeedParser.m */,
+				AE9221441A5FDED1003687A2 /* MWFeedParserAppDelegate.h */,
+				AE9221451A5FDED1003687A2 /* MWFeedParserAppDelegate.m */,
+				AE9221461A5FDED1003687A2 /* NSDate+InternetDateTime.h */,
+				AE9221471A5FDED1003687A2 /* NSDate+InternetDateTime.m */,
+				AE9221481A5FDED1003687A2 /* NSString+HTML.h */,
+				AE9221491A5FDED1003687A2 /* NSString+HTML.m */,
+				AE92214A1A5FDED1003687A2 /* NSString+XMLEntities.h */,
+				AE92214B1A5FDED1003687A2 /* NSString+XMLEntities.m */,
+			);
+			name = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,17 +508,27 @@
 				AE1B0FAB19DBD0850061FD4D /* OnboardingContentViewController.m in Sources */,
 				AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */,
 				AE10A6D61A49501A008A6C44 /* SubscriptionsCell.m in Sources */,
+				AE9221501A5FDED1003687A2 /* MWFeedInfo.m in Sources */,
 				AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */,
 				AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */,
+				AE9221511A5FDED1003687A2 /* MWFeedItem.m in Sources */,
+				AE9221541A5FDED1003687A2 /* NSDate+InternetDateTime.m in Sources */,
 				AE818EB91A2041FF0054631E /* SplashViewController.m in Sources */,
 				AE315F1119EBA6160021D539 /* CreditsTableViewController.m in Sources */,
+				AE9221551A5FDED1003687A2 /* NSString+HTML.m in Sources */,
 				AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */,
 				AE1B0FAC19DBD0850061FD4D /* OnboardingViewController.m in Sources */,
+				AE9221531A5FDED1003687A2 /* MWFeedParserAppDelegate.m in Sources */,
+				AE9221571A5FDED1003687A2 /* RootViewController.m in Sources */,
+				AE9221561A5FDED1003687A2 /* NSString+XMLEntities.m in Sources */,
+				AE92214E1A5FDED1003687A2 /* DetailTableViewController.m in Sources */,
+				AE9221521A5FDED1003687A2 /* MWFeedParser.m in Sources */,
 				AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */,
 				AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */,
 				AE068F991A22C7E60007634E /* FeedCell.m in Sources */,
 				AE3B5AEC19D7AA59002207E1 /* OverlayView.m in Sources */,
 				AE068F961A22C0050007634E /* FeedController.m in Sources */,
+				AE92214F1A5FDED1003687A2 /* GTMNSString+HTML.m in Sources */,
 				AE1A21E419C66EEF009D5019 /* AppDelegate.m in Sources */,
 				AE3B5AEA19D7AA59002207E1 /* DraggableView.m in Sources */,
 				AE1A21E119C66EEF009D5019 /* main.m in Sources */,

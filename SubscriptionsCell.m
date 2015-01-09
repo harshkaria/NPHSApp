@@ -9,7 +9,7 @@
 #import "SubscriptionsCell.h"
 
 @implementation SubscriptionsCell
-@synthesize contentView, clubLabel;
+@synthesize contentView, clubLabel, username;
 - (void)awakeFromNib {
     // Initialization code
 }

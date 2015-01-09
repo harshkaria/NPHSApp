@@ -12,16 +12,20 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "OnboardingViewController.h"
-
+#import "MWFeedParser.h"
+#import "MWFeedInfo.h"
 @interface FeedController ()
 @property NSMutableArray *clubNames;
 @property NSMutableArray *clubText;
 @property NSInteger count;
 @property (nonatomic) PFInstallation *installation;
+@property NSMutableArray *links;
+@property UIWebView *wv;
+@property UIBarButtonItem *prowl;
 @end
 
 @implementation FeedController
-@synthesize  clubNames, clubText, count;
+@synthesize  clubNames, clubText, count, links, wv, prowl;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -44,6 +48,11 @@
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.view.translatesAutoresizingMaskIntoConstraints = YES;
     UIViewController *splash = [[SplashViewController alloc] init];
+    prowl = [[UIBarButtonItem alloc]initWithTitle:@"Prowler" style:UIBarButtonItemStyleDone target:self action:@selector(getArticles)];
+    [prowl setTintColor:[UIColor yellowColor]];
+    self.navigationItem.leftBarButtonItem = prowl;
+    links = [[NSMutableArray alloc] init];
+    
     
 
     [super viewDidLoad];
@@ -103,6 +112,11 @@
             //[self.view addSubview:draggableBackground];
 
     
+            MWFeedParser *parser = [[MWFeedParser alloc] initWithFeedURL:[NSURL URLWithString:@"http://pantherprowler.org/feed/"]];
+            parser.delegate = self;
+            parser.connectionType = ConnectionTypeAsynchronously;
+            parser.feedParseType = ParseTypeItemsOnly;
+            [parser parse];
         [self.tableView reloadData];
         self.tableView.scrollsToTop = YES;
     [self presentViewController:splash animated:NO completion:nil];
@@ -110,6 +124,35 @@
     [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
         }
     
+}
+-(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
+{
+    [links addObject:item.link];
+    
+}
+-(void)getArticles
+{
+    wv = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    wv.scalesPageToFit = YES;
+    NSURLRequest *url = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[links objectAtIndex:0]]];
+    [wv loadRequest:url];
+    [self.view addSubview:wv];
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneReading)];
+    done.tintColor = [UIColor yellowColor];
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.title = @"Panther Prowler";
+    self.navigationItem.rightBarButtonItem = done;
+    
+    
+}
+
+-(void)doneReading
+{
+    
+    [wv removeFromSuperview];
+    self.navigationItem.leftBarButtonItem = prowl;
+    self.navigationItem.rightBarButtonItem = nil;
+    self.navigationItem.title = @"Feed";
 }
 
 -(void)hideMe
@@ -172,7 +215,7 @@
     
     
     
-    cell.clubName.text = object[@"clubName"];
+    cell.clubName.text = object[@"Name"];
     
     
     cell.clubText.text = [object objectForKey:@"feedPost"];

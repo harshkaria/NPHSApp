@@ -12,5 +12,5 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UILabel *clubLabel;
 @property (weak, nonatomic) IBOutlet UIView *seperatorView;
-
+@property NSString *username;
 @end

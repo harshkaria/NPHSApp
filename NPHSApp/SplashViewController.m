@@ -23,13 +23,18 @@
     self.view.translatesAutoresizingMaskIntoConstraints = YES;
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.view.bounds];
     shimmeringView.translatesAutoresizingMaskIntoConstraints = YES;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    imageView.image = [UIImage imageNamed:VIEW_BG];
-    imageView.contentMode = UIViewContentModeScaleToFill;
-    [self.view addSubview:imageView];
     
     PFQuery *picLabel = [PFQuery queryWithClassName:@"Pics"];
     PFObject *name = [picLabel getFirstObject];
+    PFFile *file = [name objectForKey:@"image"];
+    NSData *imageData = [file getData];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.image = [UIImage imageWithData:imageData];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:imageView];
+    
+    
     NSString *picByLabel = [name objectForKey:@"picBy"];
     
     UILabel  *myText = [[UILabel alloc] init];

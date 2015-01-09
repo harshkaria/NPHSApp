@@ -22,7 +22,7 @@
 @synthesize notificationField, sendLabel, username, subscribers, send;
 
 - (void)viewDidLoad {
-    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.backBarButtonItem = nil;
     UIBarButtonItem *logOut = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logOutAction)];
     self.navigationItem.leftBarButtonItem = logOut;
     [super viewDidLoad];
@@ -101,15 +101,22 @@
     else
     {
         
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:username];
+        PFObject *object = [query getFirstObject];
+        NSString *clubName = [object objectForKey:@"clubName"];
+        
+        
         PFObject *feed = [PFObject objectWithClassName:@"feed"];
         feed[@"clubName"] = username;
         feed[@"feedPost"] = notificationField.text;
+        feed[@"Name"] = clubName;
         [feed saveInBackground];
         
         PFPush *push = [[PFPush alloc] init];
         
         NSString *channel = username;
-        NSString *notification = [NSString stringWithFormat:@"%@: %@", username, notificationField.text];
+        NSString *notification = [NSString stringWithFormat:@"%@: %@", clubName, notificationField.text];
         
         
         [push setChannel:channel];

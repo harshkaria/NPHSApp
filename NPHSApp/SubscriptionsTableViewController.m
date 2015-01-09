@@ -76,10 +76,11 @@
   
     cell.userInteractionEnabled = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.clubLabel.text = [object objectForKey:@"username"];
+    
+    cell.clubLabel.text = [object objectForKey:@"clubName"];
     cell.clubLabel.font = [UIFont fontWithName:@"HelveticaStrong" size:20];
     cell.clubLabel.textColor = [UIColor whiteColor];
-    
+    cell.username = [object objectForKey:@"username"];
     
     
     // ADD ON OFF SWITCH
@@ -94,14 +95,14 @@
     
     [cell.contentView addSubview:cell.clubLabel];
     [cell.contentView addSubview:self.onOff];
-    if([currentChannels containsObject:cell.clubLabel.text])
+    if([currentChannels containsObject:cell.username])
     {
         [self setOn];
-        [self.onOff setOn:YES];
+        
         
         
     }
-    if([cell.clubLabel.text isEqualToString:@"asg"] || [cell.clubLabel.text isEqualToString:@"admin"])
+    if([cell.username isEqualToString:@"asg"] || [cell.username isEqualToString:@"admin"] || [cell.username isEqualToString:@"prowler"])
     {
         
         [self setOn];
@@ -145,16 +146,16 @@
     SubscriptionsCell * cell = (SubscriptionsCell*) mySwitch.superview;
     
     
-   if(!([myInstall.channels containsObject:cell.clubLabel.text]))
+   if(!([myInstall.channels containsObject:cell.username]))
    {
        NSLog(@"on");
-    [myInstall addUniqueObject:cell.clubLabel.text forKey:@"channels"];
+    [myInstall addUniqueObject:cell.username forKey:@"channels"];
     [myInstall saveInBackground];
     [self.tableView reloadData];
    }
    else
    {
-       [myInstall removeObject:cell.clubLabel.text forKey:@"channels"];
+       [myInstall removeObject:cell.username forKey:@"channels"];
        [myInstall save];
        [self.tableView reloadData];
    }

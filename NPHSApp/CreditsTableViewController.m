@@ -71,7 +71,7 @@
     {
         //cell.backgroundColor = [UIColor blackColor];
         //cell.creditLabel.textColor = [UIColor whiteColor];
-        cell.biography.text = @"Team Leader and Lead Developer. Overlord.";
+        cell.biography.text = @"Team Leader and Lead Developer.";
         //cell.biography.t = [UIColor whiteColor];
         
         
