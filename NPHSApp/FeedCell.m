@@ -12,9 +12,7 @@
 @synthesize feedView, clubName, clubText, dateLabel, bg;
 - (void)awakeFromNib {
     // Initialization code
-   clubText.dataDetectorTypes = UIDataDetectorTypeLink;
-    clubText.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"Helvetica" size:14]};
-    clubText.scrollEnabled = NO;
+   
     
     
 }

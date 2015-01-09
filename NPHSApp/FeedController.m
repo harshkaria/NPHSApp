@@ -52,7 +52,7 @@
     [prowl setTintColor:[UIColor yellowColor]];
     self.navigationItem.leftBarButtonItem = prowl;
     links = [[NSMutableArray alloc] init];
-    
+    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
 
     [super viewDidLoad];
@@ -132,7 +132,10 @@
 }
 -(void)getArticles
 {
+    self.tableView.scrollsToTop = NO;
+    
     wv = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.wv.scrollView.scrollsToTop = YES;
     wv.scalesPageToFit = YES;
     NSURLRequest *url = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[links objectAtIndex:0]]];
     [wv loadRequest:url];
