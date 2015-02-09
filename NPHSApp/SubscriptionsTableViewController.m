@@ -9,6 +9,7 @@
 #import "SubscriptionsTableViewController.h"
 #import "SubscriptionsCell.h"
 #import "AppDelegate.h"
+#import <ParseUI/ParseUI.h>
 #import <Parse/Parse.h>
 @interface SubscriptionsTableViewController ()
 @property (strong, nonatomic) NSArray *subscriptions;

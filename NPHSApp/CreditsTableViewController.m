@@ -17,8 +17,8 @@
 @synthesize people;
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Matthew Mangawang", @"Claire Monro", @"Suraj Palaparty", @"Ernesto Ambrocio", @"Victoria Juan", @"Michael Weingarden",  nil];
+    
+    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Matthew Mangawang", @"Claire Monro",  @"Kevin Norgaard", @"Suraj Palaparty", @"Ernesto Ambrocio", @"Victoria Juan", @"Chris Reusch", @"Michael Weingarden",   nil];
     
     
 }
@@ -53,7 +53,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
-
+    
     
     //cell.creditLabel.textAlignment = NSTextAlignmentCenter;
     cell.creditLabel.text = [people objectAtIndex:indexPath.row];
@@ -61,7 +61,11 @@
     cell.backgroundColor = [UIColor blackColor];
     
     cell.creditLabel.textColor = [UIColor yellowColor];
-    cell.biography.text = @"General Operations. Responible for assisting with execution & strategy, quality control, and beta testing.";
+    NSMutableAttributedString *leaderString = [[NSMutableAttributedString alloc]initWithString:@"Leader"];
+    NSRange textRange = NSMakeRange(0, 6);
+    
+    
+    cell.biography.text = @"General Operations. Responsible for assisting with execution & strategy, quality control, and beta testing.";
     //cell.creditLabel.textAlignment = NSTextAlignmentRight;
     //cell.biography = [UIColor yellowColor];
     //[[cell appearance]setBackgroundColor:[UIColor blackColor]];
@@ -70,6 +74,7 @@
     //tableView.userInteractionEnabled = YES;
     if([cell.creditLabel.text isEqualToString:@"Harsh Karia"])
     {
+        
         //cell.backgroundColor = [UIColor blackColor];
         //cell.creditLabel.textColor = [UIColor whiteColor];
         cell.biography.text = @"Team Leader and Lead Developer. President of App Club. Responsible for development, general strategy, and execution.";
@@ -84,15 +89,22 @@
     }
     if([cell.creditLabel.text isEqualToString:@"Matthew Mangawang"])
     {
-         cell.biography.text = @"Leader: Operations and Publicity. Responsible for planning and coordinating general strategy, managing promotional content, creating the icon, and beta testing.";
+        
+        cell.biography.text = @"Leader: Operations and User Experience. Responsible for planning and coordinating general strategy, managing promotional content, creating the icon, and beta testing.";
     }
     if([cell.creditLabel.text isEqualToString:@"Claire Monro"])
     {
-        cell.biography.text = @"Leader: Operations and Publicity. Responsible for coordinating general strategy, managing promotional content, the creation and successful execution of promotional strategy, and user engagement.";
+        
+        cell.biography.text = @"Leader: Operations and Publicity. Responsible for public relations and executing promotional strategy.";
+    }
+    if([cell.creditLabel.text isEqualToString:@"Kevin Norgaard"])
+    {
+        
+        cell.biography.text = @"Leader: Operations and User Experience. Responsible for sound effects, in addition to planning strategy, and guiding user experience.";
     }
     
     cell.userInteractionEnabled = NO;
-       return cell;
+    return cell;
 }
 
 @end

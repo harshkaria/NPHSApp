@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 @interface SubscriptionsTableViewController : PFQueryTableViewController
 @property (weak, nonatomic) IBOutlet UITableView *SubscriptionTableView;
 @property (weak, nonatomic) IBOutlet UISwitch *test;

@@ -12,6 +12,7 @@
 #import "OnboardingContentViewController.h"
 #import "FeedController.h"
 #import "RKDropdownAlert.h"
+#import <ParseCrashReporting/ParseCrashReporting.h>
 @interface AppDelegate ()
 
 @end
@@ -20,6 +21,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [ParseCrashReporting enable];
     // Override point for customization after application launch.
     [Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
                   clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
@@ -79,7 +81,7 @@
         FeedController *feed = [[FeedController alloc]init];
         [feed loadObjects];
     }
-
+    
     
     
     return YES;

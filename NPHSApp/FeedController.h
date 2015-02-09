@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "MWFeedParser.h"
+#import <ParseUI/ParseUI.h>
 @interface FeedController : PFQueryTableViewController<MWFeedParserDelegate>
 
 @end

@@ -21,10 +21,6 @@
 		AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E619C66EEF009D5019 /* ViewController.m */; };
 		AE1A21EA19C66EEF009D5019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21E819C66EEF009D5019 /* Main.storyboard */; };
 		AE1A21EF19C66EEF009D5019 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */; };
-		AE1A21FB19C66EF0009D5019 /* NPHSAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21FA19C66EF0009D5019 /* NPHSAppTests.m */; };
-		AE1A220719C6751A009D5019 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220419C6751A009D5019 /* Bolts.framework */; };
-		AE1A220819C6751A009D5019 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220519C6751A009D5019 /* Parse.framework */; };
-		AE1A220919C6751A009D5019 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220619C6751A009D5019 /* ParseFacebookUtils.framework */; };
 		AE1A220B19C67897009D5019 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220A19C67897009D5019 /* AudioToolbox.framework */; };
 		AE1A220D19C6789F009D5019 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220C19C6789F009D5019 /* StoreKit.framework */; };
 		AE1A220F19C678A8009D5019 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220E19C678A8009D5019 /* CoreGraphics.framework */; };
@@ -35,8 +31,6 @@
 		AE1A221919C67EEF009D5019 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A221819C67EEF009D5019 /* MobileCoreServices.framework */; };
 		AE1A221B19C67EF7009D5019 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A221A19C67EF7009D5019 /* Security.framework */; };
 		AE1A221D19C67F0A009D5019 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A221C19C67F0A009D5019 /* SystemConfiguration.framework */; };
-		AE1A222019C67FC8009D5019 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220419C6751A009D5019 /* Bolts.framework */; };
-		AE1A222119C67FC8009D5019 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220519C6751A009D5019 /* Parse.framework */; };
 		AE1B0FAB19DBD0850061FD4D /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B0FA819DBD0850061FD4D /* OnboardingContentViewController.m */; };
 		AE1B0FAC19DBD0850061FD4D /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B0FAA19DBD0850061FD4D /* OnboardingViewController.m */; };
 		AE1B0FAF19DBD3E30061FD4D /* nphs1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE1B0FAE19DBD3E30061FD4D /* nphs1.jpeg */; };
@@ -49,6 +43,12 @@
 		AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AF219D80988002207E1 /* LoginViewController.m */; };
 		AE44B71419DFB34E003776AC /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44B71319DFB34E003776AC /* RKDropdownAlert.m */; };
 		AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE451EC01A319A5E00399E1C /* CreditsCell.m */; };
+		AE5BA6611A88022100CEB715 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA65F1A88022100CEB715 /* Bolts.framework */; };
+		AE5BA6621A88022100CEB715 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6601A88022100CEB715 /* Parse.framework */; };
+		AE5BA6641A88027D00CEB715 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6631A88027D00CEB715 /* ParseUI.framework */; };
+		AE5BA6661A8802FF00CEB715 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6651A8802FF00CEB715 /* libsqlite3.0.dylib */; };
+		AE5BA6691A8805A400CEB715 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6681A8805A400CEB715 /* ParseCrashReporting.framework */; };
+		AE5BA66B1A8805E900CEB715 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA66A1A8805E900CEB715 /* libstdc++.6.0.9.dylib */; };
 		AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DC19EA350000CC7FE2 /* Foundation.framework */; };
 		AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DA19EA34C700CC7FE2 /* UIKit.framework */; };
 		AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */; };
@@ -74,16 +74,6 @@
 		AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733C1A535B6100B79DFE /* rss-7.png */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		AE1A21F519C66EF0009D5019 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE1A21D319C66EEF009D5019 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AE1A21DA19C66EEF009D5019;
-			remoteInfo = NPHSApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		AE01B43E1A54BB8E006BFB38 /* icon.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.JPG; sourceTree = "<group>"; };
 		AE068F941A22C0050007634E /* FeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedController.h; sourceTree = "<group>"; };
@@ -106,11 +96,8 @@
 		AE1A21E619C66EEF009D5019 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AE1A21E919C66EEF009D5019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE1A21EE19C66EEF009D5019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		AE1A21F419C66EF0009D5019 /* NPHSAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NPHSAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1A21F919C66EF0009D5019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1A21FA19C66EF0009D5019 /* NPHSAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NPHSAppTests.m; sourceTree = "<group>"; };
-		AE1A220419C6751A009D5019 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../Downloads/parse-library-1.3.0/Bolts.framework"; sourceTree = "<group>"; };
-		AE1A220519C6751A009D5019 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../Downloads/parse-library-1.3.0/Parse.framework"; sourceTree = "<group>"; };
 		AE1A220619C6751A009D5019 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../Downloads/parse-library-1.3.0/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
 		AE1A220A19C67897009D5019 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AE1A220C19C6789F009D5019 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -144,6 +131,12 @@
 		AE44B71319DFB34E003776AC /* RKDropdownAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKDropdownAlert.m; sourceTree = "<group>"; };
 		AE451EBF1A319A5E00399E1C /* CreditsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsCell.h; sourceTree = "<group>"; };
 		AE451EC01A319A5E00399E1C /* CreditsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsCell.m; sourceTree = "<group>"; };
+		AE5BA65F1A88022100CEB715 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		AE5BA6601A88022100CEB715 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		AE5BA6631A88027D00CEB715 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		AE5BA6651A8802FF00CEB715 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		AE5BA6681A8805A400CEB715 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
+		AE5BA66A1A8805E900CEB715 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		AE6919DA19EA34C700CC7FE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE6919DC19EA350000CC7FE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsTableViewController.h; sourceTree = "<group>"; };
@@ -191,30 +184,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5BA66B1A8805E900CEB715 /* libstdc++.6.0.9.dylib in Frameworks */,
+				AE5BA6661A8802FF00CEB715 /* libsqlite3.0.dylib in Frameworks */,
 				AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */,
 				AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */,
-				AE1A222019C67FC8009D5019 /* Bolts.framework in Frameworks */,
-				AE1A222119C67FC8009D5019 /* Parse.framework in Frameworks */,
+				AE5BA6691A8805A400CEB715 /* ParseCrashReporting.framework in Frameworks */,
 				AE1A221D19C67F0A009D5019 /* SystemConfiguration.framework in Frameworks */,
 				AE1A220D19C6789F009D5019 /* StoreKit.framework in Frameworks */,
 				AE1A221B19C67EF7009D5019 /* Security.framework in Frameworks */,
 				AE1A221919C67EEF009D5019 /* MobileCoreServices.framework in Frameworks */,
 				AE1A221719C67EE2009D5019 /* CoreLocation.framework in Frameworks */,
+				AE5BA6611A88022100CEB715 /* Bolts.framework in Frameworks */,
 				AE1A220F19C678A8009D5019 /* CoreGraphics.framework in Frameworks */,
 				AE1A221519C67ECD009D5019 /* CFNetwork.framework in Frameworks */,
+				AE5BA6621A88022100CEB715 /* Parse.framework in Frameworks */,
 				AE1A221319C67EC1009D5019 /* libz.dylib in Frameworks */,
+				AE5BA6641A88027D00CEB715 /* ParseUI.framework in Frameworks */,
 				AE1A221119C678AC009D5019 /* QuartzCore.framework in Frameworks */,
 				AE1A220B19C67897009D5019 /* AudioToolbox.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AE1A21F119C66EF0009D5019 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AE1A220819C6751A009D5019 /* Parse.framework in Frameworks */,
-				AE1A220719C6751A009D5019 /* Bolts.framework in Frameworks */,
-				AE1A220919C6751A009D5019 /* ParseFacebookUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				AE1A21DB19C66EEF009D5019 /* NPHSApp.app */,
-				AE1A21F419C66EF0009D5019 /* NPHSAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -299,10 +285,11 @@
 		AE1A21DE19C66EEF009D5019 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE5BA66A1A8805E900CEB715 /* libstdc++.6.0.9.dylib */,
+				AE5BA6651A8802FF00CEB715 /* libsqlite3.0.dylib */,
+				AE5BA6681A8805A400CEB715 /* ParseCrashReporting.framework */,
 				AE6919DC19EA350000CC7FE2 /* Foundation.framework */,
 				AE6919DA19EA34C700CC7FE2 /* UIKit.framework */,
-				AE1A220419C6751A009D5019 /* Bolts.framework */,
-				AE1A220519C6751A009D5019 /* Parse.framework */,
 				AE1A220619C6751A009D5019 /* ParseFacebookUtils.framework */,
 				AE1A221C19C67F0A009D5019 /* SystemConfiguration.framework */,
 				AE1A221A19C67EF7009D5019 /* Security.framework */,
@@ -310,6 +297,9 @@
 				AE1A221619C67EE2009D5019 /* CoreLocation.framework */,
 				AE1A221419C67ECD009D5019 /* CFNetwork.framework */,
 				AE1A221219C67EC1009D5019 /* libz.dylib */,
+				AE5BA6631A88027D00CEB715 /* ParseUI.framework */,
+				AE5BA65F1A88022100CEB715 /* Bolts.framework */,
+				AE5BA6601A88022100CEB715 /* Parse.framework */,
 				AE1A221019C678AC009D5019 /* QuartzCore.framework */,
 				AE1A220E19C678A8009D5019 /* CoreGraphics.framework */,
 				AE1A220C19C6789F009D5019 /* StoreKit.framework */,
@@ -400,6 +390,7 @@
 				AE1A21D719C66EEF009D5019 /* Sources */,
 				AE1A21D819C66EEF009D5019 /* Frameworks */,
 				AE1A21D919C66EEF009D5019 /* Resources */,
+				AE5BA66C1A88096400CEB715 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -409,24 +400,6 @@
 			productName = NPHSApp;
 			productReference = AE1A21DB19C66EEF009D5019 /* NPHSApp.app */;
 			productType = "com.apple.product-type.application";
-		};
-		AE1A21F319C66EF0009D5019 /* NPHSAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AE1A220119C66EF0009D5019 /* Build configuration list for PBXNativeTarget "NPHSAppTests" */;
-			buildPhases = (
-				AE1A21F019C66EF0009D5019 /* Sources */,
-				AE1A21F119C66EF0009D5019 /* Frameworks */,
-				AE1A21F219C66EF0009D5019 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AE1A21F619C66EF0009D5019 /* PBXTargetDependency */,
-			);
-			name = NPHSAppTests;
-			productName = NPHSAppTests;
-			productReference = AE1A21F419C66EF0009D5019 /* NPHSAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -440,10 +413,6 @@
 					AE1A21DA19C66EEF009D5019 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = GC67WT8T7M;
-					};
-					AE1A21F319C66EF0009D5019 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = AE1A21DA19C66EEF009D5019;
 					};
 				};
 			};
@@ -461,7 +430,6 @@
 			projectRoot = "";
 			targets = (
 				AE1A21DA19C66EEF009D5019 /* NPHSApp */,
-				AE1A21F319C66EF0009D5019 /* NPHSAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -491,14 +459,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE1A21F219C66EF0009D5019 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AE5BA66C1A88096400CEB715 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
 			files = (
 			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=/usr/local/bin:$PATH\ncd /Users/harshkaria/desktop/NPHSApp/crash/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AE1A21D719C66EEF009D5019 /* Sources */ = {
@@ -538,23 +515,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE1A21F019C66EF0009D5019 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AE1A21FB19C66EF0009D5019 /* NPHSAppTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AE1A21F619C66EF0009D5019 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AE1A21DA19C66EEF009D5019 /* NPHSApp */;
-			targetProxy = AE1A21F519C66EF0009D5019 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AE1A21E819C66EEF009D5019 /* Main.storyboard */ = {
@@ -614,6 +575,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "a68c41a2-dc6a-4706-afe5-1c721431169a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -636,7 +598,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -649,6 +611,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "a68c41a2-dc6a-4706-afe5-1c721431169a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -659,17 +622,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
+					"$(PROJECT_DIR)/NPHSApp",
 				);
 				INFOPLIST_FILE = NPHSApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "bb3f9d1b-e3b3-4da3-a6ae-4ab3e3c15473";
+				PROVISIONING_PROFILE = "a68c41a2-dc6a-4706-afe5-1c721431169a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -679,54 +643,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
+					"$(PROJECT_DIR)/NPHSApp",
 				);
 				INFOPLIST_FILE = NPHSApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "bb3f9d1b-e3b3-4da3-a6ae-4ab3e3c15473";
+				PROVISIONING_PROFILE = "a68c41a2-dc6a-4706-afe5-1c721431169a";
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		AE1A220219C66EF0009D5019 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"/Users/harshkaria/Downloads/parse-library-1.3.0",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = NPHSAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = NPHSAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NPHSApp.app/NPHSApp";
-			};
-			name = Debug;
-		};
-		AE1A220319C66EF0009D5019 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"/Users/harshkaria/Downloads/parse-library-1.3.0",
-				);
-				INFOPLIST_FILE = NPHSAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = NPHSAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NPHSApp.app/NPHSApp";
 			};
 			name = Release;
 		};
@@ -747,15 +676,6 @@
 			buildConfigurations = (
 				AE1A21FF19C66EF0009D5019 /* Debug */,
 				AE1A220019C66EF0009D5019 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AE1A220119C66EF0009D5019 /* Build configuration list for PBXNativeTarget "NPHSAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AE1A220219C66EF0009D5019 /* Debug */,
-				AE1A220319C66EF0009D5019 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

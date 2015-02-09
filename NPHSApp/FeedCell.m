@@ -7,14 +7,14 @@
 //
 
 #import "FeedCell.h"
+#import <Parse/Parse.h>
 #import "AppDelegate.h"
 @implementation FeedCell
-@synthesize feedView, clubName, clubText, dateLabel, bg;
+@synthesize feedView, clubName, clubText, dateLabel, bg, removeButton;
 - (void)awakeFromNib {
     // Initialization code
    
-    
-    
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -28,4 +28,6 @@
     return UIEdgeInsetsZero;
 }
 
+- (IBAction)removeButton:(id)sender {
+}
 @end
