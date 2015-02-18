@@ -58,7 +58,7 @@
     }
     else
     {
-        picBy.frame = CGRectMake(screenSize.width * 0.2, screenSize.height * 0.94, 495, 60);
+        picBy.frame = CGRectMake(screenSize.width * 0.24, screenSize.height * 0.94, 495, 60);
     }
     picBy.text = picByLabel;
     picBy.textColor = [UIColor whiteColor];

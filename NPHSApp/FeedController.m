@@ -18,7 +18,7 @@
 @property NSMutableArray *clubNames;
 @property NSMutableArray *clubText;
 @property NSInteger count;
-@property (nonatomic) PFInstallation *installation;
+@property PFInstallation *installation;
 @property NSMutableArray *links;
 @property UIWebView *wv;
 @property UIBarButtonItem *prowl;
@@ -27,16 +27,19 @@
 @property UIBarButtonItem *qButton;
 @property UIBarButtonItem *done;
 @property UIWebView *gradesWV;
+@property NSArray *removeArray;
 @end
 
 
 @implementation FeedController
-@synthesize  clubNames, clubText, count, links, wv, prowl, query, array, qButton, done, gradesWV;
+@synthesize  clubNames, clubText, count, links, wv, prowl, query, array, qButton, done, gradesWV, removeArray, installation;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if(self)
     {
+        
+        self.parseClassName = @"feed";
         //self.parseClassName = @"User";
         self.paginationEnabled = NO;
         self.pullToRefreshEnabled = YES;
@@ -51,7 +54,8 @@
     return self;
 }
 - (void)viewDidLoad {
-    
+    installation = [PFInstallation currentInstallation];
+
     self.tableView.separatorColor = [UIColor yellowColor];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
     self.tableView.separatorInset = UIEdgeInsetsZero;
@@ -75,7 +79,7 @@
     
     [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
     
-    _installation = [PFInstallation currentInstallation];
+   
     
     
     /*if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
@@ -120,10 +124,10 @@
     
     
     
-    if(_installation.badge != 0)
+    if(installation.badge != 0)
     {
-        _installation.badge = 0;
-        [_installation saveInBackground];
+        installation.badge = 0;
+        [installation saveInBackground];
     }
     
     // DraggableViewBackground *draggableBackground = [[DraggableViewBackground alloc]initWithFrame:self.view.frame];
@@ -217,14 +221,25 @@
 
 -(PFQuery *)queryForTable
 {
-    PFInstallation *installation = [PFInstallation currentInstallation];
-    
-    query = [PFQuery queryWithClassName:@"feed"];
+        if(!self.parseClassName)
+    {
+        self.parseClassName = @"feed";
+    }
+    query = [PFQuery queryWithClassName:self.parseClassName];
+    if(installation.channels)
+    {
     [query whereKey:@"clubName" containedIn:installation.channels];
+    
+    }
+    if(![installation.channels containsObject:@"prowler"])
+         {
+             [installation addUniqueObject:@"prowler" forKey:@"channels"];
+             [installation saveInBackground];
+         }
     [query orderByDescending:@"createdAt"];
     count = [query countObjects];
-    array = [query findObjects];
-    [self.tableView reloadData];
+    //array = [query findObjects];
+   // [self.tableView reloadData];
     return query;
     
 }
@@ -265,10 +280,15 @@
     cell.bg.image = [UIImage imageNamed:VIEW_BG];
     cell.bg.alpha = 0.4;
     NSString *username = [[PFUser currentUser]username];
-    if([username isEqualToString:object[@"clubName"]])
+     cell.clubName.text = object[@"Name"];
+     cell.objId = [object objectForKey:@"clubName"];
+    /*if([username isEqualToString:cell.objId])
         {
             cell.removeButton.hidden = NO;
-        }
+            [cell.removeButton addTarget:self action:@selector(deleteMe:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.feedView addSubview:cell.removeButton];
+            
+        }*/
     
     
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -279,8 +299,8 @@
     
     
     
-    cell.clubName.text = object[@"Name"];
-    
+   
+   
     
     
     cell.clubText.text = [object objectForKey:@"feedPost"];
@@ -300,11 +320,12 @@
     
     
     
+    
     [cell.feedView addSubview:cell.clubName];
     
     [cell.feedView addSubview:cell.clubText];
     [cell.feedView addSubview:cell.dateLabel];
-    [cell.feedView addSubview:cell.removeButton];
+    
     
     
     
@@ -315,4 +336,5 @@
     
     
 }
+
 @end

@@ -15,8 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *clubName;
 @property (weak, nonatomic) IBOutlet UITextView *clubText;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIButton *removeButton;
-- (IBAction)removeButton:(id)sender;
+@property  UIButton *removeButton;
+@property NSString *objId;
+//- (IBAction)removeButton:(id)sender;
 
 
 @end

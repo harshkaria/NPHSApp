@@ -45,7 +45,7 @@
     }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-     CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:NAV_BG]];
+   //  CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:NAV_BG]];
     
      // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAV_BG] forBarMetrics:UIBarMetricsDefault];
     

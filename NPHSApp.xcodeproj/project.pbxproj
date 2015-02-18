@@ -19,8 +19,6 @@
 		AE1A21E119C66EEF009D5019 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E019C66EEF009D5019 /* main.m */; };
 		AE1A21E419C66EEF009D5019 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E319C66EEF009D5019 /* AppDelegate.m */; };
 		AE1A21E719C66EEF009D5019 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A21E619C66EEF009D5019 /* ViewController.m */; };
-		AE1A21EA19C66EEF009D5019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21E819C66EEF009D5019 /* Main.storyboard */; };
-		AE1A21EF19C66EEF009D5019 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */; };
 		AE1A220B19C67897009D5019 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220A19C67897009D5019 /* AudioToolbox.framework */; };
 		AE1A220D19C6789F009D5019 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220C19C6789F009D5019 /* StoreKit.framework */; };
 		AE1A220F19C678A8009D5019 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1A220E19C678A8009D5019 /* CoreGraphics.framework */; };
@@ -44,11 +42,11 @@
 		AE44B71419DFB34E003776AC /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44B71319DFB34E003776AC /* RKDropdownAlert.m */; };
 		AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE451EC01A319A5E00399E1C /* CreditsCell.m */; };
 		AE5BA6611A88022100CEB715 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA65F1A88022100CEB715 /* Bolts.framework */; };
-		AE5BA6621A88022100CEB715 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6601A88022100CEB715 /* Parse.framework */; };
 		AE5BA6641A88027D00CEB715 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6631A88027D00CEB715 /* ParseUI.framework */; };
 		AE5BA6661A8802FF00CEB715 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6651A8802FF00CEB715 /* libsqlite3.0.dylib */; };
 		AE5BA6691A8805A400CEB715 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA6681A8805A400CEB715 /* ParseCrashReporting.framework */; };
 		AE5BA66B1A8805E900CEB715 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BA66A1A8805E900CEB715 /* libstdc++.6.0.9.dylib */; };
+		AE66B9E21A947ABA00EADEB4 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE66B9E11A947ABA00EADEB4 /* Parse.framework */; };
 		AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DC19EA350000CC7FE2 /* Foundation.framework */; };
 		AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DA19EA34C700CC7FE2 /* UIKit.framework */; };
 		AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */; };
@@ -72,6 +70,8 @@
 		AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED7D9521A20251400016D3D /* SplashViewController.xib */; };
 		AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733A1A535A2F00B79DFE /* feedIcon.png */; };
 		AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733C1A535B6100B79DFE /* rss-7.png */; };
+		AEFA46C61A88A72300AB634B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21E819C66EEF009D5019 /* Main.storyboard */; };
+		AEFA46C71A88A72600AB634B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21ED19C66EEF009D5019 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,11 +132,11 @@
 		AE451EBF1A319A5E00399E1C /* CreditsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsCell.h; sourceTree = "<group>"; };
 		AE451EC01A319A5E00399E1C /* CreditsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsCell.m; sourceTree = "<group>"; };
 		AE5BA65F1A88022100CEB715 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		AE5BA6601A88022100CEB715 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		AE5BA6631A88027D00CEB715 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		AE5BA6651A8802FF00CEB715 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		AE5BA6681A8805A400CEB715 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		AE5BA66A1A8805E900CEB715 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		AE66B9E11A947ABA00EADEB4 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		AE6919DA19EA34C700CC7FE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE6919DC19EA350000CC7FE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsTableViewController.h; sourceTree = "<group>"; };
@@ -194,10 +194,10 @@
 				AE1A221B19C67EF7009D5019 /* Security.framework in Frameworks */,
 				AE1A221919C67EEF009D5019 /* MobileCoreServices.framework in Frameworks */,
 				AE1A221719C67EE2009D5019 /* CoreLocation.framework in Frameworks */,
+				AE66B9E21A947ABA00EADEB4 /* Parse.framework in Frameworks */,
 				AE5BA6611A88022100CEB715 /* Bolts.framework in Frameworks */,
 				AE1A220F19C678A8009D5019 /* CoreGraphics.framework in Frameworks */,
 				AE1A221519C67ECD009D5019 /* CFNetwork.framework in Frameworks */,
-				AE5BA6621A88022100CEB715 /* Parse.framework in Frameworks */,
 				AE1A221319C67EC1009D5019 /* libz.dylib in Frameworks */,
 				AE5BA6641A88027D00CEB715 /* ParseUI.framework in Frameworks */,
 				AE1A221119C678AC009D5019 /* QuartzCore.framework in Frameworks */,
@@ -292,6 +292,7 @@
 				AE6919DA19EA34C700CC7FE2 /* UIKit.framework */,
 				AE1A220619C6751A009D5019 /* ParseFacebookUtils.framework */,
 				AE1A221C19C67F0A009D5019 /* SystemConfiguration.framework */,
+				AE66B9E11A947ABA00EADEB4 /* Parse.framework */,
 				AE1A221A19C67EF7009D5019 /* Security.framework */,
 				AE1A221819C67EEF009D5019 /* MobileCoreServices.framework */,
 				AE1A221619C67EE2009D5019 /* CoreLocation.framework */,
@@ -299,7 +300,6 @@
 				AE1A221219C67EC1009D5019 /* libz.dylib */,
 				AE5BA6631A88027D00CEB715 /* ParseUI.framework */,
 				AE5BA65F1A88022100CEB715 /* Bolts.framework */,
-				AE5BA6601A88022100CEB715 /* Parse.framework */,
 				AE1A221019C678AC009D5019 /* QuartzCore.framework */,
 				AE1A220E19C678A8009D5019 /* CoreGraphics.framework */,
 				AE1A220C19C6789F009D5019 /* StoreKit.framework */,
@@ -390,7 +390,7 @@
 				AE1A21D719C66EEF009D5019 /* Sources */,
 				AE1A21D819C66EEF009D5019 /* Frameworks */,
 				AE1A21D919C66EEF009D5019 /* Resources */,
-				AE5BA66C1A88096400CEB715 /* ShellScript */,
+				AE66B9E31A947AED00EADEB4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -451,8 +451,8 @@
 				AE0CEE671A54E35D00C32CB1 /* arrows_in@3x.png in Resources */,
 				AE83E0B81A469EB40040D422 /* nphs3.JPG in Resources */,
 				AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */,
-				AE1A21EA19C66EEF009D5019 /* Main.storyboard in Resources */,
-				AE1A21EF19C66EEF009D5019 /* LaunchScreen.xib in Resources */,
+				AEFA46C61A88A72300AB634B /* Main.storyboard in Resources */,
+				AEFA46C71A88A72600AB634B /* LaunchScreen.xib in Resources */,
 				AEA625E519DE9F4A00200AA6 /* notification.jpg in Resources */,
 				AE0CEE631A54E1F000C32CB1 /* users_three_2@3x.png in Resources */,
 				AE818ECF1A2051EA0054631E /* Dekar Light.otf in Resources */,
@@ -462,7 +462,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AE5BA66C1A88096400CEB715 /* ShellScript */ = {
+		AE66B9E31A947AED00EADEB4 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
@@ -473,7 +473,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=/usr/local/bin:$PATH\ncd /Users/harshkaria/desktop/NPHSApp/crash/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+			shellScript = "export PATH=/usr/local/bin:$PATH\ncd /Users/harshkaria/desktop/NPHSApp/parse\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -622,8 +622,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -643,8 +643,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Karia Sanjay (GC67WT8T7M)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",

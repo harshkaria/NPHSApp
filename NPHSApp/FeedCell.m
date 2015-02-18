@@ -9,11 +9,12 @@
 #import "FeedCell.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
+#import "FeedController.h"
 @implementation FeedCell
-@synthesize feedView, clubName, clubText, dateLabel, bg, removeButton;
+@synthesize feedView, clubName, clubText, dateLabel, bg, removeButton, objId;
 - (void)awakeFromNib {
     // Initialization code
-   
+    removeButton.hidden = YES;
 
 }
 
@@ -28,6 +29,5 @@
     return UIEdgeInsetsZero;
 }
 
-- (IBAction)removeButton:(id)sender {
-}
+
 @end
