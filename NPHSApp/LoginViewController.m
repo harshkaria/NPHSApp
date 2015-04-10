@@ -33,7 +33,7 @@
         [self dismissViewControllerAnimated:NO completion:nil];
         [self performSegueWithIdentifier:@"goLogin" sender:nil];
     }
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    self.view.backgroundColor = [UIColor blackColor];
     
        
     
@@ -81,7 +81,7 @@
             {
                 //RKDropdownAlert *dropdown = [[RKDropdownAlert alloc] init];
                 [RKDropdownAlert show];
-                [RKDropdownAlert title:@"Failed" message:@"Wrong Username and Password. Try again." backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
+                [RKDropdownAlert title:@"Failed" message:@"Wrong Username and Password. Try again." backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]time:3];
                 
                 
               

@@ -26,26 +26,23 @@
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:screenBound];
     shimmeringView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    PFConfig *config = [PFConfig getConfig];
-    
-    // PFQuery *picLabel = [c queryWithClassName:@"Pics"];
-    // PFObject *name = [config o];
-    PFFile *file = [config objectForKey:@"bg"];
-    NSData *imageData = [file getData];
+   // PFConfig *config = [PFConfig getConfig];
+    //PFFile *file = [config objectForKey:@"bg"];
+    //NSData *imageData = [file getData];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:screenBound];
-    imageView.image = [UIImage imageWithData:imageData];
+    imageView.image = [UIImage imageNamed:@"panther.jpg"];
     imageView.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:imageView];
     
     
-    NSString *picByLabel = [config objectForKey:@"picBy"];
+    NSString *picByLabel = @"";
     
     UILabel  *myText = [[UILabel alloc] initWithFrame:CGRectMake(screenSize.width / 2, screenSize.height / 2, 300, 120)];
     myText.text = @"NPHS";
     myText.textAlignment = NSTextAlignmentCenter;
     myText.font = [UIFont fontWithName:@"Dekar Light" size:125];
-    myText.textColor = [UIColor yellowColor];
+    myText.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     UILabel *picBy = [[UILabel alloc]init];
     
     if(screenSize.height == 480)
@@ -62,7 +59,7 @@
     }
     picBy.text = picByLabel;
     picBy.textColor = [UIColor whiteColor];
-    picBy.font = [UIFont fontWithName:@"HelveticaNeueStrong" size:40];
+    picBy.font = [UIFont fontWithName:@"HelveticaNeue-Strong" size:40];
     picBy.alpha = 1;
     
     

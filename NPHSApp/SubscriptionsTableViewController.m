@@ -59,7 +59,7 @@
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = [UIColor yellowColor];
+    tableView.separatorColor = [UIColor whiteColor];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
@@ -79,8 +79,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.clubLabel.text = [object objectForKey:@"clubName"];
-    cell.clubLabel.font = [UIFont fontWithName:@"HelveticaStrong" size:20];
-    cell.clubLabel.textColor = [UIColor whiteColor];
+    cell.clubLabel.font = [UIFont fontWithName:@"Copperplate" size:16];
+    cell.clubLabel.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     cell.username = [object objectForKey:@"username"];
     
     
@@ -103,6 +103,7 @@
         
         
     }
+    
     if([cell.username isEqualToString:@"asg"] || [cell.username isEqualToString:@"admin"] || [cell.username isEqualToString:@"prowler"])
     {
         
@@ -118,7 +119,7 @@
 -(void)setOn
 {
     [onOff setOnTintColor:[UIColor blackColor]];
-    [onOff setThumbTintColor:[UIColor yellowColor]];
+    [onOff setThumbTintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
     [self.onOff setOn:YES];
 
 }

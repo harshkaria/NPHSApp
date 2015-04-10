@@ -16,10 +16,11 @@
 @property NSString *kaboom;
 @property NSInteger *subscribers;
 @property UIBarButtonItem *send;
+@property UIBarButtonItem *viewBeeps;
 @end
 
 @implementation NotificationViewController
-@synthesize notificationField, sendLabel, username, subscribers, send;
+@synthesize notificationField, sendLabel, username, subscribers, send, viewBeeps;
 
 - (void)viewDidLoad {
     self.navigationItem.backBarButtonItem = nil;
@@ -28,37 +29,49 @@
     [super viewDidLoad];
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     username = [[PFUser currentUser]username];
+    
     if(currentInstallation.badge != 0)
     {
         currentInstallation.badge = 0;
         [currentInstallation saveInBackground];
     }
     
+    if([username isEqualToString:@"appclub"])
+    {
+        viewBeeps = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"note-write-7.png"] style:UIBarButtonItemStylePlain target:self action:@selector(beepList)];
+        self.navigationItem.rightBarButtonItem = viewBeeps;
+    }
+    
     
     self.navigationItem.title = [NSString stringWithFormat:@"Send: %@", [username uppercaseString]];
     self.view.backgroundColor = [UIColor blackColor];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
     
     // Do any additional setup after loading the view.
     
     PFQuery *query = [PFUser query];
     // Customize Notification Field
     
-    notificationField.textColor = [UIColor blackColor];
-    
+   // notificationField.textColor = [UIColor yellowColor];
+     notificationField.textColor = [UIColor  colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     notificationField.layer.borderWidth = 0;
     notificationField.delegate = self;
     NSNumber *number = [[NSNumber alloc]initWithInteger:[query countObjects]];
     
     [RKDropdownAlert show];
-    [RKDropdownAlert title:[NSString stringWithFormat:@"Welcome, %@", [username uppercaseString]] message:@"Go ahead and do your thing" backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
+    [RKDropdownAlert title:[NSString stringWithFormat:@"Welcome, %@", [username uppercaseString]] message:@"Go ahead and do your thing" backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]time:3];
     [sendLabel setTextColor:[UIColor yellowColor]];
         
     
     NSLog(@"%@", number);
     
     sendLabel.hidden = YES;
+}
+-(void)beepList
+{
+    self.title = @"Send";
+    [self performSegueWithIdentifier:@"Beeps" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,8 +83,7 @@
     notificationField.text = @"";
     send = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(send)];
     
-    
-    send.tintColor = [UIColor yellowColor];
+    send.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
 
     self.navigationItem.rightBarButtonItem = send;
     
@@ -115,16 +127,18 @@
         
         PFPush *push = [[PFPush alloc] init];
         
-        NSString *channel = username;
+        
         NSString *notification = [NSString stringWithFormat:@"%@: %@", clubName, notificationField.text];
         
         
-        [push setChannel:channel];
+        
         NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                               notification, @"alert",
                               @"Increment", @"badge",
                               @"default", @"sound",
                               nil];
+        NSString *channel = username;
+        [push setChannel:channel];
         [push setData:data];
         [push sendPushInBackgroundWithBlock:^(BOOL succeded, NSError *error)
          {
@@ -138,7 +152,7 @@
              
          }];
        
-        [RKDropdownAlert title:@"Done!" message:[NSString stringWithFormat:@"Your notification has been sent, and pushed to the feed."] backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:2];
+        [RKDropdownAlert title:@"Done!" message:[NSString stringWithFormat:@"Your notification has been sent, and pushed to the feed."] backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]time:2];
         
     }
 }

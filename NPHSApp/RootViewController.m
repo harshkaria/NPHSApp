@@ -45,6 +45,7 @@
 	[super viewDidLoad];
 	
 	// Setup
+    [UIColor blackColor];
 	self.title = @"Loading...";
 	formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateStyle:NSDateFormatterShortStyle];

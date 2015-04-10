@@ -8,24 +8,39 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "OnboardingViewController.h"
-#import "OnboardingContentViewController.h"
+//#import "OnboardingViewController.h"
+//#import "OnboardingContentViewController.h"
 #import "FeedController.h"
 #import "RKDropdownAlert.h"
 #import <ParseCrashReporting/ParseCrashReporting.h>
+#import "BeepSpotlightVC.h"
+#import "SplashViewController.h"
 @interface AppDelegate ()
-
+@property UINavigationController *navController;
+@property UITabBarController *tabBarController;
 @end
 
 @implementation AppDelegate
-
+// publicname:(type *)nameinthecode
+@synthesize navController, tabBarController, beepText;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ParseCrashReporting enable];
-    // Override point for customization after application launch.
+        // Override point for customization after application launch.
     [Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
-                  clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
+                 clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
+    //BETA
+    //[Parse setApplicationId:@"zScBzNliDkwbRIOwiuLY71s31ZWBkb6Gd2pDTtAr"
+    //clientKey:@"UeIZ0ilVrYrYkKIXsNExpsmCfsFvME0f58X5xFZD"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"Feed"];
+    navController  = (UINavigationController *)self.window.rootViewController;
+    
+
+    
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                         UIUserNotificationTypeBadge |
@@ -45,14 +60,11 @@
     }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-   //  CIImage *image = [[CIImage alloc] initWithContentsOfURL:[NSURL URLWithString:NAV_BG]];
-    
-     // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NAV_BG] forBarMetrics:UIBarMetricsDefault];
-    
+  
     [[UINavigationBar appearance]setTitleTextAttributes:
     @{
-      NSForegroundColorAttributeName:[UIColor yellowColor],
-      NSFontAttributeName: [UIFont fontWithName:@"Dekar Light" size:32
+      NSForegroundColorAttributeName:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1],
+      NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:22
      ]}];
     
     [[UINavigationBar appearance]setBackgroundColor:[UIColor blackColor]];
@@ -62,27 +74,44 @@
     
     [[UITabBar appearance]setTranslucent:NO];
     [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    UITabBar *tabBar = tabBarController.tabBar;
+    //UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+   
     
     
     [[UITabBarItem appearance]setTitleTextAttributes:
      @{
-       NSForegroundColorAttributeName: [UIColor yellowColor],
+       NSForegroundColorAttributeName: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1],
        NSFontAttributeName: [UIFont fontWithName:@"Helvetica" size:12]
       } forState:UIControlStateNormal];
     [[UITabBarItem appearance]setTitleTextAttributes:
        @{
        NSForegroundColorAttributeName: [UIColor whiteColor]
        } forState:UIControlStateSelected];
-   NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    [[UIBarButtonItem appearance] setTintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
+    [[UISegmentedControl appearance]setTintColor: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
+    
+    // SPOTLIGHT BEEP
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if(notificationPayload)
     {
-        FeedController *feed = [[FeedController alloc]init];
-        [feed loadObjects];
+        NSString *myBeep = [notificationPayload objectForKey:@"id"];
+        
+        PFObject *beepObject = [PFObject objectWithoutDataWithClassName:@"sentBeeps" objectId:myBeep];
+        [beepObject fetchIfNeeded];
+        
+        beepText = beepObject[@"beepText"];
+               
+
     }
     
-    
+    else
+    {
+        FeedController *feed = [[FeedController alloc]init];
+
+        [feed loadObjects];
+        
+    }
     
     return YES;
 }
@@ -104,8 +133,23 @@
     // if push is recieved in the app, while app is running
     // gets it from 'aps' dictionairy
     NSDictionary *notification = [userInfo objectForKey:@"aps"];
+    NSString *object = [userInfo objectForKey:@"id"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    if(object)
+    {
+        PFObject *beepObject = [PFObject objectWithoutDataWithClassName:@"sentBeeps" objectId:object];
+        [beepObject fetch];
+        NSString *beepTexts = beepObject[@"beepText"];
+        BeepSpotlightVC *spotlight = [storyboard instantiateViewControllerWithIdentifier:@"Spotlight"];
+        spotlight.beepText = beepTexts;
+        [self.navController presentViewController:spotlight animated:NO completion:nil];
+    
+    }
+    else
+    {
     [RKDropdownAlert show];
-    [RKDropdownAlert title:@"Notification" message:[notification objectForKey:@"alert"] backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:1 green:(251.0/255.0) blue:(38.0/255.0) alpha:1]time:3];
+    [RKDropdownAlert title:@"Notification" message:[notification objectForKey:@"alert"] backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]time:5];
+    }
     
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     if(currentInstallation.badge != 0)
@@ -137,15 +181,7 @@
         currentInstallation.badge = 0;
         [currentInstallation saveInBackground];
     }
-    if(!([currentInstallation.channels containsObject:@"global"] && [currentInstallation.channels containsObject:@"asg"] && [currentInstallation.channels containsObject:@"admin"]))
-    {
-        
-    [currentInstallation addUniqueObject:@"global" forKey:@"channels"];
-    [currentInstallation addUniqueObject:@"asg" forKey:@"channels"];
-    [currentInstallation addUniqueObject:@"admin" forKey:@"channels"];
-    
-    [currentInstallation saveInBackground];
-    }
+  
 
     
     

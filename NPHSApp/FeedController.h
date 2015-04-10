@@ -11,5 +11,6 @@
 #import "MWFeedParser.h"
 #import <ParseUI/ParseUI.h>
 @interface FeedController : PFQueryTableViewController<MWFeedParserDelegate>
-
+@property NSString *spotlightText;
+@property BOOL comingBack;
 @end

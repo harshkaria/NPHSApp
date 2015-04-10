@@ -11,9 +11,11 @@
 #import "SplashViewController.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "OnboardingViewController.h"
+//#import "OnboardingViewController.h"
 #import "MWFeedParser.h"
 #import "MWFeedInfo.h"
+#import "FBShimmeringView.h"
+#import "BeepSpotlightVC.h"
 @interface FeedController ()
 @property NSMutableArray *clubNames;
 @property NSMutableArray *clubText;
@@ -28,11 +30,24 @@
 @property UIBarButtonItem *done;
 @property UIWebView *gradesWV;
 @property NSArray *removeArray;
+@property UISegmentedControl *segmentedControl;
+@property NSString *beepString;
+@property UISwipeGestureRecognizer *leftSwipe;
+@property UISwipeGestureRecognizer *rightSwipe;
+@property UIBarButtonItem *sendButton;
+@property (nonatomic, assign) BOOL payload;
+
 @end
 
 
 @implementation FeedController
-@synthesize  clubNames, clubText, count, links, wv, prowl, query, array, qButton, done, gradesWV, removeArray, installation;
+@synthesize  clubNames, clubText, count, links, wv, prowl, query, array, qButton, done, gradesWV, removeArray, installation, segmentedControl, beepString, leftSwipe, rightSwipe, sendButton, payload, spotlightText, comingBack;
+-(id)init
+{
+    [self loadObjects];
+    return [self initWithStyle:UITableViewStylePlain];
+}
+
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -45,7 +60,7 @@
         self.pullToRefreshEnabled = YES;
         //self.count = 0;
         done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneReading)];
-        done.tintColor = [UIColor yellowColor];
+        done.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
         
         
         
@@ -53,19 +68,31 @@
     }
     return self;
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    if(appDelegate.beepText.length > 0)
+    {
+        spotlightText = appDelegate.beepText;
+        [self showSpotlight];
+        appDelegate.beepText = nil;
+    }
+}
+
 - (void)viewDidLoad {
+    [self addSegmented];
+    [self addGestures];
     installation = [PFInstallation currentInstallation];
 
-    self.tableView.separatorColor = [UIColor yellowColor];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
-    self.tableView.separatorInset = UIEdgeInsetsZero;
+    self.tableView.separatorColor = [UIColor whiteColor];
+    //self.tableView.backgroundColor = [UIColor clearColor];
+        self.tableView.separatorInset = UIEdgeInsetsZero;
     self.view.translatesAutoresizingMaskIntoConstraints = YES;
     UIViewController *splash = [[SplashViewController alloc] init];
     prowl = [[UIBarButtonItem alloc]initWithTitle:@"Prowler" style:UIBarButtonItemStyleDone target:self action:@selector(getArticles)];
-    [prowl setTintColor:[UIColor yellowColor]];
-    
     qButton = [[UIBarButtonItem alloc] initWithTitle:@"Grades" style:UIBarButtonItemStyleDone target:self action:@selector(loadQ)];
-    [qButton setTintColor:[UIColor yellowColor]];
+    sendButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"new@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sendBeep)];
+    
     
     self.navigationItem.leftBarButtonItem = prowl;
     self.navigationItem.rightBarButtonItem = qButton;
@@ -75,14 +102,25 @@
     
     
     [super viewDidLoad];
+    if(!comingBack)
+    {
+
     [self presentViewController:splash animated:NO completion:nil];
-    
+
     [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
+    }
+    if(comingBack)
+    {
+        self.navigationItem.hidesBackButton = YES;
+        segmentedControl.selectedSegmentIndex = 1;
+    }
     
+    
+
    
     
     
-    /*if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
+   /* if (![[NSUserDefaults standardUserDefaults] boolForKey:@"bb"]) {
      self.navigationItem.title = @"It's my first time...";
      
      
@@ -91,6 +129,7 @@
      OnboardingContentViewController *thirdPage = [[OnboardingContentViewController alloc]initWithTitle:@"Introducing Smart Reminders" body:@"Interact like never before. Now, you can view live scores for athletics, and automatically get new reminders that are tailored to suit you." image:nil buttonText:nil action:nil];
      OnboardingContentViewController *fourthPage = [[OnboardingContentViewController alloc]initWithTitle:@"Precise Design" body:@"We designed the NPHS with you in mind. In fact, most of the pictures you see in this app, including the background on the pages, will be updated with pictures you take. Tweet away to @harshkaria"  image:nil buttonText:@"Done" action:^{
      [self dismissViewControllerAnimated:YES completion: nil];
+    
      self.navigationItem.title = @"Feed";
      [self loadObjects];
      }];
@@ -146,11 +185,78 @@
     
     
     
+    
+}
+-(void)showSpotlight
+{
+    [self performSegueWithIdentifier:@"viewspotlight" sender:self];
+
+}
+-(void)addSegmented
+{
+    NSArray *segments = [NSArray arrayWithObjects:@"Clubs", @"Beep", nil];
+    segmentedControl = [[UISegmentedControl alloc] initWithItems:segments];
+    segmentedControl.selectedSegmentIndex = 0;
+    [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:)  forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = segmentedControl;
+    
+}
+-(void)addGestures
+{
+    
+    leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedMe:)];
+    leftSwipe.delegate = leftSwipe;
+    [leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.tableView addGestureRecognizer:leftSwipe];
+    
+
+    rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipedMe:)];
+    rightSwipe.delegate = rightSwipe;
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    [self.tableView addGestureRecognizer:rightSwipe];
+   
+
+    
+    
+}
+-(void)swipedMe:(UISwipeGestureRecognizer *)sender
+{
+   
+    if(sender.direction == UISwipeGestureRecognizerDirectionRight)
+    {
+        segmentedControl.selectedSegmentIndex = (segmentedControl.selectedSegmentIndex - 1) % segmentedControl.numberOfSegments;
+        [self onSegmentedControlChanged:segmentedControl];
+        NSLog(@"RIGHT");
+        
+    }
+    
+    if(sender.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
+        segmentedControl.selectedSegmentIndex = (segmentedControl.selectedSegmentIndex + 1) % segmentedControl.numberOfSegments;
+        [self onSegmentedControlChanged:segmentedControl];
+        NSLog(@"LEFT");
+    }
+    
+    //NSLog(@"swiped");
+    
+    
+}
+-(void)onSegmentedControlChanged:(UISegmentedControl *)sender
+{
+        [self loadObjects];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
 }
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
 {
     [links addObject:item.link];
     
+}
+-(void)sendBeep
+{
+    [self performSegueWithIdentifier:@"sendBeep" sender:self];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
 }
 -(void)getArticles
 {
@@ -170,9 +276,8 @@
         NSURLRequest *url = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[links objectAtIndex:0]]];
         [wv loadRequest:url];
         [self.tableView addSubview:wv];
-        UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneReading)];
-        done.tintColor = [UIColor yellowColor];
         self.navigationItem.leftBarButtonItems = nil;
+        self.navigationItem.titleView = nil;
         self.navigationItem.title = @"Panther Prowler";
         self.navigationItem.rightBarButtonItem = done;
     }
@@ -194,6 +299,7 @@
         [self.view addSubview:gradesWV];
         
         self.navigationItem.leftBarButtonItems = nil;
+        self.navigationItem.titleView = nil;
         self.navigationItem.rightBarButtonItem = done;
     }
     
@@ -209,7 +315,7 @@
     
     self.navigationItem.leftBarButtonItem = prowl;
     self.navigationItem.rightBarButtonItem = qButton;
-    self.navigationItem.title = @"Feed";
+    self.navigationItem.titleView = segmentedControl;
 }
 
 -(void)hideMe
@@ -221,26 +327,49 @@
 
 -(PFQuery *)queryForTable
 {
-        if(!self.parseClassName)
-    {
-        self.parseClassName = @"feed";
-    }
-    query = [PFQuery queryWithClassName:self.parseClassName];
-    if(installation.channels)
-    {
-    [query whereKey:@"clubName" containedIn:installation.channels];
+    PFConfig *config = [PFConfig getConfig];
     
+    switch (segmentedControl.selectedSegmentIndex)
+    {
+        case 0:
+                if(!self.parseClassName)
+                {
+                    self.parseClassName = @"feed";
+                }
+                query = [PFQuery queryWithClassName:self.parseClassName];
+                if(installation.channels)
+                {
+                    [query whereKey:@"clubName" containedIn:installation.channels];
+    
+                }
+                if(![installation.channels containsObject:@"prowler"])
+                {
+                    [installation addUniqueObject:@"prowler" forKey:@"channels"];
+                    [installation saveInBackground];
+                }
+                [query orderByDescending:@"createdAt"];
+                count = [query countObjects];
+    
+            return query;
+            break;
+        case 1:
+            
+            if([config[@"lockdown"] boolValue] == false)
+            {
+            query = [PFQuery queryWithClassName:@"sentBeeps"];
+            [query orderByDescending:@"createdAt"];
+            }
+            else
+            {
+            query = [PFQuery queryWithClassName:@"beep"];
+            [query orderByDescending:@"createdAt"];
+            }
+            return query;
+            break;
+            
+        
     }
-    if(![installation.channels containsObject:@"prowler"])
-         {
-             [installation addUniqueObject:@"prowler" forKey:@"channels"];
-             [installation saveInBackground];
-         }
-    [query orderByDescending:@"createdAt"];
-    count = [query countObjects];
-    //array = [query findObjects];
-   // [self.tableView reloadData];
-    return query;
+    return nil;
     
 }
 
@@ -264,24 +393,71 @@
     
     
     cell = [tableView dequeueReusableCellWithIdentifier:@"Feed"];
-    cell.bg.image = [UIImage imageNamed:VIEW_BG];
+    /*cell.bg.image = [UIImage imageNamed:@""];
     cell.bg.alpha = 0.4;
     cell.clubText.selectable = YES;
+    cell.bg.hidden = YES;*/
     
     
 }
 
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"viewspotlight"])
+    {
+        BeepSpotlightVC *spotlightVC = segue.destinationViewController;
+        spotlightVC.beepText = self.spotlightText;
+        spotlightVC.outofApp = YES;
+    }
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     
     
     FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Feed"];
-    cell.bg.image = [UIImage imageNamed:VIEW_BG];
+    /*cell.bg.image = [UIImage imageNamed:@""];
     cell.bg.alpha = 0.4;
+    cell.bg.hidden = YES;*/
+    cell.backgroundColor = [UIColor whiteColor];
     NSString *username = [[PFUser currentUser]username];
+    if(segmentedControl.selectedSegmentIndex == 0)
+    {
+     self.navigationItem.rightBarButtonItem = qButton;
+     self.navigationItem.leftBarButtonItem = prowl;
      cell.clubName.text = object[@"Name"];
      cell.objId = [object objectForKey:@"clubName"];
+     cell.clubText.text = [object objectForKey:@"feedPost"];
+     cell.clubName.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
+
+        
+    }
+    if(segmentedControl.selectedSegmentIndex == 1)
+    {
+        self.navigationItem.rightBarButtonItem = sendButton;
+        self.navigationItem.leftBarButtonItem = nil;
+        cell.clubName.text = @"Beep";
+        //cell.objId = [object objectForKey:@"clubName"];
+        beepString = object[@"beepText"];
+        
+       
+        if([object[@"live"]boolValue] == true)
+        {
+            cell.clubName.text = @"LIVE";
+            cell.clubName.textColor = [UIColor redColor];
+            
+        }
+        else
+        {
+            cell.clubName.text = @"Beep";
+            cell.clubName.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
+        }
+        cell.clubText.text = beepString;
+        
+        
+    }
+
     /*if([username isEqualToString:cell.objId])
         {
             cell.removeButton.hidden = NO;
@@ -299,32 +475,27 @@
     
     
     
-   
-   
-    
-    
-    cell.clubText.text = [object objectForKey:@"feedPost"];
     
     
     cell.dateLabel.text = date;
-    cell.dateLabel.alpha = 0.6;
+  //  cell.dateLabel.alpha = 0.6;
     
     
     cell.clubText.selectable = YES;
     
-    cell.clubName.alpha = 1;
+   // cell.clubName.alpha = 1;
     
     
-    cell.clubText.alpha = 1;
+   // cell.clubText.alpha = 1;
     cell.clubText.scrollsToTop = NO;
     
     
     
     
-    [cell.feedView addSubview:cell.clubName];
+   // [cell.feedView addSubview:cell.clubName];
     
-    [cell.feedView addSubview:cell.clubText];
-    [cell.feedView addSubview:cell.dateLabel];
+  // //[cell.feedView addSubview:cell.clubText];
+   // [cell.feedView addSubview:cell.dateLabel];
     
     
     
@@ -336,5 +507,6 @@
     
     
 }
+
 
 @end

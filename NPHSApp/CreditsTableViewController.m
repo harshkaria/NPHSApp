@@ -18,8 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Matthew Mangawang", @"Claire Monro",  @"Kevin Norgaard", @"Suraj Palaparty", @"Ernesto Ambrocio", @"Victoria Juan", @"Chris Reusch", @"Michael Weingarden",   nil];
-    
+    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Matthew Mangawang", @"Kevin Norgaard", @"Claire Monro", @"Victoria Juan", @"Ernesto Ambrocio",  @"Chris Reusch", @"Michael Weingarden",   nil];
     
 }
 
@@ -48,19 +47,17 @@
     tableView.scrollEnabled = YES;
     tableView.bounces = YES;
     tableView.userInteractionEnabled = YES;
-    tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:VIEW_BG]];
     CreditsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Credits" forIndexPath:indexPath];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    
-    
-    
+    self.tableView.separatorInset = UIEdgeInsetsZero;
+
     //cell.creditLabel.textAlignment = NSTextAlignmentCenter;
     cell.creditLabel.text = [people objectAtIndex:indexPath.row];
     
     cell.backgroundColor = [UIColor blackColor];
     
-    cell.creditLabel.textColor = [UIColor yellowColor];
+    //cell.creditLabel.textColor = [UIColor yellowColor];
     NSMutableAttributedString *leaderString = [[NSMutableAttributedString alloc]initWithString:@"Leader"];
     NSRange textRange = NSMakeRange(0, 6);
     
@@ -102,7 +99,7 @@
         
         cell.biography.text = @"Leader: Operations and User Experience. Responsible for sound effects, in addition to planning strategy, and guiding user experience.";
     }
-    
+    [cell.contentView addSubview:cell.biography];
     cell.userInteractionEnabled = NO;
     return cell;
 }
