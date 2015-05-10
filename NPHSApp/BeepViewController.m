@@ -15,11 +15,13 @@
 @interface BeepViewController ()
 @property NSString *beepString;
 @property NSString *objectID;
+@property UIButton *ban;
+@property NSString *banId;
 
 @end
 
 @implementation BeepViewController
-@synthesize beepString, objectID;
+@synthesize beepString, objectID, ban, banId;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -88,6 +90,17 @@
     cell.accessoryView = check;
     [cell.contentView addSubview:check];
     
+    cell.banButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [cell.banButton setTitle:@"Ban" forState:UIControlStateNormal];
+    [cell.banButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    cell.banButton.frame = CGRectMake(218, 4, 46, 30);
+    [cell.banButton addTarget:self action:@selector(ban:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:cell.banButton];
+    cell.banButton.tag = indexPath.row;
+    cell.person = object[@"person"];
+    
+    //[cell.contentView addSubview:cell.banButton];
+    
   
     if([beepString containsString:@"/n"])
     {
@@ -108,11 +121,28 @@
     }
     cell.beepText.text = beepString;
     cell.myObject = object.objectId;
+   
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 
     
     return cell;
+}
+-(void)ban:(id)sender
+{
+
+    UIButton *button = (UIButton *)sender;
+    NSIndexPath *path = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    BeepCell *cell = (BeepCell *)[self.tableView cellForRowAtIndexPath:path];
+    
+    //NSLog(cell.person);
+    PFObject *object = [PFObject objectWithoutDataWithClassName:@"_Installation" objectId:cell.person];
+    //PFObject *object = [query getFirstObject];
+    object[@"banned"] = [NSNumber numberWithBool:YES];
+    [object save];
+    [RKDropdownAlert show];
+    [RKDropdownAlert title:@"Banned" message:[NSString stringWithFormat:@"Banned: %@", cell.person] backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:4];
+
 }
 -(void)sendBeep:(id)sender
 {
@@ -127,7 +157,7 @@
     [deleteMe deleteInBackground];
     
     [RKDropdownAlert show];
-    [RKDropdownAlert title:@"Moderator: Posted" message:@"Swaggers. You've beeped it." time:4];
+    [RKDropdownAlert title:@"Moderator: Posted" message:@"Swaggers. You've bleeped it." time:4];
     [self loadObjects];
 }
 

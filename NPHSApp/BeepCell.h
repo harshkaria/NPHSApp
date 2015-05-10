@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *beepText;
 @property (weak, nonatomic) IBOutlet UILabel *liveLabel;
 @property NSString *myObject;
-
+@property NSString *person;
+@property UIButton *banButton;
 @end

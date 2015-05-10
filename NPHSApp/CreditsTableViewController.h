@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface CreditsTableViewController : UITableViewController
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
+@interface CreditsTableViewController : PFQueryTableViewController
 
 @end

@@ -114,7 +114,7 @@
             </objects>
             <point key="canvasLocation" x="5272" y="-1672"/>
         </scene>
-        <!--Credits Table View Controller-->
+        <!--Credits-->
         <scene sceneID="zYr-RQ-J6p">
             <objects>
                 <tableViewController id="4dS-x3-OYQ" customClass="CreditsTableViewController" sceneMemberID="viewController">
@@ -156,7 +156,7 @@
                             <outlet property="delegate" destination="4dS-x3-OYQ" id="2Q8-gr-vg9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="xxq-Wc-7Ab"/>
+                    <navigationItem key="navigationItem" title="Credits" id="xxq-Wc-7Ab"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMt-ZS-qEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -186,7 +186,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" text="The beep is shown here" translatesAutoresizingMaskIntoConstraints="NO" id="jpv-yG-6SB">
-                                            <rect key="frame" x="4" y="32" width="312" height="97"/>
+                                            <rect key="frame" x="8" y="38" width="312" height="80"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="textColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
@@ -194,7 +194,7 @@
                                         </textView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="jpv-yG-6SB" firstAttribute="top" secondItem="tuX-6I-0Hf" secondAttribute="bottom" constant="2" id="Kjg-ch-kRN"/>
+                                        <constraint firstItem="jpv-yG-6SB" firstAttribute="top" secondItem="tuX-6I-0Hf" secondAttribute="bottom" constant="8" id="Kjg-ch-kRN"/>
                                         <constraint firstItem="tuX-6I-0Hf" firstAttribute="top" secondItem="CQY-Uw-3B1" secondAttribute="topMargin" constant="-3" id="aQb-uB-nyo"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="tuX-6I-0Hf" secondAttribute="trailing" constant="70" id="b6u-DT-LLg"/>
                                         <constraint firstItem="tuX-6I-0Hf" firstAttribute="leading" secondItem="CQY-Uw-3B1" secondAttribute="leadingMargin" constant="73" id="uEr-yw-R6u"/>
@@ -246,7 +246,7 @@
                                     <action selector="doneButton:" destination="lCv-Jj-MiS" eventType="touchUpInside" id="TXq-wW-fyu"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Beep Spotlight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rr-JG-1fi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beep Spotlight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rr-JG-1fi">
                                 <rect key="frame" x="81" y="20" width="238" height="41"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="25"/>
                                 <color key="textColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -266,11 +266,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="NAL-gM-HJZ" firstAttribute="top" secondItem="1rr-JG-1fi" secondAttribute="bottom" constant="23" id="3Ef-b7-1K1"/>
                             <constraint firstItem="NAL-gM-HJZ" firstAttribute="leading" secondItem="tfq-mw-Or3" secondAttribute="leadingMargin" constant="-16" id="DyL-q5-iiu"/>
                             <constraint firstItem="NAL-gM-HJZ" firstAttribute="trailing" secondItem="tfq-mw-Or3" secondAttribute="trailingMargin" constant="9" id="S2d-9t-2YN"/>
                             <constraint firstItem="NAL-gM-HJZ" firstAttribute="top" secondItem="vJ4-DL-b31" secondAttribute="bottom" constant="64" id="UlI-um-jzB"/>
+                            <constraint firstItem="1rr-JG-1fi" firstAttribute="top" secondItem="vJ4-DL-b31" secondAttribute="bottom" id="ZxG-ln-UxD"/>
                             <constraint firstItem="y4l-7B-xp0" firstAttribute="top" secondItem="90v-hx-100" secondAttribute="bottom" constant="209" id="bh3-xv-sW0"/>
                             <constraint firstItem="90v-hx-100" firstAttribute="centerX" secondItem="tfq-mw-Or3" secondAttribute="centerX" id="dOr-sy-3zl"/>
+                            <constraint firstItem="1rr-JG-1fi" firstAttribute="leading" secondItem="tfq-mw-Or3" secondAttribute="leadingMargin" constant="65" id="j5p-yM-oxx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1rr-JG-1fi" secondAttribute="trailing" constant="40" id="y4d-H2-NxE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Beep Spotlight" id="ueC-5K-0lB"/>
@@ -434,7 +438,7 @@
                                 <rect key="frame" x="91" y="120" width="188" height="30"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="vbW-Pa-hWR"/>
+                                    <constraint firstAttribute="height" constant="30" id="GZn-nG-4Cp"/>
                                 </constraints>
                                 <color key="textColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -447,7 +451,7 @@
                                 <rect key="frame" x="89" y="158" width="190" height="30"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ks6-iN-D55"/>
+                                    <constraint firstAttribute="height" constant="30" id="9wZ-uD-6hF"/>
                                 </constraints>
                                 <color key="textColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -456,8 +460,8 @@
                                     <outlet property="delegate" destination="Mxs-wS-yuf" id="Yg8-2p-ipc"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moQ-PF-Ig9">
-                                <rect key="frame" x="77" y="237" width="220" height="127"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moQ-PF-Ig9">
+                                <rect key="frame" x="68" y="267" width="220" height="75"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -469,16 +473,14 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="moQ-PF-Ig9" firstAttribute="top" secondItem="nRg-S9-Uzf" secondAttribute="bottom" constant="49" id="0oT-0B-MlZ"/>
-                            <constraint firstItem="moQ-PF-Ig9" firstAttribute="leading" secondItem="iU3-QP-unR" secondAttribute="leadingMargin" constant="61" id="1Fv-bo-eyv"/>
-                            <constraint firstItem="nRg-S9-Uzf" firstAttribute="top" secondItem="gQw-14-Kgq" secondAttribute="bottom" constant="8" symbolic="YES" id="1xg-MI-7pF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gQw-14-Kgq" secondAttribute="trailing" constant="80" id="2Vg-Vv-UkL"/>
-                            <constraint firstItem="gQw-14-Kgq" firstAttribute="top" secondItem="f2b-gO-ni7" secondAttribute="bottom" constant="100" id="33f-cj-ReI"/>
-                            <constraint firstItem="moQ-PF-Ig9" firstAttribute="centerX" secondItem="iU3-QP-unR" secondAttribute="centerX" id="IR4-6k-Wqi"/>
-                            <constraint firstItem="ua3-Md-NXh" firstAttribute="top" secondItem="moQ-PF-Ig9" secondAttribute="bottom" constant="303" id="K3B-nf-Vhh"/>
-                            <constraint firstItem="moQ-PF-Ig9" firstAttribute="centerX" secondItem="nRg-S9-Uzf" secondAttribute="centerX" constant="3" id="PA9-0l-ukH"/>
-                            <constraint firstItem="gQw-14-Kgq" firstAttribute="leading" secondItem="iU3-QP-unR" secondAttribute="leadingMargin" constant="75" id="RTZ-AB-2yK"/>
-                            <constraint firstItem="nRg-S9-Uzf" firstAttribute="leading" secondItem="iU3-QP-unR" secondAttribute="leadingMargin" constant="73" id="krn-M4-7ju"/>
+                            <constraint firstItem="gQw-14-Kgq" firstAttribute="trailing" secondItem="nRg-S9-Uzf" secondAttribute="trailing" id="Bnz-6F-qWf"/>
+                            <constraint firstItem="gQw-14-Kgq" firstAttribute="top" secondItem="f2b-gO-ni7" secondAttribute="bottom" constant="100" id="I9e-wM-Qg7"/>
+                            <constraint firstItem="moQ-PF-Ig9" firstAttribute="leading" secondItem="iU3-QP-unR" secondAttribute="leadingMargin" constant="52" id="Sua-FV-TRb"/>
+                            <constraint firstItem="nRg-S9-Uzf" firstAttribute="leading" secondItem="iU3-QP-unR" secondAttribute="leadingMargin" constant="73" id="V3p-mk-uAc"/>
+                            <constraint firstItem="nRg-S9-Uzf" firstAttribute="top" secondItem="gQw-14-Kgq" secondAttribute="bottom" constant="8" symbolic="YES" id="kZU-6J-Npd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gQw-14-Kgq" secondAttribute="trailing" constant="80" id="u5h-GL-yau"/>
+                            <constraint firstItem="gQw-14-Kgq" firstAttribute="leading" secondItem="iU3-QP-unR" secondAttribute="leadingMargin" constant="75" id="wh0-xx-y9Q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="moQ-PF-Ig9" secondAttribute="trailing" constant="71" id="zYP-QM-anu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Club Area" id="5GU-Hb-XgA"/>
@@ -632,7 +634,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="aYK-fQ-Dgp"/>
-        <segue reference="CMP-rv-pQ7"/>
+        <segue reference="fNS-49-gHj"/>
         <segue reference="ufe-lB-YPN"/>
     </inferredMetricsTieBreakers>
 </document>

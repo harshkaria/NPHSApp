@@ -199,7 +199,6 @@
     segmentedControl.selectedSegmentIndex = 0;
     [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:)  forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = segmentedControl;
-    
 }
 -(void)addGestures
 {
@@ -255,8 +254,10 @@
 }
 -(void)sendBeep
 {
+    
     [self performSegueWithIdentifier:@"sendBeep" sender:self];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
+    self.title = @"Feed";
 }
 -(void)getArticles
 {

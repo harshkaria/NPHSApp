@@ -20,6 +20,12 @@
 @property UITabBarController *tabBarController;
 @end
 
+@implementation NSURLRequest(DataController)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
+{
+    return YES;
+}
+@end
 @implementation AppDelegate
 // publicname:(type *)nameinthecode
 @synthesize navController, tabBarController, beepText;
@@ -28,7 +34,7 @@
     [ParseCrashReporting enable];
         // Override point for customization after application launch.
     [Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
-                 clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
+                  clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
     //BETA
     //[Parse setApplicationId:@"zScBzNliDkwbRIOwiuLY71s31ZWBkb6Gd2pDTtAr"
     //clientKey:@"UeIZ0ilVrYrYkKIXsNExpsmCfsFvME0f58X5xFZD"];
@@ -93,7 +99,7 @@
     
     // SPOTLIGHT BEEP
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(notificationPayload)
+    if([notificationPayload objectForKey:@"id"])
     {
         NSString *myBeep = [notificationPayload objectForKey:@"id"];
         
@@ -115,7 +121,6 @@
     
     return YES;
 }
-
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current installation and save it to Parse.

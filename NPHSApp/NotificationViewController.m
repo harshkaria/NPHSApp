@@ -17,10 +17,12 @@
 @property NSInteger *subscribers;
 @property UIBarButtonItem *send;
 @property UIBarButtonItem *viewBeeps;
+@property NSString *channel;
+@property NSString *notification;
 @end
 
 @implementation NotificationViewController
-@synthesize notificationField, sendLabel, username, subscribers, send, viewBeeps;
+@synthesize notificationField, sendLabel, username, subscribers, send, viewBeeps, channel, notification;
 
 - (void)viewDidLoad {
     self.navigationItem.backBarButtonItem = nil;
@@ -128,16 +130,26 @@
         PFPush *push = [[PFPush alloc] init];
         
         
-        NSString *notification = [NSString stringWithFormat:@"%@: %@", clubName, notificationField.text];
+        notification = [NSString stringWithFormat:@"%@: %@", clubName, notificationField.text];
         
         
         
+        if([username isEqualToString:@"commoncents"])
+        {
+            channel = @"global";
+            notification = [NSString stringWithFormat:@"%@", notificationField.text];
+        }
+        else
+        {
+        channel = username;
+        }
         NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                               notification, @"alert",
                               @"Increment", @"badge",
                               @"default", @"sound",
                               nil];
-        NSString *channel = username;
+
+        
         [push setChannel:channel];
         [push setData:data];
         [push sendPushInBackgroundWithBlock:^(BOOL succeded, NSError *error)

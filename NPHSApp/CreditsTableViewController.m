@@ -9,17 +9,41 @@
 #import "CreditsTableViewController.h"
 #import "CreditsCell.h"
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 @interface CreditsTableViewController ()
-@property NSMutableArray *people;
+//@property NSMutableArray *people;
 @end
 
 @implementation CreditsTableViewController
-@synthesize people;
+//@synthesize people;
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self)
+    {
+        //self.parseClassName = @"User";
+        self.paginationEnabled = NO;
+        self.pullToRefreshEnabled = YES;
+        //self.count = 0;
+        
+        
+        
+    }
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Matthew Mangawang", @"Kevin Norgaard", @"Claire Monro", @"Victoria Juan", @"Ernesto Ambrocio",  @"Chris Reusch", @"Michael Weingarden",   nil];
+    //people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Matthew Mangawang", @"Kevin Norgaard", @"Claire Monro", @"Victoria Juan", @"Ernesto Ambrocio", @"Akash Velu", @"Chris Reusch", @"Michael Weingarden",   nil];
     
+}
+-(PFQuery *)queryForTable
+{
+    PFQuery *credits = [PFQuery queryWithClassName:@"credits"];
+    [credits orderByAscending:@"number"];
+    return credits;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,16 +59,17 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+/*- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [people count];
-}
+}*/
 
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     tableView.scrollEnabled = YES;
+    tableView.backgroundColor = [UIColor blackColor];
     tableView.bounces = YES;
     tableView.userInteractionEnabled = YES;
     CreditsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Credits" forIndexPath:indexPath];
@@ -53,23 +78,22 @@
     self.tableView.separatorInset = UIEdgeInsetsZero;
 
     //cell.creditLabel.textAlignment = NSTextAlignmentCenter;
-    cell.creditLabel.text = [people objectAtIndex:indexPath.row];
-    
+    cell.creditLabel.text = object[@"name"];
+    cell.biography.text = object[@"bio"];
     cell.backgroundColor = [UIColor blackColor];
-    
     //cell.creditLabel.textColor = [UIColor yellowColor];
-    NSMutableAttributedString *leaderString = [[NSMutableAttributedString alloc]initWithString:@"Leader"];
+    /*NSMutableAttributedString *leaderString = [[NSMutableAttributedString alloc]initWithString:@"Leader"];
     NSRange textRange = NSMakeRange(0, 6);
+    //@"General Operations. Responsible for assisting with execution & strategy, quality control, and beta testing."
     
     
-    cell.biography.text = @"General Operations. Responsible for assisting with execution & strategy, quality control, and beta testing.";
     //cell.creditLabel.textAlignment = NSTextAlignmentRight;
     //cell.biography = [UIColor yellowColor];
     //[[cell appearance]setBackgroundColor:[UIColor blackColor]];
     
     
     //tableView.userInteractionEnabled = YES;
-    if([cell.creditLabel.text isEqualToString:@"Harsh Karia"])
+    /*if([cell.creditLabel.text isEqualToString:@"Harsh Karia"])
     {
         
         //cell.backgroundColor = [UIColor blackColor];
@@ -87,7 +111,7 @@
     if([cell.creditLabel.text isEqualToString:@"Matthew Mangawang"])
     {
         
-        cell.biography.text = @"Leader: Operations and User Experience. Responsible for planning and coordinating general strategy, managing promotional content, creating the icon, and beta testing.";
+        cell.biography.text = @"Leader: Operations and User Experience. Responsible for planning and coordinating general strategy, managing promotional content, and beta testing.";
     }
     if([cell.creditLabel.text isEqualToString:@"Claire Monro"])
     {
@@ -97,8 +121,8 @@
     if([cell.creditLabel.text isEqualToString:@"Kevin Norgaard"])
     {
         
-        cell.biography.text = @"Leader: Operations and User Experience. Responsible for sound effects, in addition to planning strategy, and guiding user experience.";
-    }
+        cell.biography.text = @"Leader: Operations and User Experience. Responsible for creating the icon, managing promotional content, planning strategy, and guiding user experience.";
+    }*/
     [cell.contentView addSubview:cell.biography];
     cell.userInteractionEnabled = NO;
     return cell;
