@@ -54,6 +54,7 @@
     PFQuery *clubs = [PFUser query];
     self.count = [clubs countObjects];
     
+    
     return clubs;
 }
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

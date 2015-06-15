@@ -18,4 +18,5 @@
 @property NSString *myObject;
 @property NSString *person;
 @property UIButton *banButton;
+@property (weak, nonatomic) IBOutlet UIButton *approveButton;
 @end

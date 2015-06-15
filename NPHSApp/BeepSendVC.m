@@ -54,31 +54,47 @@
 {
     PFInstallation *installation = [PFInstallation currentInstallation];
     PFObject *object = [PFObject objectWithoutDataWithClassName:@"_Installation" objectId:installation.objectId];
-    [object fetchIfNeeded];
+    
     //PFQuery *query = [PFInstallation query];
     beepTextView.text = [NSString stringWithFormat:@"%@", beepTextView.text];
     
     
     NSLog([NSString stringWithFormat:@"%li seconds", (long)timeInt]);
-    
+    [object fetchIfNeeded];
     if(![self containsBadWords:[beepTextView.text lowercaseString]] && timeInt == 0 && beepTextView.text.length > 0 && ![beepTextView.text isEqualToString:@"Enter Beep Here"] && [object[@"banned"] boolValue] == false)
     {
         PFObject *object = [PFObject objectWithClassName:@"sentBeeps"];
         object[@"beepText"] = beepTextView.text;
         object[@"person"] = installation.objectId;
+        object[@"approved"] = [NSNumber numberWithBool:false];
         
         [object saveInBackgroundWithBlock:^(BOOL success, NSError *error)
         {
             if(success & !error)
             {
-            beepTextView.text = @"Enter Beep Here";
             [beepTextView resignFirstResponder];
             [self.view endEditing:YES];
             [RKDropdownAlert show];
             [RKDropdownAlert title:@"Beeped" message:@"Your beep was sent." time:3];
+                
+                PFPush *push = [[PFPush alloc] init];
+                PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
+                [query whereKey:@"authorized" equalTo:[NSNumber numberWithBool:YES]];
+                [push setQuery:query];
+                NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSString stringWithFormat:@"Approve: %@", beepTextView.text], @"alert",
+                                            @"default", @"sound",
+                                            nil];
+                beepTextView.text = @"Enter Beep Here";
+              
+                [push setData:dictionary];
+                [push sendPushInBackground];
+                
             }
             timeInt = 45;
             timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeOut:) userInfo:nil repeats:YES];
+            
+            
         }];
         
         
@@ -128,7 +144,7 @@
     [badWords addObject:@"shit"];*/
     //[badWords objectAtIndex:<#(NSUInteger)#>]
     // DO arrays
-    if(([string containsString:@"fuck"] || [string containsString:@"shit"] || [string containsString:@"bitch"] || [string containsString:@"cunt"] || [string containsString:@"dick"] || [string containsString:@"tits"] || [string containsString:@"pussy"] || [string containsString:@"nigger"] || [string containsString:@"niggers"] || [string containsString:@"titties"] || [string containsString:@"porn"] || [string containsString:@"8="] || [string containsString:@"8-"] || [string containsString:@"(.)(.)"]))
+    if(([string containsString:@"fuck"] || [string containsString:@"shit"] || [string containsString:@"bitch"] || [string containsString:@"cunt"] || [string containsString:@"dick"] || [string containsString:@"tit"] || [string containsString:@"puss"] || [string containsString:@"nig"] || [string containsString:@"porn"] || [string containsString:@"8="] || [string containsString:@"8-"] || [string containsString:@"(.)(.)"]))
     {
         return YES;
     }

@@ -97,17 +97,19 @@
     [cell.banButton addTarget:self action:@selector(ban:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:cell.banButton];
     cell.banButton.tag = indexPath.row;
+    
+    // Approve Button
+    cell.approveButton.tag = indexPath.row;
+    [cell.approveButton addTarget:self action:@selector(approve:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:cell.approveButton];
+    
+    
     cell.person = object[@"person"];
     
     //[cell.contentView addSubview:cell.banButton];
     
+    
   
-    if([beepString containsString:@"/n"])
-    {
-        
-        beepString = [beepString stringByReplacingOccurrencesOfString:@"/n" withString:@"\n \☞"];
-        
-    }
     if([object[@"live"]boolValue] == true)
     {
         cell.titleLabel.text = @"LIVE";
@@ -123,7 +125,13 @@
     cell.myObject = object.objectId;
    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    if([object[@"approved"] boolValue] == true)
+    {
+        [cell.approveButton setTitle:@"APPROVED" forState:UIControlStateNormal];
+        [cell.approveButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [cell.approveButton removeTarget:self action:@selector(approve:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
 
     
     return cell;
@@ -142,7 +150,23 @@
     [object save];
     [RKDropdownAlert show];
     [RKDropdownAlert title:@"Banned" message:[NSString stringWithFormat:@"Banned: %@", cell.person] backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:4];
-
+}
+-(void)approve:(id)sender
+{
+    UIButton *approve = (UIButton *)sender;
+    // Creates path from row
+    NSIndexPath *path = [NSIndexPath indexPathForRow:approve.tag inSection:0];
+    // Gets/Casts BeepCell from tableview using path
+    BeepCell *cell = (BeepCell *)[self.tableView cellForRowAtIndexPath:path];
+    
+    PFObject *object = [PFObject objectWithoutDataWithClassName:@"sentBeeps" objectId:cell.myObject];
+    object[@"approved"] = [NSNumber numberWithBool:YES];
+    [object save];
+    [RKDropdownAlert show];
+    [RKDropdownAlert title:@"Approved." message: @"It's on the feed" backgroundColor:[UIColor greenColor] textColor:[UIColor redColor] time:2];
+    [self loadObjects];
+    
+    
 }
 -(void)sendBeep:(id)sender
 {

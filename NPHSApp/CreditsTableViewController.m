@@ -10,12 +10,16 @@
 #import "CreditsCell.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "PersonViewController.h"
 @interface CreditsTableViewController ()
-//@property NSMutableArray *people;
+@property NSArray *people;
+@property PFQuery *credits;
+@property NSInteger count;
+@property NSString *person;
 @end
 
 @implementation CreditsTableViewController
-//@synthesize people;
+@synthesize people, credits, count, person;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -35,13 +39,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    people = [[NSArray alloc] init];
     
-    //people = [[NSMutableArray alloc] initWithObjects:@"Harsh Karia", @"Matthew Mangawang", @"Kevin Norgaard", @"Claire Monro", @"Victoria Juan", @"Ernesto Ambrocio", @"Akash Velu", @"Chris Reusch", @"Michael Weingarden",   nil];
+
+    
     
 }
 -(PFQuery *)queryForTable
 {
-    PFQuery *credits = [PFQuery queryWithClassName:@"credits"];
+    credits = [PFQuery queryWithClassName:@"credits"];
     [credits orderByAscending:@"number"];
     return credits;
 }
@@ -59,15 +65,11 @@
     return 1;
 }
 
-/*- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return [people count];
-}*/
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
+
     tableView.scrollEnabled = YES;
     tableView.backgroundColor = [UIColor blackColor];
     tableView.bounces = YES;
@@ -76,56 +78,28 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.tableView.separatorInset = UIEdgeInsetsZero;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     //cell.creditLabel.textAlignment = NSTextAlignmentCenter;
     cell.creditLabel.text = object[@"name"];
-    cell.biography.text = object[@"bio"];
+    person = cell.creditLabel.text;
+   // cell.biography.text = object[@"bio"];
     cell.backgroundColor = [UIColor blackColor];
-    //cell.creditLabel.textColor = [UIColor yellowColor];
-    /*NSMutableAttributedString *leaderString = [[NSMutableAttributedString alloc]initWithString:@"Leader"];
-    NSRange textRange = NSMakeRange(0, 6);
-    //@"General Operations. Responsible for assisting with execution & strategy, quality control, and beta testing."
-    
-    
-    //cell.creditLabel.textAlignment = NSTextAlignmentRight;
-    //cell.biography = [UIColor yellowColor];
-    //[[cell appearance]setBackgroundColor:[UIColor blackColor]];
-    
-    
-    //tableView.userInteractionEnabled = YES;
-    /*if([cell.creditLabel.text isEqualToString:@"Harsh Karia"])
-    {
-        
-        //cell.backgroundColor = [UIColor blackColor];
-        //cell.creditLabel.textColor = [UIColor whiteColor];
-        cell.biography.text = @"Team Leader and Lead Developer. President of App Club. Responsible for development, general strategy, and execution.";
-        //cell.biography.t = [UIColor whiteColor];
-        
-        
-    }
-    if([cell.creditLabel.text isEqualToString:@"Michael Weingarden"])
-    {
-        cell.biography.text = @"Teacher Advisor to App Club.";
-        
-    }
-    if([cell.creditLabel.text isEqualToString:@"Matthew Mangawang"])
-    {
-        
-        cell.biography.text = @"Leader: Operations and User Experience. Responsible for planning and coordinating general strategy, managing promotional content, and beta testing.";
-    }
-    if([cell.creditLabel.text isEqualToString:@"Claire Monro"])
-    {
-        
-        cell.biography.text = @"Leader: Operations and Publicity. Responsible for public relations and executing promotional strategy.";
-    }
-    if([cell.creditLabel.text isEqualToString:@"Kevin Norgaard"])
-    {
-        
-        cell.biography.text = @"Leader: Operations and User Experience. Responsible for creating the icon, managing promotional content, planning strategy, and guiding user experience.";
-    }*/
-    [cell.contentView addSubview:cell.biography];
-    cell.userInteractionEnabled = NO;
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CreditsCell *cell = (CreditsCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"Person" sender:self];
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    PersonViewController *personVC = segue.destinationViewController;
+    if([segue.identifier isEqualToString:@"Person"])
+    {
+        personVC.name = person;
+    }
+    
 }
 
 @end

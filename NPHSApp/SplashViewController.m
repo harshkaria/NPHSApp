@@ -14,6 +14,9 @@
 
 @end
 
+// BLACK TO YELLOW
+
+
 @implementation SplashViewController
 @synthesize james;
 - (void)viewDidLoad {
@@ -21,6 +24,7 @@
     // Do any additional setup after loading the view from its nib.
     CGRect screenBound = [[UIScreen mainScreen] bounds];
     CGSize screenSize = screenBound.size;
+    self.view.backgroundColor = [UIColor blackColor];
     
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:screenBound];
@@ -31,8 +35,8 @@
     //NSData *imageData = [file getData];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:screenBound];
-    imageView.image = [UIImage imageNamed:@"panther.jpg"];
-    imageView.contentMode = UIViewContentModeScaleToFill;
+    imageView.image = [UIImage imageNamed:@"Paw.png"];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:imageView];
     
     
@@ -73,7 +77,7 @@
     shimmeringView.shimmeringAnimationOpacity = 1;
     [self.view addSubview:shimmeringView];
     [shimmeringView addSubview:myText];
-    [shimmeringView addSubview:picBy];
+    //[shimmeringView addSubview:picBy];
     
     // Start shimmering.
     

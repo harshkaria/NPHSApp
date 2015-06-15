@@ -16,6 +16,7 @@
 #import "MWFeedInfo.h"
 #import "FBShimmeringView.h"
 #import "BeepSpotlightVC.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 @interface FeedController ()
 @property NSMutableArray *clubNames;
 @property NSMutableArray *clubText;
@@ -107,7 +108,7 @@
 
     [self presentViewController:splash animated:NO completion:nil];
 
-    [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
+    [self performSelector:@selector(hideMe) withObject:nil afterDelay:2];
     }
     if(comingBack)
     {
@@ -194,9 +195,19 @@
 }
 -(void)addSegmented
 {
-    NSArray *segments = [NSArray arrayWithObjects:@"Clubs", @"Beep", nil];
+    NSMutableArray *segments = [NSMutableArray arrayWithObjects:@"Clubs", @"Beep", nil];
     segmentedControl = [[UISegmentedControl alloc] initWithItems:segments];
     segmentedControl.selectedSegmentIndex = 0;
+    
+    PFConfig *liveQuery = [PFConfig getConfig];
+    if ([[liveQuery objectForKey:@"lockdown"] boolValue] == true) {
+        [segmentedControl removeSegmentAtIndex:1 animated:NO];
+        [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:12]} forState:UIControlStateSelected];
+        [segmentedControl setTintColor:[UIColor whiteColor]];
+        [segmentedControl insertSegmentWithTitle:@"BEEP LIVE" atIndex:1 animated:YES];
+         segmentedControl.selectedSegmentIndex = 1;
+        
+    }
     [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:)  forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = segmentedControl;
 }
@@ -290,7 +301,7 @@
     if(!self.tableView.isDecelerating && !self.tableView.isDragging)
     {
         //self.gradesWV.userInteractionEnabled = YES;
-        // self.tableView.userInteractionEnabled = NO;
+        //self.tableView.userInteractionEnabled = NO;
         gradesWV = [[UIWebView alloc] initWithFrame:self.view.bounds];
         gradesWV.scalesPageToFit = YES;
         self.tableView.scrollsToTop = NO;
@@ -357,16 +368,32 @@
             
             if([config[@"lockdown"] boolValue] == false)
             {
-            query = [PFQuery queryWithClassName:@"sentBeeps"];
-            [query orderByDescending:@"createdAt"];
+                // Gets all the approved ones
+                PFQuery *firstQuery = [PFQuery queryWithClassName:@"sentBeeps"];
+                [firstQuery whereKey:@"approved" equalTo:[NSNumber numberWithBool:true]];
+                
+                
+                // Gets all the unapproved ones, belonging to the user
+                PFQuery *secondQuery = [PFQuery queryWithClassName:@"sentBeeps"];
+                [secondQuery whereKey:@"person" equalTo:installation.objectId];
+                [secondQuery whereKey:@"approved" equalTo:[NSNumber numberWithBool:false]];
+                
+               
+                // Compiles both results into one query
+                query = [PFQuery orQueryWithSubqueries:@[firstQuery, secondQuery]];
+                
+                
+                [query orderByDescending:@"createdAt"];
+                return query;
             }
-            else
-            {
+        else
+        {
             query = [PFQuery queryWithClassName:@"beep"];
             [query orderByDescending:@"createdAt"];
-            }
-            return query;
-            break;
+        }
+        
+        return query;
+        break;
             
         
     }
@@ -421,8 +448,10 @@
     /*cell.bg.image = [UIImage imageNamed:@""];
     cell.bg.alpha = 0.4;
     cell.bg.hidden = YES;*/
-    cell.backgroundColor = [UIColor whiteColor];
-    NSString *username = [[PFUser currentUser]username];
+   // cell.backgroundColor = [UIColor whiteColor];
+    //NSString *username = [[PFUser currentUser]username];
+    
+    // CLUBS
     if(segmentedControl.selectedSegmentIndex == 0)
     {
      self.navigationItem.rightBarButtonItem = qButton;
@@ -434,6 +463,7 @@
 
         
     }
+    // BEEP
     if(segmentedControl.selectedSegmentIndex == 1)
     {
         self.navigationItem.rightBarButtonItem = sendButton;
@@ -441,6 +471,9 @@
         cell.clubName.text = @"Beep";
         //cell.objId = [object objectForKey:@"clubName"];
         beepString = object[@"beepText"];
+        
+        
+        
         
        
         if([object[@"live"]boolValue] == true)
@@ -451,7 +484,7 @@
         }
         else
         {
-            cell.clubName.text = @"Beep";
+            //cell.clubName.text = @"Beep";
             cell.clubName.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
         }
         cell.clubText.text = beepString;
@@ -467,14 +500,14 @@
             
         }*/
     
-    
+    self.tableView.separatorColor = [UIColor colorWithRed:(70.0/255.0) green:(70.0/255.0) blue:(70.0/255.0) alpha:1.0];
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/YYYY, hh:mm a"];
+    [dateFormatter setDateFormat:@"MM/dd/YY, hh:mm a"];
     NSString *date = [dateFormatter stringFromDate:object.createdAt];
     
-    
+    //NSDateFormatter *getDates =
     
     
     

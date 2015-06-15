@@ -42,6 +42,10 @@
 		AE21077D1AD52E2800CBC8C0 /* hacking.png in Resources */ = {isa = PBXBuildFile; fileRef = AE21077C1AD52E2800CBC8C0 /* hacking.png */; };
 		AE23DAC51AD22B5500289201 /* BeepSpotlightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23DAC41AD22B5500289201 /* BeepSpotlightVC.m */; };
 		AE2849C61AC8DF20003E7C62 /* BeepSendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7E08351AC257AD0063DB63 /* BeepSendVC.m */; };
+		AE28571A1AECBB390031E71C /* Icon-60@2x (3).png in Resources */ = {isa = PBXBuildFile; fileRef = AE2857161AECBB390031E71C /* Icon-60@2x (3).png */; };
+		AE28571B1AECBB390031E71C /* Icon-60@3x (3).png in Resources */ = {isa = PBXBuildFile; fileRef = AE2857171AECBB390031E71C /* Icon-60@3x (3).png */; };
+		AE28571C1AECBB390031E71C /* Icon-Small@2x (1).png in Resources */ = {isa = PBXBuildFile; fileRef = AE2857181AECBB390031E71C /* Icon-Small@2x (1).png */; };
+		AE28571D1AECBB390031E71C /* Icon-Small@3x (1).png in Resources */ = {isa = PBXBuildFile; fileRef = AE2857191AECBB390031E71C /* Icon-Small@3x (1).png */; };
 		AE315F1119EBA6160021D539 /* CreditsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE315F1019EBA6160021D539 /* CreditsTableViewController.m */; };
 		AE346A931ABFBE82006B5A85 /* NPAppIcon3.png in Resources */ = {isa = PBXBuildFile; fileRef = AE346A921ABFBE82006B5A85 /* NPAppIcon3.png */; };
 		AE3B5AEA19D7AA59002207E1 /* DraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AE519D7AA59002207E1 /* DraggableView.m */; };
@@ -49,6 +53,7 @@
 		AE3B5AEC19D7AA59002207E1 /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AE919D7AA59002207E1 /* OverlayView.m */; };
 		AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */; };
 		AE3B5AF319D80988002207E1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B5AF219D80988002207E1 /* LoginViewController.m */; };
+		AE4463FF1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4463FE1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m */; };
 		AE44B71419DFB34E003776AC /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44B71319DFB34E003776AC /* RKDropdownAlert.m */; };
 		AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE451EC01A319A5E00399E1C /* CreditsCell.m */; };
 		AE50417D1AB65CDA00E70DF4 /* BeepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE50417C1AB65CDA00E70DF4 /* BeepViewController.m */; };
@@ -86,6 +91,10 @@
 		AEB23F091AAE5B5900CC878A /* BeepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB23F081AAE5B5900CC878A /* BeepCell.m */; };
 		AED7D9541A20251400016D3D /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED7D9521A20251400016D3D /* SplashViewController.xib */; };
 		AEE176A41AB58193008CCC35 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = AEE176A31AB58193008CCC35 /* info.png */; };
+		AEEF04FE1B255D1300C6024B /* Paw.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF04FD1B255D1300C6024B /* Paw.png */; };
+		AEEF05001B2581D000C6024B /* harsh.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF04FF1B2581D000C6024B /* harsh.png */; };
+		AEEF05031B25842000C6024B /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEF05021B25842000C6024B /* PersonViewController.m */; };
+		AEEF05051B25884700C6024B /* harsh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEF05041B25884700C6024B /* harsh.jpg */; };
 		AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733A1A535A2F00B79DFE /* feedIcon.png */; };
 		AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733C1A535B6100B79DFE /* rss-7.png */; };
 		AEFA46C61A88A72300AB634B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21E819C66EEF009D5019 /* Main.storyboard */; };
@@ -146,6 +155,10 @@
 		AE21077C1AD52E2800CBC8C0 /* hacking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hacking.png; sourceTree = "<group>"; };
 		AE23DAC31AD22B5500289201 /* BeepSpotlightVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeepSpotlightVC.h; sourceTree = "<group>"; };
 		AE23DAC41AD22B5500289201 /* BeepSpotlightVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeepSpotlightVC.m; sourceTree = "<group>"; };
+		AE2857161AECBB390031E71C /* Icon-60@2x (3).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x (3).png"; sourceTree = "<group>"; };
+		AE2857171AECBB390031E71C /* Icon-60@3x (3).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x (3).png"; sourceTree = "<group>"; };
+		AE2857181AECBB390031E71C /* Icon-Small@2x (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x (1).png"; sourceTree = "<group>"; };
+		AE2857191AECBB390031E71C /* Icon-Small@3x (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x (1).png"; sourceTree = "<group>"; };
 		AE315F0F19EBA6160021D539 /* CreditsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsTableViewController.h; sourceTree = "<group>"; };
 		AE315F1019EBA6160021D539 /* CreditsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsTableViewController.m; sourceTree = "<group>"; };
 		AE346A921ABFBE82006B5A85 /* NPAppIcon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NPAppIcon3.png; sourceTree = "<group>"; };
@@ -159,6 +172,8 @@
 		AE3B5AEF19D7BCF8002207E1 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		AE3B5AF119D80988002207E1 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AE3B5AF219D80988002207E1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		AE4463FD1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		AE4463FE1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		AE44B71219DFB34E003776AC /* RKDropdownAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKDropdownAlert.h; sourceTree = "<group>"; };
 		AE44B71319DFB34E003776AC /* RKDropdownAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKDropdownAlert.m; sourceTree = "<group>"; };
 		AE451EBF1A319A5E00399E1C /* CreditsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsCell.h; sourceTree = "<group>"; };
@@ -220,6 +235,11 @@
 		AED7D9501A20251400016D3D /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashViewController.h; path = ../SplashViewController.h; sourceTree = "<group>"; };
 		AED7D9521A20251400016D3D /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashViewController.xib; path = ../SplashViewController.xib; sourceTree = "<group>"; };
 		AEE176A31AB58193008CCC35 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		AEEF04FD1B255D1300C6024B /* Paw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Paw.png; path = ../Paw.png; sourceTree = "<group>"; };
+		AEEF04FF1B2581D000C6024B /* harsh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harsh.png; sourceTree = "<group>"; };
+		AEEF05011B25842000C6024B /* PersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewController.h; sourceTree = "<group>"; };
+		AEEF05021B25842000C6024B /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
+		AEEF05041B25884700C6024B /* harsh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = harsh.jpg; sourceTree = "<group>"; };
 		AEEF733A1A535A2F00B79DFE /* feedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedIcon.png; sourceTree = "<group>"; };
 		AEEF733C1A535B6100B79DFE /* rss-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rss-7.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -273,6 +293,9 @@
 		AE1A21DD19C66EEF009D5019 /* NPHSApp */ = {
 			isa = PBXGroup;
 			children = (
+				AEEF04FF1B2581D000C6024B /* harsh.png */,
+				AEEF05041B25884700C6024B /* harsh.jpg */,
+				AEEF04FD1B255D1300C6024B /* Paw.png */,
 				AE63B46F1ACCF63300CA2967 /* icon1.png */,
 				AE5C07D81AC9288F00B73832 /* note-write-7.png */,
 				AE7E08321AC254410063DB63 /* new@3x.png */,
@@ -296,6 +319,12 @@
 				AE2107761AD471FB00CBC8C0 /* panels.json */,
 				AE1A50A91AD796E3003F8485 /* panther.jpg */,
 				AE21077C1AD52E2800CBC8C0 /* hacking.png */,
+				AE2857161AECBB390031E71C /* Icon-60@2x (3).png */,
+				AE2857171AECBB390031E71C /* Icon-60@3x (3).png */,
+				AE2857191AECBB390031E71C /* Icon-Small@3x (1).png */,
+				AE2857181AECBB390031E71C /* Icon-Small@2x (1).png */,
+				AE4463FD1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.h */,
+				AE4463FE1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m */,
 				AE21075F1AD4714400CBC8C0 /* Surfboard */,
 				AE3B5AED19D7AA71002207E1 /* Cards */,
 				AE9221591A5FDF1E003687A2 /* Parser */,
@@ -333,6 +362,8 @@
 				AE451EC01A319A5E00399E1C /* CreditsCell.m */,
 				AE315F0F19EBA6160021D539 /* CreditsTableViewController.h */,
 				AE315F1019EBA6160021D539 /* CreditsTableViewController.m */,
+				AEEF05011B25842000C6024B /* PersonViewController.h */,
+				AEEF05021B25842000C6024B /* PersonViewController.m */,
 				AED7D9501A20251400016D3D /* SplashViewController.h */,
 				AE818EB81A2041FF0054631E /* SplashViewController.m */,
 				AED7D9521A20251400016D3D /* SplashViewController.xib */,
@@ -559,16 +590,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */,
+				AE28571A1AECBB390031E71C /* Icon-60@2x (3).png in Resources */,
+				AE28571C1AECBB390031E71C /* Icon-Small@2x (1).png in Resources */,
 				AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */,
+				AE28571D1AECBB390031E71C /* Icon-Small@3x (1).png in Resources */,
 				AE1B0FB119DBD3E80061FD4D /* nphs2.jpg in Resources */,
 				AE63B4721ACD0F1500CA2967 /* rsz_appicon.png in Resources */,
+				AEEF05051B25884700C6024B /* harsh.jpg in Resources */,
 				AE0CEE5F1A54BE3000C32CB1 /* Images.xcassets in Resources */,
 				AE2107731AD4714400CBC8C0 /* SRFSurfboardPanelCell.xib in Resources */,
 				AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */,
+				AEEF05001B2581D000C6024B /* harsh.png in Resources */,
 				AE0CEE611A54E01B00C32CB1 /* office_chair@3x.png in Resources */,
 				AE0CEE651A54E28A00C32CB1 /* top_charts@3x.png in Resources */,
 				AE21077B1AD52C7600CBC8C0 /* beep1.png in Resources */,
 				AE346A931ABFBE82006B5A85 /* NPAppIcon3.png in Resources */,
+				AE28571B1AECBB390031E71C /* Icon-60@3x (3).png in Resources */,
+				AEEF04FE1B255D1300C6024B /* Paw.png in Resources */,
 				AE63B4701ACCF63300CA2967 /* icon1.png in Resources */,
 				AE1B0FAF19DBD3E30061FD4D /* nphs1.jpeg in Resources */,
 				AE01B43F1A54BB8E006BFB38 /* icon.JPG in Resources */,
@@ -613,8 +651,10 @@
 				AE9221531A5FDED1003687A2 /* MWFeedParserAppDelegate.m in Sources */,
 				AE2107711AD4714400CBC8C0 /* UIButton+IndexPath.m in Sources */,
 				AE9221571A5FDED1003687A2 /* RootViewController.m in Sources */,
+				AEEF05031B25842000C6024B /* PersonViewController.m in Sources */,
 				AE9221561A5FDED1003687A2 /* NSString+XMLEntities.m in Sources */,
 				AE92214E1A5FDED1003687A2 /* DetailTableViewController.m in Sources */,
+				AE4463FF1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				AE2107741AD4714400CBC8C0 /* SRFSurfboardPanel.m in Sources */,
 				AE9221521A5FDED1003687A2 /* MWFeedParser.m in Sources */,
 				AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */,
@@ -741,7 +781,7 @@
 		AE1A21FF19C66EF0009D5019 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -762,7 +802,7 @@
 		AE1A220019C66EF0009D5019 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

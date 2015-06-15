@@ -114,7 +114,6 @@
     }
     else
     {
-        
         PFQuery *query = [PFUser query];
         [query whereKey:@"username" equalTo:username];
         PFObject *object = [query getFirstObject];
@@ -131,18 +130,7 @@
         
         
         notification = [NSString stringWithFormat:@"%@: %@", clubName, notificationField.text];
-        
-        
-        
-        if([username isEqualToString:@"commoncents"])
-        {
-            channel = @"global";
-            notification = [NSString stringWithFormat:@"%@", notificationField.text];
-        }
-        else
-        {
         channel = username;
-        }
         NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                               notification, @"alert",
                               @"Increment", @"badge",
@@ -153,7 +141,7 @@
         [push setChannel:channel];
         [push setData:data];
         [push sendPushInBackgroundWithBlock:^(BOOL succeded, NSError *error)
-         {
+        {
              if(succeded && !error)
              {
                  notificationField.text = @"Enter Notification Here:";
@@ -165,7 +153,6 @@
          }];
        
         [RKDropdownAlert title:@"Done!" message:[NSString stringWithFormat:@"Your notification has been sent, and pushed to the feed."] backgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] textColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]time:2];
-        
     }
 }
 
