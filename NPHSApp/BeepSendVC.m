@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 #import "RKDropdownAlert.h"
+#import "CommentsViewController.h"
 
 @interface BeepSendVC ()
 
@@ -18,15 +19,22 @@
 @property NSMutableArray *badWords;
 @property NSTimer *timer;
 @property NSInteger timeInt;
--(BOOL)containsBadWords:(NSString * )string;
+
 @end
 
 @implementation BeepSendVC
-@synthesize beepTextView, finalString, badWords, timer, timeInt;
+@synthesize beepTextView, finalString, badWords, timer, timeInt, commentObject, characterLabel;
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    UIBarButtonItem *back = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(backToThreads)];
+    self.navigationItem.backBarButtonItem = back;
+}
 - (void)viewDidLoad {
+    self.navigationItem.title = commentObject[@"topic"];
     [super viewDidLoad];
-    self.navigationItem.title = nil;
+    //self.navigationItem.title = nil;
 
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
@@ -50,6 +58,24 @@
 {
     beepTextView.text = @"";
 }
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    NSInteger amount = (220 - [newString length] + 1);
+    self.characterLabel.textColor = [UIColor whiteColor];
+    self.characterLabel.text = [NSString stringWithFormat:@"%lu", amount];
+    if(amount == -1)
+    {
+        self.characterLabel.text = @"0";
+        self.characterLabel.textColor = [UIColor redColor];
+        return NO;
+    }
+    else
+    {
+    return YES;
+    }
+}
 -(void)sendBeep
 {
     PFInstallation *installation = [PFInstallation currentInstallation];
@@ -63,10 +89,19 @@
     [object fetchIfNeeded];
     if(![self containsBadWords:[beepTextView.text lowercaseString]] && timeInt == 0 && beepTextView.text.length > 0 && ![beepTextView.text isEqualToString:@"Enter Beep Here"] && [object[@"banned"] boolValue] == false)
     {
-        PFObject *object = [PFObject objectWithClassName:@"sentBeeps"];
-        object[@"beepText"] = beepTextView.text;
-        object[@"person"] = installation.objectId;
+        PFObject *object = [PFObject objectWithClassName:@"Comments"];
+        object[@"text"] = beepTextView.text;
+        object[@"creator"] = installation.objectId;
         object[@"approved"] = [NSNumber numberWithBool:false];
+        object[@"topicPointer"] = commentObject;
+        object[@"topicObjectId"] = commentObject.objectId;
+        object[@"voteNumber"] = [NSNumber numberWithInt:0];
+        
+        PFInstallation *installation = [PFInstallation currentInstallation];
+        [installation incrementKey:@"ranker"];
+        [installation saveInBackground];
+        [commentObject incrementKey:@"commentCount"];
+        [commentObject saveInBackground];
         
         [object saveInBackgroundWithBlock:^(BOOL success, NSError *error)
         {
@@ -76,8 +111,8 @@
             [self.view endEditing:YES];
             [RKDropdownAlert show];
             [RKDropdownAlert title:@"Beeped" message:@"Your beep was sent." time:3];
-                
-                PFPush *push = [[PFPush alloc] init];
+            beepTextView.text = @"Enter Beep Here";
+              /*  PFPush *push = [[PFPush alloc] init];
                 PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
                 [query whereKey:@"authorized" equalTo:[NSNumber numberWithBool:YES]];
                 [push setQuery:query];
@@ -88,7 +123,9 @@
                 beepTextView.text = @"Enter Beep Here";
               
                 [push setData:dictionary];
-                [push sendPushInBackground];
+                [push sendPushInBackground];*/
+                self.characterLabel.text = @"";
+                [self performSegueWithIdentifier:@"doneCommenting" sender:self];
                 
             }
             timeInt = 45;
@@ -153,6 +190,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"doneCommenting"])
+    {
+        CommentsViewController *commentsVC = segue.destinationViewController;
+        commentsVC.navigationItem.backBarButtonItem = nil;
+        commentsVC.navigationItem.leftBarButtonItem = commentsVC.back;
+        commentsVC.commentPointer = commentObject;
+    }
 }
 
 /*

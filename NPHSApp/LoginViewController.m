@@ -20,6 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Subscriptions" style:UIBarButtonItemStyleDone target:self action:@selector(backToSubcriptions)];
+    self.navigationItem.leftBarButtonItem = back;
    
     usernameField.clearButtonMode = YES;
     usernameField.clearsOnBeginEditing = YES;
@@ -38,6 +41,10 @@
        
     
     
+}
+-(void)backToSubcriptions
+{
+    [self performSegueWithIdentifier:@"BackSubscriptions" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface BeepSendVC : UIViewController<UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *beepTextView;
-
+@property (weak, nonatomic) IBOutlet UILabel *characterLabel;
+-(BOOL)containsBadWords:(NSString * )string;
+@property PFObject *commentObject;
 @end

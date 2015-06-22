@@ -94,10 +94,12 @@
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    PersonViewController *personVC = segue.destinationViewController;
     if([segue.identifier isEqualToString:@"Person"])
     {
-        personVC.name = person;
+        PersonViewController *personVC = segue.destinationViewController;
+        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        CreditsCell *cell = (CreditsCell *)[self.tableView cellForRowAtIndexPath:path];
+        personVC.name = cell.creditLabel.text;
     }
     
 }

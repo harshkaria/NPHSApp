@@ -41,12 +41,21 @@
 
 -(void)viewDidLoad
 {
+    self.navigationItem.hidesBackButton = YES;
+    UIBarButtonItem *clubArea = [[UIBarButtonItem alloc] initWithTitle:@"Club Area" style:UIBarButtonItemStyleDone target:self action:@selector(clubArea)];
+    self.navigationItem.rightBarButtonItem = clubArea;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.separatorColor = [UIColor yellowColor];
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [super viewDidLoad];
        
     
+}
+-(void)clubArea
+{
+ 
+        self.title = @"Clubs";
+        [self performSegueWithIdentifier:@"ClubArea" sender:self];
 }
 -(PFQuery *)queryForTable
 {

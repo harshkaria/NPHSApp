@@ -24,6 +24,7 @@
 @implementation NotificationViewController
 @synthesize notificationField, sendLabel, username, subscribers, send, viewBeeps, channel, notification;
 
+
 - (void)viewDidLoad {
     self.navigationItem.backBarButtonItem = nil;
     UIBarButtonItem *logOut = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logOutAction)];

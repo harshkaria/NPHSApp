@@ -20,11 +20,12 @@
     name = @"";
 }
 - (void)viewDidLoad {
+    nameLabel.text = name;
     [super viewDidLoad];
     self.navigationItem.backBarButtonItem.title = @"Back";
     CGRect screenBound = [[UIScreen mainScreen] bounds];
     CGSize screenSize = screenBound.size;
-    nameLabel.text = name;
+    
     // Do any additional setup after loading the view.
     UIImage *image = [UIImage imageNamed:@"harsh.png"];
     photoImage.layer.cornerRadius = photoImage.frame.size.width / 2;

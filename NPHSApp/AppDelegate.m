@@ -33,8 +33,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ParseCrashReporting enable];
         // Override point for customization after application launch.
-    [Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
-                  clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
+    // NORMAL
+    /*[Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
+                  clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];*/
+
+    // THREADS
+    [Parse setApplicationId:@"7nKYjaRV0FKR1QeU74bT5RiVPuujLk1xuBOcYas8"
+                  clientKey:@"Q0Sq9hazXcLrKpTJ9Oe2KDlR1JZE9kXfEKH9G0dL"];
     //BETA
     //[Parse setApplicationId:@"zScBzNliDkwbRIOwiuLY71s31ZWBkb6Gd2pDTtAr"
     //clientKey:@"UeIZ0ilVrYrYkKIXsNExpsmCfsFvME0f58X5xFZD"];
