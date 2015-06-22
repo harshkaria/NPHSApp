@@ -11,7 +11,6 @@
 #import <Parse/Parse.h>
 #import "BeepSendVC.h"
 #import "UIScrollView+EmptyDataSet.h"
-#import "UITableView+FDTemplateLayoutCell.h"
 @interface CommentsViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property NSString *trueString;
@@ -86,13 +85,10 @@
     return 1;
 }
 
+
+
 #pragma mark - Table view data source
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [tableView fd_heightForCellWithIdentifier:@"Comment" configuration:^(id cell) {
-    }];
-}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     
     self.promptLabel.hidden = NO;
@@ -100,7 +96,6 @@
     self.amountOfVotes = object[@"voteNumber"];
     NSArray *voters = object[@"voters"];
     CommentsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
-    [cell.commentText sizeToFit];
     [self styleCell:cell];
     [self styleCellAfterVote:cell];
     [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateNormal];
