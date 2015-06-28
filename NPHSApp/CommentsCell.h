@@ -17,6 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *agreeButton;
 @property NSString *currentComment;
 @property (weak, nonatomic) IBOutlet UIButton *countButtton;
-
-
 @end
+
+

@@ -28,8 +28,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    UIBarButtonItem *back = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(backToThreads)];
-    self.navigationItem.backBarButtonItem = back;
+  
 }
 - (void)viewDidLoad {
     self.navigationItem.title = commentObject[@"topic"];
@@ -196,8 +195,8 @@
     if([segue.identifier isEqualToString:@"doneCommenting"])
     {
         CommentsViewController *commentsVC = segue.destinationViewController;
-        commentsVC.navigationItem.backBarButtonItem = nil;
-        commentsVC.navigationItem.leftBarButtonItem = commentsVC.back;
+        //commentsVC.navigationItem.backBarButtonItem = nil;
+        //commentsVC.navigationItem.leftBarButtonItem = commentsVC.back;
         commentsVC.commentPointer = commentObject;
     }
 }

@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property  PFObject *currentThread;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *disclosureView;
+@property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 
 @end

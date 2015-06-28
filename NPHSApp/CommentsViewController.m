@@ -19,10 +19,11 @@
 @property NSArray *creators;
 @property PFInstallation *currentInstallation;
 @property NSNumber *amountOfVotes;
+@property NSNumber *rowHeight;
 @end
 
 @implementation CommentsViewController
-@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data;
+@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -38,10 +39,10 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationItem.hidesBackButton = YES;
+    //self.navigationItem.hidesBackButton = YES;
     [super viewWillAppear:YES];
-    back = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(backToThreads)];
-    self.navigationItem.leftBarButtonItem = back;
+   // back = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(backToThreads)];
+   // self.navigationItem.leftBarButtonItem = back;
     self.promptLabel.hidden = YES;
 
 }
@@ -68,9 +69,9 @@
 -(PFQuery *)queryForTable
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
     [query orderByDescending:@"voteNumber"];
-    
     return query;
 }
 
@@ -85,8 +86,6 @@
     return 1;
 }
 
-
-
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
@@ -96,6 +95,7 @@
     self.amountOfVotes = object[@"voteNumber"];
     NSArray *voters = object[@"voters"];
     CommentsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
+    
     [self styleCell:cell];
     [self styleCellAfterVote:cell];
     [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateNormal];
@@ -112,7 +112,7 @@
     {
         [cell.agreeButton setTitleColor: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forState:UIControlStateNormal];
     }
-    if([voters containsObject:currentInstallation.objectId])
+    else if([voters containsObject:currentInstallation.objectId])
     {
         cell.agreeButton.hidden = YES;
     }
@@ -122,14 +122,13 @@
     }
     
     self.tableView.separatorColor = [UIColor clearColor];
-    cell.customView.layer.cornerRadius = 12;
+   // cell.customView.layer.cornerRadius = 12;
     
     [cell.customView.layer setMasksToBounds:YES];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.commentText.text = object[@"text"];
     cell.currentComment = object.objectId;
-    
     return cell;
 }
 -(void)styleCell:(CommentsCell *)cell
@@ -180,10 +179,6 @@
     NSString *commentCount = [NSString stringWithFormat:@"%@", numberCount];
     return commentCount;
 }
-
-
-
-
 
 -(void)comment
 {

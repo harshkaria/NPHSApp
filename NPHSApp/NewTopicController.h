@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *promptField;
 @property (weak, nonatomic) IBOutlet UILabel *promptCount;
 
+-(void)createTopic:(NSString *)topic prompt:(NSString *)prompt imageNamed:(NSString *)imageName;
+
 
 @end

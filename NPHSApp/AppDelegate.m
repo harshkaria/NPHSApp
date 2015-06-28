@@ -101,7 +101,14 @@
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
     [[UISegmentedControl appearance]setTintColor: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
+    PFInstallation *installation = [PFInstallation currentInstallation];
     
+    if(![installation objectForKey:@"dogTag"])
+    {
+    [self createDogTag];
+    }
+    
+
     // SPOTLIGHT BEEP
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if([notificationPayload objectForKey:@"id"])
@@ -125,6 +132,25 @@
     }
     
     return YES;
+}
+
+-(void)createDogTag
+{
+    PFInstallation *installation = [PFInstallation currentInstallation];
+    NSString *alpha = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // 0-25
+    int a = arc4random() % 26;
+    NSString *stringA = [alpha substringWithRange:NSMakeRange(a, 1)];
+    int b = arc4random() % 26;
+    NSString *stringB = [alpha substringWithRange:NSMakeRange(b, 1)];
+    int c = arc4random() % 26;
+    NSString *stringC = [alpha substringWithRange:NSMakeRange(c, 1)];
+    NSString *final = [NSString stringWithFormat:@"%@%@%@", stringA, stringB, stringC];
+    [installation setObject:final forKey:@"dogTag"];
+    [installation saveInBackground];
+    
+    
+    
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "BeepSendVC.h"
 #import "RKDropdownAlert.h"
+#import "ImageCellTableViewController.h"
 
 @interface NewTopicController ()
 
@@ -25,7 +26,7 @@
     promptField.delegate = self;
     [characterLabel setText:@""];
     [promptCount setText:@""];
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createTopic)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(goToPicker)];
     self.navigationItem.rightBarButtonItem = addButton;
     
 }
@@ -44,13 +45,18 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    BeepSendVC *beepVC = [[BeepSendVC alloc] init];
     self.characterLabel.textColor = [UIColor whiteColor];
     self.promptCount.textColor = [UIColor whiteColor];
     if([topicField isFirstResponder])
     {
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        NSInteger amount = (23 - [newString length]);
+        NSInteger amount = (15 - [newString length]);
         self.characterLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)amount];
+        if([beepVC containsBadWords:[newString lowercaseString]])
+        {
+            self.characterLabel.textColor = [UIColor redColor];
+        }
         if(amount == -1)
         {
             self.characterLabel.text = @"0";
@@ -67,6 +73,10 @@
     
         NSInteger amount2 = (50 - [promptString length]);
         self.promptCount.text = [NSString stringWithFormat:@"%lu", (unsigned long)amount2];
+        if([beepVC containsBadWords:[promptString lowercaseString]])
+        {
+            self.promptCount.textColor = [UIColor redColor];
+        }
         
         if(amount2 == -1)
         {
@@ -78,25 +88,42 @@
     return YES;
 }
 
--(void)createTopic
+-(void)goToPicker
+{
+    [self performSegueWithIdentifier:@"pickImage" sender:self];
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"pickImage"])
+    {
+        ImageCellTableViewController *imageVC = segue.destinationViewController;
+        imageVC.topic = topicField.text;
+        imageVC.prompt = promptField.text;
+    }
+}
+
+-(void)createTopic:(NSString *)topic prompt:(NSString *)prompt imageNamed:(NSString *)imageName
 {
     BeepSendVC *beepVC = [[BeepSendVC alloc] init];
+    ImageCellTableViewController *imageVC = [[ImageCellTableViewController alloc] init];
     
-    if(![beepVC containsBadWords:[topicField.text lowercaseString]] && ![beepVC containsBadWords:[promptField.text lowercaseString]])
+    if(![beepVC containsBadWords:[topic lowercaseString]] && ![beepVC containsBadWords:[prompt lowercaseString]])
     {
         PFInstallation *installation = [PFInstallation currentInstallation];
         
         PFObject *topicObject = [PFObject objectWithClassName:@"Topics"];
         topicObject[@"creator"] = installation.objectId;
-        topicObject[@"topic"] = [NSString stringWithFormat:@"#%@", topicField.text];
-        topicObject[@"prompt"] = promptField.text;
+        topicObject[@"topic"] = [NSString stringWithFormat:@"#%@", topic];
+        topicObject[@"prompt"] = prompt;
+        topicObject[@"commentCount"] = [NSNumber numberWithInt:0];
+        topicObject[@"imageName"] = imageName;
 
         
         [topicObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
         {
          if(succeeded && !error)
          {
-             [self performSegueWithIdentifier:@"BackToThreads" sender:self];
+             [self performSegueWithIdentifier:@"BackToThreads" sender:imageVC];
          }
     }];
     }
