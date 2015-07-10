@@ -25,7 +25,14 @@
     self.navigationItem.title = @"Pick an Image";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(selectedImage)];
     self.navigationItem.rightBarButtonItem = addButton;
-    images = [[NSMutableArray alloc] initWithObjects:@"nphs1.jpeg", @"nphs2.jpg", @"nphs3.JPG", @"panther.jpg", nil];
+    //images = [[NSFileManager defaultManager]contentsOfDirectoryAtPath:@"Backgrounds" error:nil];
+    images = [NSMutableArray array];
+    [[[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:nil] enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        NSString *path = [obj lastPathComponent];
+        if ([path hasPrefix:@"bg"]) {
+            [images addObject:path];
+        }
+    }];
 
    
 }
@@ -69,7 +76,9 @@
 {
     ImageCell *cell = (ImageCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     self.navigationItem.title = @"Image Selected";
+    NSLog(@"luv you too fam");
     imageName = cell.imageName;
+    
     NSLog(imageName);
 }
 

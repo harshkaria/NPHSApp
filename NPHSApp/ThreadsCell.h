@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *disclosureView;
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
+@property (weak, nonatomic) IBOutlet UIView *liveView;
+@property (weak, nonatomic) IBOutlet UILabel *liveLabel;
 
 
 @end

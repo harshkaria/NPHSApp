@@ -11,7 +11,10 @@
 @implementation ImageCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
+    effectView.frame = CGRectMake(0, 0, 380, 100);
+    [self.customImage addSubview:effectView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -11,16 +11,21 @@
 #import "BeepViewController.h"
 #import <Parse/Parse.h>
 #import "CommentsViewController.h"
+#import "YALSunnyRefreshControl.h"
+#import "FBShimmeringView.h"
 
 @interface ThreadsFeedController ()
 @property PFObject *correct;
 @property NSArray *data;
 @property NSArray *finalData;
 @property NSArray *hotData;
+@property NSArray *liveData;
+@property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
+
 @end
 
 @implementation ThreadsFeedController
-@synthesize correct, data, finalData, hotData;
+@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -29,7 +34,7 @@
     {
         self.parseClassName = @"Topics";
         self.paginationEnabled = NO;
-        self.pullToRefreshEnabled = YES;
+        self.pullToRefreshEnabled = NO;
         
     }
     return self;
@@ -40,6 +45,7 @@
      //[self loadObjects];
     [super viewWillAppear:YES];
     self.navigationItem.hidesBackButton = YES;
+
     
     
 }
@@ -49,21 +55,40 @@
     [super viewDidLoad];
     UIBarButtonItem *newThread = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newThread)];
     self.navigationItem.rightBarButtonItem = newThread;
+    [self setUpRefresh];
     
+}
+-(void)setUpRefresh
+{
+    self.sunnyRefreshControl = [YALSunnyRefreshControl attachToScrollView:self.tableView
+                                                                   target:self
+                                                            refreshAction:@selector(didStartRefreshing)];
+}
+-(void)didStartRefreshing
+{
     
+    [self performSelector:@selector(endAnimationHandle) withObject:nil afterDelay:1];
+}
+-(void)endAnimationHandle{
+    
+    [self.sunnyRefreshControl endRefreshing];
+    [self loadObjects];
 }
 -(PFQuery *)queryForTable
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Topics"];
     [query orderByDescending:@"createdAt"];
-    //query.cachePolicy = kPFCachePolicyNetworkElseCache;
-    
     PFQuery *queryTwo = [PFQuery queryWithClassName:@"Topics"];
     [queryTwo orderByDescending:@"commentCount"];
+    [queryTwo whereKey:@"live" equalTo:[NSNumber numberWithBool:false]];
     [queryTwo setLimit:3];
-   // queryTwo.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    
+    PFQuery *liveQuery = [PFQuery queryWithClassName:@"Topics"];
+    [liveQuery whereKey:@"live" equalTo:[NSNumber numberWithBool:YES]];
+    
     data = [query findObjects];
     hotData = [queryTwo findObjects];
+    liveData = [liveQuery findObjects];
     [self sortObjects];
     return query;
 
@@ -71,10 +96,17 @@
 
 -(void)sortObjects
 {
+    
     NSMutableArray *preData = [[NSMutableArray alloc] init];
     NSMutableArray *hotPreData = [[NSMutableArray alloc] init];
     NSMutableArray *recentData = [[NSMutableArray alloc] init];
     NSArray *preData3 = [[NSArray alloc] init];
+    
+    for(PFObject *liveObject in liveData)
+    {
+        [preData addObject:liveObject];
+        [hotPreData addObject:liveObject.objectId];
+    }
     
     for(PFObject *hotObject in hotData)
     {
@@ -141,13 +173,24 @@
 }
 
 #pragma mark - Table view data source
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     self.tableView.separatorColor = [UIColor clearColor];
-    
-    ThreadsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Thread"];
+    ThreadsCell *cell;
+    if(indexPath.row <= 2)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"HotThread"];
+    }
+    else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Thread"];
+    }
     cell.bgView.image = [UIImage imageNamed:object[@"imageName"]];
     cell.commentCountLabel.hidden = YES;
+    cell.liveView.hidden = YES;
+    cell.liveLabel.hidden = YES;
     [cell.custom.layer setMasksToBounds:YES];
+    BOOL live = [object[@"live"]boolValue];
     
     cell.custom.layer.borderWidth = 1;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -157,6 +200,17 @@
     else
     {
         cell.custom.layer.borderColor = [[UIColor whiteColor]CGColor];
+    }
+    if (live) {
+        cell.liveView.hidden = NO;
+        cell.liveLabel.hidden = NO;
+        FBShimmeringView *shimmer = [[FBShimmeringView alloc] initWithFrame:CGRectMake(12, 17, 35, 21)];
+        shimmer.contentView = cell.liveLabel;
+        shimmer.shimmering = YES;
+        shimmer.shimmeringSpeed = 60;
+        shimmer.shimmeringOpacity = 1.0;
+        [cell.contentView addSubview:shimmer];
+        
     }
     
     if(commentCount > 0)

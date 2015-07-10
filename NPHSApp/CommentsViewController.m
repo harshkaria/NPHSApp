@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "BeepSendVC.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import <CoreText/CoreText.h>
 @interface CommentsViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property NSString *trueString;
@@ -20,10 +21,14 @@
 @property PFInstallation *currentInstallation;
 @property NSNumber *amountOfVotes;
 @property NSNumber *rowHeight;
+@property NSArray *preData1;
+@property NSMutableArray *preData2;
+@property NSArray *finalCommentsArray;
+@property NSString *hotObjectId;
 @end
 
 @implementation CommentsViewController
-@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight;
+@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -61,6 +66,7 @@
     UIBarButtonItem *beepButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"new@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(comment)];
     self.navigationItem.rightBarButtonItem = beepButton;
 }
+
 -(void)backToThreads
 {
     [self performSegueWithIdentifier:@"backToThreads" sender:self];
@@ -68,13 +74,36 @@
 
 -(PFQuery *)queryForTable
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    [query whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
-    [query orderByDescending:@"voteNumber"];
-    return query;
+    PFQuery *queryOne = [PFQuery queryWithClassName:@"Comments"];
+    [queryOne whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [queryOne orderByDescending:@"createdAt"];
+    queryOne.cachePolicy = kPFCachePolicyNetworkElseCache;
+    
+    PFQuery *queryTwo = [PFQuery queryWithClassName:@"Comments"];
+    [queryTwo whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [queryTwo orderByDescending:@"voteNumber"];
+    [queryTwo setLimit:1];
+    
+    //PFObject *hotComment = [queryTwo getFirstObject];
+    //preData1 = [query findObjects];1
+    preData1 = [queryOne findObjects];
+    preData2 = [[NSMutableArray alloc] initWithObjects:[queryTwo getFirstObject], nil];
+    //preData2[0] = [queryTwo getFirstObject];
+   // hotObjectId = hotComment.objectId;
+    [self sortComments];
+    
+    return queryOne;
 }
-
+-(void)sortComments
+{
+        NSArray *finalArray = [preData2 arrayByAddingObjectsFromArray:preData1];
+       // NSOrderedSet *set = [NSOrderedSet orderedSetWithArray:finalArray];
+         finalCommentsArray = finalArray;
+}
+-(PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    return finalCommentsArray[indexPath.row];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -88,69 +117,135 @@
 
 #pragma mark - Table view data source
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     
+    NSMutableAttributedString *commentText;
     self.promptLabel.hidden = NO;
     self.promptLabel.text = commentPointer[@"prompt"];
-    self.amountOfVotes = object[@"voteNumber"];
     NSArray *voters = object[@"voters"];
     CommentsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
+    cell.agreeButton.hidden = NO;
+    
+    [cell.countButtton setTitle:[self getAmountOfComments:object[@"voteNumber"]] forState:UIControlStateDisabled];
     
     [self styleCell:cell];
     [self styleCellAfterVote:cell];
-    [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateNormal];
     cell.agreeButton.tag = indexPath.row;
     cell.countButtton.layer.masksToBounds = YES;
     
-    if([object[@"creator"] isEqualToString:[PFInstallation currentInstallation].objectId])
+    if(indexPath.row == 0)
+    {
+        cell.countButtton.backgroundColor = [UIColor redColor];
+        cell.countButtton.layer.borderWidth = 1;
+        cell.countButtton.layer.borderColor = [[UIColor whiteColor] CGColor];
+        [cell.countButtton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+        cell.fireLabel.hidden = NO;
+        cell.agreeButton.hidden = YES;
+        cell.customView.layer.borderWidth = 1;
+        cell.customView.layer.borderColor = [[UIColor redColor] CGColor];
+        
+    }
+    
+    if([object[@"creator"] isEqualToString:currentInstallation.objectId])
     {
         cell.customView.backgroundColor = [UIColor lightGrayColor];
         cell.commentText.textColor = [UIColor blackColor];
         cell.agreeButton.hidden = YES;
+        commentText = [self styleComment:object[@"text"] ownComment:YES];
     }
-    else if(![object[@"creator"] isEqualToString:[PFInstallation currentInstallation].objectId])
+    else if(![object[@"creator"] isEqualToString:currentInstallation.objectId])
     {
         [cell.agreeButton setTitleColor: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forState:UIControlStateNormal];
+        commentText = [self styleComment:object[@"text"] ownComment:NO];
     }
-    else if([voters containsObject:currentInstallation.objectId])
+    else if([voters containsObject:currentInstallation.objectId] || [object[@"creator"] isEqualToString:currentInstallation.objectId])
     {
         cell.agreeButton.hidden = YES;
     }
-    else if(![voters containsObject:currentInstallation.objectId] && ![object[@"creator"] isEqualToString:[PFInstallation currentInstallation].objectId])
+    if([voters containsObject:currentInstallation.objectId])
     {
-        cell.agreeButton.hidden = NO;
+        cell.agreeButton.hidden = YES;
     }
+    if([object[@"staff"] boolValue] == YES)
+    {
+        [self staffStyle:cell];
+    }
+    if(cell.voted)
+    {
+        NSNumber *numberVote = [NSNumber numberWithInt:[object[@"voteNumber"]intValue]];
+        [cell.countButtton setTitle:[self getAmountOfComments:numberVote] forState:UIControlStateDisabled];
+    }
+    
     
     self.tableView.separatorColor = [UIColor clearColor];
    // cell.customView.layer.cornerRadius = 12;
     
-    [cell.customView.layer setMasksToBounds:YES];
+    //[cell.customView.layer setMasksToBounds:YES];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    cell.commentText.text = object[@"text"];
+    cell.commentText.attributedText = commentText;
     cell.currentComment = object.objectId;
+    cell.dogTag.text = object[@"dogTag"];
     return cell;
 }
 -(void)styleCell:(CommentsCell *)cell
 {
+    cell.customView.layer.borderWidth = 0;
     cell.customView.backgroundColor = [UIColor darkGrayColor];;
-    cell.commentText.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     
     [cell.agreeButton addTarget:self action:@selector(agreeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     cell.agreeButton.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
-    cell.agreeButton.layer.cornerRadius = 4;
+    cell.agreeButton.layer.cornerRadius = 2;
     cell.agreeButton.layer.borderWidth = 1;
     cell.agreeButton.layer.borderColor = cell.agreeButton.tintColor.CGColor;
-
+    cell.fireLabel.hidden = YES;
+    
+    
 }
 -(void)styleCellAfterVote:(CommentsCell *)cell
 {
+    cell.countButtton.layer.borderWidth = 0;
     cell.countButtton.layer.cornerRadius = 10;
     cell.countButtton.backgroundColor = [UIColor blackColor];
     cell.countButtton.enabled = NO;
     [cell.countButtton setTitleColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forState:UIControlStateDisabled];
-    cell.countButtton.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
-    cell.countButtton.layer.borderColor = cell.countButtton.tintColor.CGColor;
+   
+}
+-(void)staffStyle:(CommentsCell *)cell
+{
+    cell.tagView.backgroundColor = [UIColor redColor];
+    cell.dogTag.textColor = [UIColor whiteColor];
+    cell.dogTag.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:11];
+}
+
+-(NSMutableAttributedString *)styleComment:(NSString *)comment ownComment:(BOOL)own
+{
+    NSArray *words = [comment componentsSeparatedByString:@" "];
+    NSMutableAttributedString *formattedString = [[NSMutableAttributedString alloc] initWithString:comment];
+    
+    if(own)
+    {
+        [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName] range:[comment rangeOfString:comment]];
+    }
+    else
+    {
+        [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forKey:NSForegroundColorAttributeName] range:[comment rangeOfString:comment]];
+    }
+    for(NSString *word in words)
+    {
+        if([word hasPrefix:@"@"])
+        {
+            NSRange range = [comment rangeOfString:word];
+            [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor blueColor] forKey:NSForegroundColorAttributeName] range:range];
+            if(!own)
+            {
+               [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName] range:range];
+            }
+            
+        }
+
+    }
+    return formattedString;
 }
 
 -(void)agreeButtonPressed:(id)sender
@@ -167,7 +262,8 @@
         {
          amountOfVotes = object[@"voteNumber"];
          cell.agreeButton.hidden = YES;
-         [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateNormal];
+         cell.voted = YES;
+         [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateDisabled];
         }
      }];
     

@@ -15,6 +15,8 @@
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import "BeepSpotlightVC.h"
 #import "SplashViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @interface AppDelegate ()
 @property UINavigationController *navController;
 @property UITabBarController *tabBarController;
@@ -32,6 +34,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ParseCrashReporting enable];
+    [Fabric with:@[CrashlyticsKit]];
         // Override point for customization after application launch.
     // NORMAL
     /*[Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
@@ -147,6 +150,7 @@
     NSString *stringC = [alpha substringWithRange:NSMakeRange(c, 1)];
     NSString *final = [NSString stringWithFormat:@"%@%@%@", stringA, stringB, stringC];
     [installation setObject:final forKey:@"dogTag"];
+    [installation setObject:[NSNumber numberWithBool:NO] forKey:@"authorized"];
     [installation saveInBackground];
     
     

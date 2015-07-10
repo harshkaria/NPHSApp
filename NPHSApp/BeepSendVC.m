@@ -78,25 +78,35 @@
 -(void)sendBeep
 {
     PFInstallation *installation = [PFInstallation currentInstallation];
-    PFObject *object = [PFObject objectWithoutDataWithClassName:@"_Installation" objectId:installation.objectId];
+    PFObject *installObject = [PFObject objectWithoutDataWithClassName:@"_Installation" objectId:installation.objectId];
     
     //PFQuery *query = [PFInstallation query];
     beepTextView.text = [NSString stringWithFormat:@"%@", beepTextView.text];
-    
-    
     NSLog([NSString stringWithFormat:@"%li seconds", (long)timeInt]);
-    [object fetchIfNeeded];
-    if(![self containsBadWords:[beepTextView.text lowercaseString]] && timeInt == 0 && beepTextView.text.length > 0 && ![beepTextView.text isEqualToString:@"Enter Beep Here"] && [object[@"banned"] boolValue] == false)
+    [installObject fetchIfNeeded];
+    
+    NSString *dogTag = [installObject objectForKey:@"dogTag"];
+    NSString *topicName = [commentObject objectForKey:@"topic"];
+    
+    
+    if(![self containsBadWords:[beepTextView.text lowercaseString]] && timeInt == 0 && beepTextView.text.length > 0 && ![beepTextView.text isEqualToString:@"Enter Beep Here"] && [installObject[@"banned"] boolValue] == false)
     {
         PFObject *object = [PFObject objectWithClassName:@"Comments"];
+        
+        if([[installObject objectForKey:@"authorized"] boolValue] == YES)
+        {
+            object[@"staff"] = [NSNumber numberWithBool:YES];
+        }
+        
         object[@"text"] = beepTextView.text;
         object[@"creator"] = installation.objectId;
+        object[@"dogTag"] = dogTag;
         object[@"approved"] = [NSNumber numberWithBool:false];
         object[@"topicPointer"] = commentObject;
         object[@"topicObjectId"] = commentObject.objectId;
         object[@"voteNumber"] = [NSNumber numberWithInt:0];
         
-        PFInstallation *installation = [PFInstallation currentInstallation];
+        //PFInstallation *installation = [PFInstallation currentInstallation];
         [installation incrementKey:@"ranker"];
         [installation saveInBackground];
         [commentObject incrementKey:@"commentCount"];
@@ -110,23 +120,27 @@
             [self.view endEditing:YES];
             [RKDropdownAlert show];
             [RKDropdownAlert title:@"Beeped" message:@"Your beep was sent." time:3];
-            beepTextView.text = @"Enter Beep Here";
-              /*  PFPush *push = [[PFPush alloc] init];
-                PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
-                [query whereKey:@"authorized" equalTo:[NSNumber numberWithBool:YES]];
-                [push setQuery:query];
-                NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [NSString stringWithFormat:@"Approve: %@", beepTextView.text], @"alert",
-                                            @"default", @"sound",
+            //beepTextView.text = @"Enter Beep Here";
+            NSMutableArray *mentionsArray = [self findMentions:beepTextView.text];
+            
+            if([mentionsArray count] > 0)
+            {
+            PFPush *push = [[PFPush alloc] init];
+            PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
+            [query whereKey:@"dogTag" containedIn:mentionsArray];
+            [push setQuery:query];
+             NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSString stringWithFormat:@"%@ tagged you in %@.", dogTag, topicName], @"alert",
+                                    @"default", @"sound",
                                             nil];
-                beepTextView.text = @"Enter Beep Here";
-              
-                [push setData:dictionary];
-                [push sendPushInBackground];*/
+            [push setData:dictionary];
+            [push sendPushInBackground];
+            }
                 self.characterLabel.text = @"";
                 [self performSegueWithIdentifier:@"doneCommenting" sender:self];
                 
             }
+            beepTextView.text = @"Enter Beep Here";
             timeInt = 45;
             timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeOut:) userInfo:nil repeats:YES];
             
@@ -147,7 +161,7 @@
         [RKDropdownAlert title:@"Enter something" message:@"Please type in a Beep before sending" backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:3];
         
     }
-    else if([object[@"banned"]boolValue] == true)
+    else if([installObject[@"banned"]boolValue] == true)
     {
         [RKDropdownAlert show];
         [RKDropdownAlert title:@"You're banned!" message:[NSString stringWithFormat:@"To dispute this, take a screenshot now. ID: %@", installation.objectId] backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:3];
@@ -170,6 +184,22 @@
         timeInt = 0;
         [countdown invalidate];
     }
+}
+-(NSMutableArray *)findMentions:(NSString *)mention
+{
+    NSMutableArray *mentionsArray = [[NSMutableArray alloc] init];
+    NSArray *mentions = [mention componentsSeparatedByString:@" "];
+    for(NSString *mention in mentions)
+    {
+        if([mention hasPrefix:@"@"])
+        {
+            NSString *newMentionsString = [mention stringByReplacingOccurrencesOfString:@"@" withString:@""];
+            newMentionsString = [newMentionsString uppercaseString];
+            [mentionsArray addObject:newMentionsString];
+        }
+    }
+    return mentionsArray;
+    
 }
 
 -(BOOL)containsBadWords:(NSString * )string

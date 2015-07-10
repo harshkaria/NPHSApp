@@ -10,11 +10,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ThreadsCell
-@synthesize custom, topicLabel;
+@synthesize custom, topicLabel, bgView;
 
 - (void)awakeFromNib {
     // Initialization code
-    
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
+    effectView.frame = CGRectMake(0, 0, 380, 115);
+    [self.bgView addSubview:effectView];
     
 }
 
