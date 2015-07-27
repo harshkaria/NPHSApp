@@ -13,6 +13,7 @@
 #import "CommentsViewController.h"
 #import "YALSunnyRefreshControl.h"
 #import "FBShimmeringView.h"
+#import "ProfileTableViewController.h"
 
 @interface ThreadsFeedController ()
 @property PFObject *correct;
@@ -20,12 +21,13 @@
 @property NSArray *finalData;
 @property NSArray *hotData;
 @property NSArray *liveData;
+@property NSArray *sponsoredData;
 @property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
 
 @end
 
 @implementation ThreadsFeedController
-@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl;
+@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -42,16 +44,37 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    PFInstallation *installation = [PFInstallation currentInstallation];
+    NSString *dogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
      //[self loadObjects];
     [super viewWillAppear:YES];
     self.navigationItem.hidesBackButton = YES;
-
     
+    UIBarButtonItem *dogTagButton = [[UIBarButtonItem alloc] initWithTitle:dogTag style:UIBarButtonItemStyleDone target:self action:@selector(goToProfile)];
+    
+    if([installation[@"dtOn"]boolValue] == true)
+    {
+    self.navigationItem.leftBarButtonItem = dogTagButton;
+    }
+    else
+    {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+    
+    //self.navigationItem.leftBarButtonItem.enabled = NO;
+   
+    
+}
+
+-(void)goToProfile
+{
+    [self performSegueWithIdentifier:@"goToProfile" sender:self];
     
 }
 
 - (void)viewDidLoad {
     [[UINavigationBar appearance]setTintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
+    self.navigationItem.title = @"Beep";
     [super viewDidLoad];
     UIBarButtonItem *newThread = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newThread)];
     self.navigationItem.rightBarButtonItem = newThread;
@@ -81,14 +104,19 @@
     PFQuery *queryTwo = [PFQuery queryWithClassName:@"Topics"];
     [queryTwo orderByDescending:@"commentCount"];
     [queryTwo whereKey:@"live" equalTo:[NSNumber numberWithBool:false]];
+    [queryTwo whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:false]];
     [queryTwo setLimit:3];
     
     PFQuery *liveQuery = [PFQuery queryWithClassName:@"Topics"];
     [liveQuery whereKey:@"live" equalTo:[NSNumber numberWithBool:YES]];
     
+    PFQuery *sponsoredQuery = [PFQuery queryWithClassName:@"Topics"];
+    [sponsoredQuery whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:YES]];
+    
     data = [query findObjects];
     hotData = [queryTwo findObjects];
     liveData = [liveQuery findObjects];
+    sponsoredData = [sponsoredQuery findObjects];
     [self sortObjects];
     return query;
 
@@ -112,6 +140,12 @@
     {
         [preData addObject:hotObject];
         [hotPreData addObject:hotObject.objectId];
+    }
+   
+    for(PFObject *sponsoredObject in sponsoredData)
+    {
+        [preData addObject:sponsoredObject];
+        [hotPreData addObject:sponsoredObject.objectId];
     }
     
     PFQuery *query = [PFQuery queryWithClassName:@"Topics"];
@@ -185,12 +219,15 @@
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Thread"];
     }
+    
+  
     cell.bgView.image = [UIImage imageNamed:object[@"imageName"]];
     cell.commentCountLabel.hidden = YES;
     cell.liveView.hidden = YES;
     cell.liveLabel.hidden = YES;
     [cell.custom.layer setMasksToBounds:YES];
     BOOL live = [object[@"live"]boolValue];
+    BOOL sponsored = [object[@"sponsor"]boolValue];
     
     cell.custom.layer.borderWidth = 1;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -212,6 +249,17 @@
         [cell.contentView addSubview:shimmer];
         
     }
+    if(sponsored)
+    {
+        cell.sponsoredView.hidden = NO;
+        cell.sponsoredLabel.hidden = NO;
+    }
+    else
+    {
+        cell.sponsoredView.hidden = YES;
+        cell.sponsoredLabel.hidden = YES;
+    }
+    
     
     if(commentCount > 0)
     {
@@ -238,6 +286,12 @@
     {
         CommentsViewController *comments = segue.destinationViewController;
         comments.commentPointer = correct;
+    }
+    if([segue.identifier isEqualToString:@"goToProfile"])
+    {
+        ProfileTableViewController *profileVC = segue.destinationViewController;
+        profileVC.dogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
+        
     }
 }
 

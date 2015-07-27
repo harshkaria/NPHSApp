@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bgView;
 @property (weak, nonatomic) IBOutlet UIView *liveView;
 @property (weak, nonatomic) IBOutlet UILabel *liveLabel;
+@property (weak, nonatomic) IBOutlet UIView *sponsoredView;
+@property (weak, nonatomic) IBOutlet UILabel *sponsoredLabel;
 
 
 @end

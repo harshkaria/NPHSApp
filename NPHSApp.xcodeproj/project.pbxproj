@@ -74,12 +74,17 @@
 		AE6919DD19EA350000CC7FE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DC19EA350000CC7FE2 /* Foundation.framework */; };
 		AE6919DE19EA350D00CC7FE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6919DA19EA34C700CC7FE2 /* UIKit.framework */; };
 		AE6919E119EA78C300CC7FE2 /* SubscriptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */; };
+		AE6FBA5F1B59C0BF006C2128 /* buildings.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6FBA5C1B59C0BE006C2128 /* buildings.png */; };
+		AE6FBA601B59C0BF006C2128 /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6FBA5D1B59C0BF006C2128 /* sky.png */; };
+		AE6FBA611B59C0BF006C2128 /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6FBA5E1B59C0BF006C2128 /* sun.png */; };
 		AE7E08331AC254410063DB63 /* new@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE7E08321AC254410063DB63 /* new@3x.png */; };
 		AE818EB91A2041FF0054631E /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE818EB81A2041FF0054631E /* SplashViewController.m */; };
 		AE818EC91A20444C0054631E /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE818EC61A20444C0054631E /* FBShimmeringLayer.m */; };
 		AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE818EC81A20444C0054631E /* FBShimmeringView.m */; };
 		AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECB1A204E890054631E /* AROMA-Light.ttf */; };
 		AE818ECF1A2051EA0054631E /* Dekar Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE818ECE1A2051EA0054631E /* Dekar Light.otf */; };
+		AE91B3691B64878200A834F7 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE91B3681B64878200A834F7 /* SettingsCell.m */; };
+		AE91B36C1B6487A300A834F7 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE91B36B1B6487A300A834F7 /* SettingsController.m */; };
 		AE92214E1A5FDED1003687A2 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92213A1A5FDED1003687A2 /* DetailTableViewController.m */; };
 		AE92214F1A5FDED1003687A2 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92213C1A5FDED1003687A2 /* GTMNSString+HTML.m */; };
 		AE9221501A5FDED1003687A2 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AE92213E1A5FDED1003687A2 /* MWFeedInfo.m */; };
@@ -112,6 +117,8 @@
 		AEAB66A11B2FA5AA0008D2AD /* ThreadsFeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAB66A01B2FA5AA0008D2AD /* ThreadsFeedController.m */; };
 		AEAB66A41B2FA7410008D2AD /* ThreadsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAB66A31B2FA7410008D2AD /* ThreadsCell.m */; };
 		AEB23F091AAE5B5900CC878A /* BeepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB23F081AAE5B5900CC878A /* BeepCell.m */; };
+		AEB564711B64CE4600B0E394 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB564701B64CE4600B0E394 /* ProfileTableViewController.m */; };
+		AEB564741B64CE6100B0E394 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB564731B64CE6100B0E394 /* ProfileCell.m */; };
 		AEBE83071B34C7B900809A35 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBE83061B34C7B900809A35 /* UIScrollView+EmptyDataSet.m */; };
 		AEBE830C1B3543BA00809A35 /* redrank.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEBE830B1B3543BA00809A35 /* redrank.jpg */; };
 		AECA85231B3A60C200236C7D /* whitearrow.png in Resources */ = {isa = PBXBuildFile; fileRef = AECA85221B3A60C200236C7D /* whitearrow.png */; };
@@ -232,6 +239,9 @@
 		AE6919DC19EA350000CC7FE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE6919DF19EA78C300CC7FE2 /* SubscriptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsTableViewController.h; sourceTree = "<group>"; };
 		AE6919E019EA78C300CC7FE2 /* SubscriptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsTableViewController.m; sourceTree = "<group>"; };
+		AE6FBA5C1B59C0BE006C2128 /* buildings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildings.png; sourceTree = "<group>"; };
+		AE6FBA5D1B59C0BF006C2128 /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
+		AE6FBA5E1B59C0BF006C2128 /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun.png; sourceTree = "<group>"; };
 		AE7E08321AC254410063DB63 /* new@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new@3x.png"; sourceTree = "<group>"; };
 		AE7E08341AC257AD0063DB63 /* BeepSendVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeepSendVC.h; sourceTree = "<group>"; };
 		AE7E08351AC257AD0063DB63 /* BeepSendVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeepSendVC.m; sourceTree = "<group>"; };
@@ -244,6 +254,10 @@
 		AE818EC81A20444C0054631E /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		AE818ECB1A204E890054631E /* AROMA-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AROMA-Light.ttf"; sourceTree = "<group>"; };
 		AE818ECE1A2051EA0054631E /* Dekar Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dekar Light.otf"; sourceTree = "<group>"; };
+		AE91B3671B64878200A834F7 /* SettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCell.h; sourceTree = "<group>"; };
+		AE91B3681B64878200A834F7 /* SettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCell.m; sourceTree = "<group>"; };
+		AE91B36A1B6487A300A834F7 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		AE91B36B1B6487A300A834F7 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		AE9221391A5FDED1003687A2 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
 		AE92213A1A5FDED1003687A2 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		AE92213B1A5FDED1003687A2 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
@@ -291,6 +305,10 @@
 		AEAB66A31B2FA7410008D2AD /* ThreadsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadsCell.m; sourceTree = "<group>"; };
 		AEB23F071AAE5B5900CC878A /* BeepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeepCell.h; sourceTree = "<group>"; };
 		AEB23F081AAE5B5900CC878A /* BeepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeepCell.m; sourceTree = "<group>"; };
+		AEB5646F1B64CE4600B0E394 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
+		AEB564701B64CE4600B0E394 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
+		AEB564721B64CE6100B0E394 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
+		AEB564731B64CE6100B0E394 /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
 		AEBE83051B34C7B900809A35 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		AEBE83061B34C7B900809A35 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		AEBE830B1B3543BA00809A35 /* redrank.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = redrank.jpg; sourceTree = "<group>"; };
@@ -362,6 +380,9 @@
 		AE1A21DD19C66EEF009D5019 /* NPHSApp */ = {
 			isa = PBXGroup;
 			children = (
+				AE6FBA5C1B59C0BE006C2128 /* buildings.png */,
+				AE6FBA5D1B59C0BF006C2128 /* sky.png */,
+				AE6FBA5E1B59C0BF006C2128 /* sun.png */,
 				AEEF04FF1B2581D000C6024B /* harsh.png */,
 				AEEF05041B25884700C6024B /* harsh.jpg */,
 				AEEF04FD1B255D1300C6024B /* Paw.png */,
@@ -401,6 +422,8 @@
 				AE21075F1AD4714400CBC8C0 /* Surfboard */,
 				AE3B5AED19D7AA71002207E1 /* Cards */,
 				AE9221591A5FDF1E003687A2 /* Parser */,
+				AE91B36D1B6487A900A834F7 /* Settings */,
+				AEB5646E1B64CD1A00B0E394 /* Profile */,
 				AE1A21E219C66EEF009D5019 /* AppDelegate.h */,
 				AE1A21E319C66EEF009D5019 /* AppDelegate.m */,
 				AE1A21E519C66EEF009D5019 /* ViewController.h */,
@@ -419,8 +442,8 @@
 				AEAB2C561AB3F6120084D592 /* BeepHelpViewController.m */,
 				AEB23F071AAE5B5900CC878A /* BeepCell.h */,
 				AEB23F081AAE5B5900CC878A /* BeepCell.m */,
-				AE50417C1AB65CDA00E70DF4 /* BeepViewController.m */,
 				AE50417B1AB65CDA00E70DF4 /* BeepViewController.h */,
+				AE50417C1AB65CDA00E70DF4 /* BeepViewController.m */,
 				AE1A21E819C66EEF009D5019 /* Main.storyboard */,
 				AE2B588D1B3FDB4300523CC1 /* ImageCell.h */,
 				AE2B588E1B3FDB4300523CC1 /* ImageCell.m */,
@@ -594,6 +617,17 @@
 			name = Cards;
 			sourceTree = "<group>";
 		};
+		AE91B36D1B6487A900A834F7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AE91B3671B64878200A834F7 /* SettingsCell.h */,
+				AE91B3681B64878200A834F7 /* SettingsCell.m */,
+				AE91B36A1B6487A300A834F7 /* SettingsController.h */,
+				AE91B36B1B6487A300A834F7 /* SettingsController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		AE9221591A5FDF1E003687A2 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +675,17 @@
 				AE94A00A1B4A11F800C028C0 /* bg20.jpg */,
 			);
 			name = Backgrounds;
+			sourceTree = "<group>";
+		};
+		AEB5646E1B64CD1A00B0E394 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AEB564721B64CE6100B0E394 /* ProfileCell.h */,
+				AEB564731B64CE6100B0E394 /* ProfileCell.m */,
+				AEB5646F1B64CE4600B0E394 /* ProfileTableViewController.h */,
+				AEB564701B64CE4600B0E394 /* ProfileTableViewController.m */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		AEC2A3AE1B38B9D400284251 /* TableViewCellResizing */ = {
@@ -722,12 +767,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE949FE71B49E98D00C028C0 /* bg6.jpg in Resources */,
+				AE6FBA5F1B59C0BF006C2128 /* buildings.png in Resources */,
 				AE949FE51B49E92200C028C0 /* bg5.jpg in Resources */,
 				AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */,
 				AE28571A1AECBB390031E71C /* Icon-60@2x (3).png in Resources */,
 				AE28571C1AECBB390031E71C /* Icon-Small@2x (1).png in Resources */,
 				AECA85231B3A60C200236C7D /* whitearrow.png in Resources */,
 				AE949FFD1B4A0EDA00C028C0 /* bg13.jpg in Resources */,
+				AE6FBA611B59C0BF006C2128 /* sun.png in Resources */,
 				AE94A00B1B4A11F800C028C0 /* bg20.jpg in Resources */,
 				AE818ECC1A204E890054631E /* AROMA-Light.ttf in Resources */,
 				AE949FDE1B49E67900C028C0 /* bg1.jpg in Resources */,
@@ -751,6 +798,7 @@
 				AE63B4701ACCF63300CA2967 /* icon1.png in Resources */,
 				AE94A0011B4A103600C028C0 /* bg15.jpg in Resources */,
 				AE01B43F1A54BB8E006BFB38 /* icon.JPG in Resources */,
+				AE6FBA601B59C0BF006C2128 /* sky.png in Resources */,
 				AECEB7811B420C2B00CA2258 /* YALSunnyRefreshControl.xib in Resources */,
 				AE7E08331AC254410063DB63 /* new@3x.png in Resources */,
 				AECEB77B1B412CA600CA2258 /* bg3.jpg in Resources */,
@@ -809,11 +857,13 @@
 				AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */,
 				AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */,
 				AE9221511A5FDED1003687A2 /* MWFeedItem.m in Sources */,
+				AEB564741B64CE6100B0E394 /* ProfileCell.m in Sources */,
 				AE50417D1AB65CDA00E70DF4 /* BeepViewController.m in Sources */,
 				AE9221541A5FDED1003687A2 /* NSDate+InternetDateTime.m in Sources */,
 				AEAB66A41B2FA7410008D2AD /* ThreadsCell.m in Sources */,
 				AE818EB91A2041FF0054631E /* SplashViewController.m in Sources */,
 				AE315F1119EBA6160021D539 /* CreditsTableViewController.m in Sources */,
+				AE91B3691B64878200A834F7 /* SettingsCell.m in Sources */,
 				AE9221551A5FDED1003687A2 /* NSString+HTML.m in Sources */,
 				AE3A96261B33BD75003F38D2 /* CommentsViewController.m in Sources */,
 				AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */,
@@ -821,6 +871,7 @@
 				AE2107711AD4714400CBC8C0 /* UIButton+IndexPath.m in Sources */,
 				AE9221571A5FDED1003687A2 /* RootViewController.m in Sources */,
 				AE2B588F1B3FDB4300523CC1 /* ImageCell.m in Sources */,
+				AE91B36C1B6487A300A834F7 /* SettingsController.m in Sources */,
 				AEEF05031B25842000C6024B /* PersonViewController.m in Sources */,
 				AE9221561A5FDED1003687A2 /* NSString+XMLEntities.m in Sources */,
 				AE92214E1A5FDED1003687A2 /* DetailTableViewController.m in Sources */,
@@ -843,6 +894,7 @@
 				AE92214F1A5FDED1003687A2 /* GTMNSString+HTML.m in Sources */,
 				AE1A21E419C66EEF009D5019 /* AppDelegate.m in Sources */,
 				AE2107751AD4714400CBC8C0 /* SRFSurfboardViewController.m in Sources */,
+				AEB564711B64CE4600B0E394 /* ProfileTableViewController.m in Sources */,
 				AE3B5AEA19D7AA59002207E1 /* DraggableView.m in Sources */,
 				AE1A21E119C66EEF009D5019 /* main.m in Sources */,
 				AE818EC91A20444C0054631E /* FBShimmeringLayer.m in Sources */,

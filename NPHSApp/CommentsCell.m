@@ -9,7 +9,7 @@
 #import "CommentsCell.h"
 
 @implementation CommentsCell
-@synthesize commentText;
+@synthesize commentText, tagView, dogTag;
 
 
 
@@ -18,5 +18,10 @@
 
     // Configure the view for the selected state
 }
-
+-(void)staffStyle
+{
+    self.tagView.backgroundColor = [UIColor redColor];
+    [self.dogTag setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.dogTag.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:11];
+}
 @end

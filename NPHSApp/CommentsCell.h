@@ -17,12 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *agreeButton;
 @property (weak, nonatomic) IBOutlet UIButton *userID;
 @property (weak, nonatomic) IBOutlet UIView *tagView;
-@property (weak, nonatomic) IBOutlet UILabel *dogTag;
+
 @property BOOL voted;
 @property (weak, nonatomic) IBOutlet UILabel *fireLabel;
+@property (weak, nonatomic) IBOutlet UIButton *dogTag;
 
 @property NSString *currentComment;
 @property (weak, nonatomic) IBOutlet UIButton *countButtton;
+-(void)staffStyle;
 @end
 
 

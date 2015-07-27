@@ -20,6 +20,7 @@
 @interface AppDelegate ()
 @property UINavigationController *navController;
 @property UITabBarController *tabBarController;
+@property NSMutableArray *badWords;
 @end
 
 @implementation NSURLRequest(DataController)
@@ -30,17 +31,17 @@
 @end
 @implementation AppDelegate
 // publicname:(type *)nameinthecode
-@synthesize navController, tabBarController, beepText;
+@synthesize navController, tabBarController, beepText, badWords;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ParseCrashReporting enable];
     [Fabric with:@[CrashlyticsKit]];
         // Override point for customization after application launch.
     // NORMAL
-    /*[Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
-                  clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];*/
+    //[Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
+    //            clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
 
-    // THREADS
+     //THREADS
     [Parse setApplicationId:@"7nKYjaRV0FKR1QeU74bT5RiVPuujLk1xuBOcYas8"
                   clientKey:@"Q0Sq9hazXcLrKpTJ9Oe2KDlR1JZE9kXfEKH9G0dL"];
     //BETA
@@ -139,23 +140,53 @@
 
 -(void)createDogTag
 {
-    PFInstallation *installation = [PFInstallation currentInstallation];
-    NSString *alpha = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    // 0-25
-    int a = arc4random() % 26;
-    NSString *stringA = [alpha substringWithRange:NSMakeRange(a, 1)];
-    int b = arc4random() % 26;
-    NSString *stringB = [alpha substringWithRange:NSMakeRange(b, 1)];
-    int c = arc4random() % 26;
-    NSString *stringC = [alpha substringWithRange:NSMakeRange(c, 1)];
-    NSString *final = [NSString stringWithFormat:@"%@%@%@", stringA, stringB, stringC];
-    [installation setObject:final forKey:@"dogTag"];
-    [installation setObject:[NSNumber numberWithBool:NO] forKey:@"authorized"];
-    [installation saveInBackground];
     
-    
+    BOOL keepGoing = true;
+    NSMutableArray *existingTags = [self getTags];
+    while (keepGoing) {
+        badWords = [[NSMutableArray alloc] initWithObjects:@"ASS", @"AZN",  @"BBW", @"BJS", @"BLK", @"BRA", @"BUD", @"BUM", @"BUN", @"COC", @"COK", @"COX", @"CUM", @"DIK", @"DIX", @"FAG", @"FAP", @"FDB", @"FGT", @"FKU", @"FTB", @"FTP", @"FUK", @"FUQ",  @"GAI", @"GAY", @"GEY", @"GOD", @"GUN", @"HOE", @"JAP", @"JEW", @"JIZ", @"KEV", @"KMS", @"KKK", @"KOK", @"KOX", @"KUM", @"LES",  @"LEZ", @"LIK", @"LSD", @"NGR", @"NIG", @"NIP", @"NUT", @"PEE", @"PIG", @"PISS", @"PMS", @"POO", @"POT", @"PRN", @"PSY",  @"PUS", @"RAK", @"SAK", @"SIP", @"SMA", @"SMD", @"SOB", @"STD", @"SUK", @"SXY", @"THC", @"TIT", @"VAG",  @"VAJ", @"WTF", @"WTH", @"XXX",  nil];
+        
+        PFInstallation *installation = [PFInstallation currentInstallation];
+        NSString *alpha = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        // 0-25
+        int a = arc4random() % 26;
+        NSString *stringA = [alpha substringWithRange:NSMakeRange(a, 1)];
+        int b = arc4random() % 26;
+        NSString *stringB = [alpha substringWithRange:NSMakeRange(b, 1)];
+        int c = arc4random() % 26;
+        NSString *stringC = [alpha substringWithRange:NSMakeRange(c, 1)];
+        NSString *final = [NSString stringWithFormat:@"%@%@%@", stringA, stringB, stringC];
+        if(![badWords containsObject:final] && ![existingTags containsObject:final])
+        {
+            PFObject *tagObject = [PFObject objectWithClassName:@"Tags"];
+            tagObject[@"dogTag"] = final;
+            [tagObject saveInBackground];
+            [installation setObject:final forKey:@"dogTag"];
+            [installation setObject:[NSNumber numberWithBool:NO] forKey:@"authorized"];
+            [installation setObject:[NSNumber numberWithBool:NO] forKey:@"dtOn"];
+            [installation saveInBackground];
+            keepGoing = false;
+        }
+        
+    }
+
     
 }
+-(NSMutableArray *)getTags
+{
+    PFQuery *usageQuery = [PFQuery queryWithClassName:@"Tags"];
+    NSArray *usageArray = [usageQuery findObjects];
+    NSMutableArray *finalArray = [[NSMutableArray alloc] init];
+    for(PFObject *object in usageArray)
+    {
+        [finalArray addObject:object[@"dogTag"]];
+    }
+    return finalArray;
+    
+}
+
+
+
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current installation and save it to Parse.

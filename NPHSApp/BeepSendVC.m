@@ -19,11 +19,12 @@
 @property NSMutableArray *badWords;
 @property NSTimer *timer;
 @property NSInteger timeInt;
+@property NSMutableAttributedString *commentString;
 
 @end
 
 @implementation BeepSendVC
-@synthesize beepTextView, finalString, badWords, timer, timeInt, commentObject, characterLabel;
+@synthesize beepTextView, finalString, badWords, timer, timeInt, commentObject, characterLabel, commentString;
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -42,6 +43,9 @@
     beepTextView.layer.borderWidth = 1;
     beepTextView.layer.borderColor = [[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] CGColor];
     beepTextView.delegate = self;
+    [commentString setAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1],
+                                   NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:21]}
+                           range:[beepTextView.text rangeOfString:beepTextView.text]];
     
     
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Beep" style:UIBarButtonItemStyleDone target:self action:@selector(sendBeep)];
@@ -55,12 +59,12 @@
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+    //commentString = [[NSMutableAttributedString alloc] initWithString:@""];
     beepTextView.text = @"";
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    
     NSInteger amount = (220 - [newString length] + 1);
     self.characterLabel.textColor = [UIColor whiteColor];
     self.characterLabel.text = [NSString stringWithFormat:@"%lu", amount];
@@ -70,11 +74,12 @@
         self.characterLabel.textColor = [UIColor redColor];
         return NO;
     }
-    else
-    {
+  
     return YES;
-    }
 }
+
+
+
 -(void)sendBeep
 {
     PFInstallation *installation = [PFInstallation currentInstallation];
@@ -97,6 +102,11 @@
         {
             object[@"staff"] = [NSNumber numberWithBool:YES];
         }
+        else
+        {
+            object[@"staff"] = [NSNumber numberWithBool:NO];
+
+        }
         
         object[@"text"] = beepTextView.text;
         object[@"creator"] = installation.objectId;
@@ -105,6 +115,7 @@
         object[@"topicPointer"] = commentObject;
         object[@"topicObjectId"] = commentObject.objectId;
         object[@"voteNumber"] = [NSNumber numberWithInt:0];
+        object[@"topic"] = commentObject[@"topic"];
         
         //PFInstallation *installation = [PFInstallation currentInstallation];
         [installation incrementKey:@"ranker"];

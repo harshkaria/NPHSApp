@@ -12,6 +12,8 @@
 #import "BeepSendVC.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import <CoreText/CoreText.h>
+#import "ProfileTableViewController.h"
+#import "YALSunnyRefreshControl.h"
 @interface CommentsViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property NSString *trueString;
@@ -25,10 +27,12 @@
 @property NSMutableArray *preData2;
 @property NSArray *finalCommentsArray;
 @property NSString *hotObjectId;
+@property NSString *dogTagString;
+@property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
 @end
 
 @implementation CommentsViewController
-@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId;
+@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId, sunnyRefreshControl, dogTagString;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -36,7 +40,7 @@
     {
         self.parseClassName = @"Comments";
         self.paginationEnabled = NO;
-        self.pullToRefreshEnabled = YES;
+        self.pullToRefreshEnabled = NO;
         
     }
     return self;
@@ -58,6 +62,7 @@
     [super viewDidLoad];
     self.tableView.emptyDataSetDelegate = self;
     self.tableView.emptyDataSetSource = self;
+    self.tableView.scrollsToTop = YES;
     
     self.tableView.tableFooterView = [UIView new];
     
@@ -65,6 +70,23 @@
     
     UIBarButtonItem *beepButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"new@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(comment)];
     self.navigationItem.rightBarButtonItem = beepButton;
+    [self setUpRefresh];
+}
+-(void)setUpRefresh
+{
+    self.sunnyRefreshControl = [YALSunnyRefreshControl attachToScrollView:self.tableView
+                                                                   target:self
+                                                            refreshAction:@selector(didStartRefreshing)];
+}
+-(void)didStartRefreshing
+{
+    
+    [self performSelector:@selector(endAnimationHandle) withObject:nil afterDelay:1];
+}
+-(void)endAnimationHandle{
+    
+    [self.sunnyRefreshControl endRefreshing];
+    [self loadObjects];
 }
 
 -(void)backToThreads
@@ -118,22 +140,27 @@
 #pragma mark - Table view data source
 
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     
     NSMutableAttributedString *commentText;
     self.promptLabel.hidden = NO;
     self.promptLabel.text = commentPointer[@"prompt"];
     NSArray *voters = object[@"voters"];
-    CommentsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
+    CommentsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Comment" forIndexPath:indexPath];
+    [self styleCell:cell];
+    [self styleCellAfterVote:cell];
+    
+    
     cell.agreeButton.hidden = NO;
+    BOOL staff = [object[@"staff"] boolValue];
     
     [cell.countButtton setTitle:[self getAmountOfComments:object[@"voteNumber"]] forState:UIControlStateDisabled];
     
-    [self styleCell:cell];
-    [self styleCellAfterVote:cell];
     cell.agreeButton.tag = indexPath.row;
     cell.countButtton.layer.masksToBounds = YES;
     
+
     if(indexPath.row == 0)
     {
         cell.countButtton.backgroundColor = [UIColor redColor];
@@ -146,7 +173,6 @@
         cell.customView.layer.borderColor = [[UIColor redColor] CGColor];
         
     }
-    
     if([object[@"creator"] isEqualToString:currentInstallation.objectId])
     {
         cell.customView.backgroundColor = [UIColor lightGrayColor];
@@ -163,30 +189,61 @@
     {
         cell.agreeButton.hidden = YES;
     }
+
     if([voters containsObject:currentInstallation.objectId])
     {
         cell.agreeButton.hidden = YES;
     }
-    if([object[@"staff"] boolValue] == YES)
-    {
-        [self staffStyle:cell];
-    }
-    if(cell.voted)
+    else if(cell.voted)
     {
         NSNumber *numberVote = [NSNumber numberWithInt:[object[@"voteNumber"]intValue]];
+        cell.agreeButton.hidden = YES;
+        
         [cell.countButtton setTitle:[self getAmountOfComments:numberVote] forState:UIControlStateDisabled];
     }
-    
+    if([object[@"dogTag"] isEqualToString:@""])
+    {
+        cell.dogTag.hidden = YES;
+        cell.tagView.hidden = YES;
+        
+    }
+   
+
     
     self.tableView.separatorColor = [UIColor clearColor];
    // cell.customView.layer.cornerRadius = 12;
+    [cell.customView addSubview:cell.agreeButton];
+    [cell.customView addSubview:cell.countButtton];
     
     //[cell.customView.layer setMasksToBounds:YES];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.commentText.attributedText = commentText;
     cell.currentComment = object.objectId;
-    cell.dogTag.text = object[@"dogTag"];
+    [cell.dogTag setTitle:object[@"dogTag"] forState:UIControlStateNormal];
+    cell.dogTag.tag = indexPath.row;
+    [cell.dogTag addTarget:self action:@selector(prepareProfile:) forControlEvents:UIControlEventTouchUpInside];
+    if(staff)
+    {
+        [self staffStyle:cell];
+    }
+    else
+    {
+    [self styleCell:cell];
+    [self styleCellAfterVote:cell];
+    }
+    
+
+    
     return cell;
+}
+-(void)prepareProfile:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    NSIndexPath *path = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    CommentsCell *cell = (CommentsCell *)[self.tableView cellForRowAtIndexPath:path];
+    self.dogTagString = cell.dogTag.titleLabel.text;
+    [self performSegueWithIdentifier:@"goToProfile" sender:self];
+    
 }
 -(void)styleCell:(CommentsCell *)cell
 {
@@ -195,17 +252,20 @@
     
     [cell.agreeButton addTarget:self action:@selector(agreeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     cell.agreeButton.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
-    cell.agreeButton.layer.cornerRadius = 2;
+    cell.agreeButton.layer.cornerRadius = 4;
     cell.agreeButton.layer.borderWidth = 1;
     cell.agreeButton.layer.borderColor = cell.agreeButton.tintColor.CGColor;
     cell.fireLabel.hidden = YES;
+    cell.tagView.backgroundColor = [UIColor blackColor];
+    
+
     
     
 }
 -(void)styleCellAfterVote:(CommentsCell *)cell
 {
     cell.countButtton.layer.borderWidth = 0;
-    cell.countButtton.layer.cornerRadius = 10;
+    cell.countButtton.layer.cornerRadius = 7;
     cell.countButtton.backgroundColor = [UIColor blackColor];
     cell.countButtton.enabled = NO;
     [cell.countButtton setTitleColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forState:UIControlStateDisabled];
@@ -214,8 +274,9 @@
 -(void)staffStyle:(CommentsCell *)cell
 {
     cell.tagView.backgroundColor = [UIColor redColor];
-    cell.dogTag.textColor = [UIColor whiteColor];
-    cell.dogTag.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:11];
+    
+    [cell.dogTag setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    cell.dogTag.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:11];
 }
 
 -(NSMutableAttributedString *)styleComment:(NSString *)comment ownComment:(BOOL)own
@@ -263,6 +324,7 @@
          amountOfVotes = object[@"voteNumber"];
          cell.agreeButton.hidden = YES;
          cell.voted = YES;
+        [self sendBumpNotification:cell.dogTag.titleLabel.text];
          [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateDisabled];
         }
      }];
@@ -276,6 +338,21 @@
     return commentCount;
 }
 
+-(void)sendBumpNotification:(NSString *)bumpedTo
+{
+    PFPush *bumpPush = [[PFPush alloc] init];
+    PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
+    [query whereKey:@"dogTag" equalTo:bumpedTo];
+    [bumpPush setQuery:query];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSString stringWithFormat:@"%@ bumped your Beep in %@.", currentInstallation[@"dogTag"], commentPointer[@"topic"]], @"alert",
+                                @"default", @"sound",
+                                nil];
+    [bumpPush setData:dictionary];
+    [bumpPush sendPushInBackground];
+
+}
+
 -(void)comment
 {
     [self performSegueWithIdentifier:@"beepComment" sender:self];
@@ -286,6 +363,11 @@
     {
         BeepSendVC *beepSend = segue.destinationViewController;
         beepSend.commentObject = commentPointer;
+    }
+    if([segue.identifier isEqualToString:@"goToProfile"])
+    {
+        ProfileTableViewController *profileVC = segue.destinationViewController;
+        profileVC.dogTag = self.dogTagString;
     }
 }
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView

@@ -118,6 +118,7 @@
         topicObject[@"commentCount"] = [NSNumber numberWithInt:0];
         topicObject[@"imageName"] = imageName;
         topicObject[@"live"] = [NSNumber numberWithBool:NO];
+        topicObject[@"sponsor"] = [NSNumber numberWithBool:NO];
 
         
         [topicObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
