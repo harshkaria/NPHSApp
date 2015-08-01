@@ -26,6 +26,7 @@
     promptField.delegate = self;
     [characterLabel setText:@""];
     [promptCount setText:@""];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(goToPicker)];
     self.navigationItem.rightBarButtonItem = addButton;
     

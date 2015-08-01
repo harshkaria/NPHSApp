@@ -11,6 +11,11 @@
 #import <Parse/Parse.h>
 #import "RKDropdownAlert.h"
 #import "CommentsViewController.h"
+#import "CustomizableCamera/Camera View/CameraSessionView.h"
+#import "TGCameraViewController.h"
+#import "JSImagePickerViewController.h"
+#import "MHFacebookImageViewer.h"
+#import "UIImageView+MHFacebookImageViewer.h"
 
 @interface BeepSendVC ()
 
@@ -20,17 +25,22 @@
 @property NSTimer *timer;
 @property NSInteger timeInt;
 @property NSMutableAttributedString *commentString;
+@property (nonatomic, strong) CameraSessionView *cameraView;
+@property NSData *parseImageData;
+
 
 @end
 
 @implementation BeepSendVC
-@synthesize beepTextView, finalString, badWords, timer, timeInt, commentObject, characterLabel, commentString;
+@synthesize beepTextView, finalString, badWords, timer, timeInt, commentObject, characterLabel, commentString, cameraView, parseImageData, beepImage;
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
   
 }
+
 - (void)viewDidLoad {
     self.navigationItem.title = commentObject[@"topic"];
     [super viewDidLoad];
@@ -38,6 +48,10 @@
 
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
+    
+    
+    [beepImage setHidden:YES];
+    [self.removeImageButton setHidden:YES];
     
     beepTextView.layer.cornerRadius = 4;
     beepTextView.layer.borderWidth = 1;
@@ -47,16 +61,108 @@
                                    NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:21]}
                            range:[beepTextView.text rangeOfString:beepTextView.text]];
     
+
+    
     
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Beep" style:UIBarButtonItemStyleDone target:self action:@selector(sendBeep)];
-    self.navigationItem.rightBarButtonItem = sendButton;
+    UIBarButtonItem *camera = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(showActions)];
+    self.navigationItem.rightBarButtonItems = @[sendButton, camera];
+    [beepImage setupImageViewer];
     
-    
+   // [self addGesture];
     
     
     
     // Do any additional setup after loading the view.
 }
+-(void)addGesture
+{
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImageActions)];
+    tapGesture.delegate = self;
+    beepImage.userInteractionEnabled = YES;
+    [beepImage addGestureRecognizer:tapGesture];
+}
+-(void)showImageActions
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View Picture", @"Remove Picture", nil];
+    actionSheet.tag = 1;
+    [actionSheet showInView:self.view];
+}
+-(void)showActions
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take a Picture", @"Choose From Library" , nil];
+    actionSheet.tag = 0;
+    [actionSheet showInView:self.view];
+    
+}
+
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.tag == 0)
+    {
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Taking One");
+            cameraView = [[CameraSessionView alloc] initWithFrame:self.navigationController.view.bounds];
+            cameraView.delegate = self;
+            [cameraView setTopBarColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
+            [self.navigationController.view addSubview:cameraView];
+
+            break;
+        case 1:
+            NSLog(@"Opening Library");
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self presentViewController:picker animated:YES completion:NULL];
+
+            break;
+    }
+    }
+    if(actionSheet.tag == 1)
+    {
+            switch (buttonIndex) {
+                case 0:
+                    NSLog(@"Yo");
+                    break;
+                case 1:
+                    //[self
+                    
+                    break;
+            }
+    }
+  }
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    self.parseImageData = UIImagePNGRepresentation(chosenImage);
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    self.beepImage.image = chosenImage;
+    [beepImage setHidden:NO];
+    [self.removeImageButton setHidden:NO];
+    
+}
+
+-(void)didCaptureImageWithData:(NSData *)imageData {
+    [self.beepTextView resignFirstResponder];
+    [self.cameraView removeFromSuperview];
+    self.navigationController.navigationBarHidden = NO;
+    //self.tabBarController.tabBar.hidden = NO;
+    NSLog(@"Captured");
+
+    parseImageData = imageData;
+    self.beepImage.image = [UIImage imageWithData:imageData];
+    [beepImage setHidden:NO];
+    [self.removeImageButton setHidden:NO];
+    //[self sendBeep];
+    
+}
+
+
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     //commentString = [[NSMutableAttributedString alloc] initWithString:@""];
@@ -116,6 +222,11 @@
         object[@"topicObjectId"] = commentObject.objectId;
         object[@"voteNumber"] = [NSNumber numberWithInt:0];
         object[@"topic"] = commentObject[@"topic"];
+        if(self.parseImageData)
+        {
+        PFFile *imageFile = [PFFile fileWithName:@"image.png" data:parseImageData];
+        object[@"image"] = imageFile;
+        }
         
         //PFInstallation *installation = [PFInstallation currentInstallation];
         [installation incrementKey:@"ranker"];
@@ -252,4 +363,10 @@
 }
 */
 
+- (IBAction)removeImage:(id)sender {
+    NSLog(@"Pressed");
+    self.parseImageData = nil;
+    self.beepImage.hidden = YES;
+    self.removeImageButton.hidden = YES;
+}
 @end

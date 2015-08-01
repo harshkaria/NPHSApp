@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>3E76698B-30AE-41D4-98FE-4743E145DB3D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>NPHSApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F08E807E70199FEB9F7AD841BAABF6FBC492FBC1</key>
 		<string>https://bitbucket.org/nphsapp/nphsapprepo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>NPHSApp.xcodeproj/project.xcworkspace</string>
+	<string>NPHSApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F08E807E70199FEB9F7AD841BAABF6FBC492FBC1</key>

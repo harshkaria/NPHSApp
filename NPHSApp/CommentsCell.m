@@ -7,15 +7,16 @@
 //
 
 #import "CommentsCell.h"
+#import "MHFacebookImageViewer.h"
 
 @implementation CommentsCell
-@synthesize commentText, tagView, dogTag;
+@synthesize commentText, tagView, dogTag, commentImageView;
 
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 -(void)staffStyle

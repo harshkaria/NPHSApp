@@ -14,6 +14,7 @@
 #import "YALSunnyRefreshControl.h"
 #import "FBShimmeringView.h"
 #import "ProfileTableViewController.h"
+#import "SponsorViewController.h"
 
 @interface ThreadsFeedController ()
 @property PFObject *correct;
@@ -101,14 +102,19 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Topics"];
     [query orderByDescending:@"createdAt"];
+    
+    PFQuery *liveQuery = [PFQuery queryWithClassName:@"Topics"];
+    [liveQuery whereKey:@"live" equalTo:[NSNumber numberWithBool:YES]];
+    NSInteger countLive = [liveQuery countObjects];
+    
+    
     PFQuery *queryTwo = [PFQuery queryWithClassName:@"Topics"];
     [queryTwo orderByDescending:@"commentCount"];
     [queryTwo whereKey:@"live" equalTo:[NSNumber numberWithBool:false]];
     [queryTwo whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:false]];
-    [queryTwo setLimit:3];
+    [queryTwo setLimit:3 - countLive];
     
-    PFQuery *liveQuery = [PFQuery queryWithClassName:@"Topics"];
-    [liveQuery whereKey:@"live" equalTo:[NSNumber numberWithBool:YES]];
+    
     
     PFQuery *sponsoredQuery = [PFQuery queryWithClassName:@"Topics"];
     [sponsoredQuery whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:YES]];
@@ -233,7 +239,15 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSNumber *commentCount = object[@"commentCount"];
     if(indexPath.row <= 2)
+    {
     cell.custom.layer.borderColor = [[UIColor redColor]CGColor];
+    }
+    else if(sponsored)
+    {
+        cell.custom.layer.borderColor = [[UIColor colorWithRed:(0) green:(153.0/255.0) blue:(0) alpha:1]CGColor];
+        cell.custom.layer.borderWidth = 2;
+    }
+    
     else
     {
         cell.custom.layer.borderColor = [[UIColor whiteColor]CGColor];
@@ -249,23 +263,26 @@
         [cell.contentView addSubview:shimmer];
         
     }
-    if(sponsored)
-    {
-        cell.sponsoredView.hidden = NO;
-        cell.sponsoredLabel.hidden = NO;
-    }
-    else
-    {
-        cell.sponsoredView.hidden = YES;
-        cell.sponsoredLabel.hidden = YES;
-    }
-    
-    
     if(commentCount > 0)
     {
         cell.commentCountLabel.hidden = NO;
         cell.commentCountLabel.text = [NSString stringWithFormat:@"%@", commentCount];
     }
+    if(sponsored)
+    {
+        cell.sponsoredView.hidden = NO;
+        cell.sponsoredLabel.hidden = NO;
+        cell.sponsor = YES;
+        cell.commentCountLabel.hidden = YES;
+    }
+    else
+    {
+        cell.sponsoredView.hidden = YES;
+        cell.sponsoredLabel.hidden = YES;
+        cell.sponsor = NO;
+    }
+    
+
     
     cell.topicLabel.text = object[@"topic"];
     cell.currentThread = object;
@@ -277,7 +294,14 @@
 {
     ThreadsCell *cell = (ThreadsCell *)[tableView cellForRowAtIndexPath:indexPath];
     correct = cell.currentThread;
+    if(cell.sponsor)
+    {
+        [self performSegueWithIdentifier:@"goToSponsor" sender:self];
+    }
+    else
+    {
     [self performSegueWithIdentifier:@"showComments" sender:self];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -292,6 +316,11 @@
         ProfileTableViewController *profileVC = segue.destinationViewController;
         profileVC.dogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
         
+    }
+    if([segue.identifier isEqualToString:@"goToSponsor"])
+    {
+        SponsorViewController *sponsor = segue.destinationViewController;
+        sponsor.sponsoredObject = correct;
     }
 }
 

@@ -33,6 +33,7 @@
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.emptyDataSetDelegate = self;
     self.tableView.emptyDataSetSource = self;
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     
     self.tableView.tableFooterView = [UIView new];
     

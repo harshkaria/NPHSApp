@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *liveLabel;
 @property (weak, nonatomic) IBOutlet UIView *sponsoredView;
 @property (weak, nonatomic) IBOutlet UILabel *sponsoredLabel;
+@property BOOL sponsor;
 
 
 @end

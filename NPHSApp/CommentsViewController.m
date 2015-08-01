@@ -14,7 +14,9 @@
 #import <CoreText/CoreText.h>
 #import "ProfileTableViewController.h"
 #import "YALSunnyRefreshControl.h"
-@interface CommentsViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+#import "MHFacebookImageViewer.h"
+#import "UIImageView+MHFacebookImageViewer.h"
+@interface CommentsViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, MHFacebookImageViewerDatasource>
 
 @property NSString *trueString;
 @property NSArray *data;
@@ -25,6 +27,7 @@
 @property NSNumber *rowHeight;
 @property NSArray *preData1;
 @property NSMutableArray *preData2;
+@property NSArray *imagesPreData;
 @property NSArray *finalCommentsArray;
 @property NSString *hotObjectId;
 @property NSString *dogTagString;
@@ -32,7 +35,7 @@
 @end
 
 @implementation CommentsViewController
-@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId, sunnyRefreshControl, dogTagString;
+@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId, sunnyRefreshControl, dogTagString, imagesPreData;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -53,6 +56,8 @@
    // back = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(backToThreads)];
    // self.navigationItem.leftBarButtonItem = back;
     self.promptLabel.hidden = YES;
+  
+    
 
 }
 -(void)viewDidLoad
@@ -69,8 +74,16 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     
     UIBarButtonItem *beepButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"new@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(comment)];
-    self.navigationItem.rightBarButtonItem = beepButton;
+    
+    if([self isSponsor])
+    {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
     [self setUpRefresh];
+    self.navigationItem.rightBarButtonItem = beepButton;
+    self.tableView.estimatedRowHeight = 105; // for example. Set your average height
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.tableView reloadData];
 }
 -(void)setUpRefresh
 {
@@ -106,10 +119,15 @@
     [queryTwo orderByDescending:@"voteNumber"];
     [queryTwo setLimit:1];
     
+    PFQuery *queryThree = [PFQuery queryWithClassName:@"Comments"];
+    [queryThree whereKeyExists:@"image"];
+    [queryThree orderByDescending:@"createdAt"];
+    
     //PFObject *hotComment = [queryTwo getFirstObject];
     //preData1 = [query findObjects];1
     preData1 = [queryOne findObjects];
     preData2 = [[NSMutableArray alloc] initWithObjects:[queryTwo getFirstObject], nil];
+    imagesPreData = [queryThree findObjects];
     //preData2[0] = [queryTwo getFirstObject];
    // hotObjectId = hotComment.objectId;
     [self sortComments];
@@ -142,12 +160,35 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    
+   
     NSMutableAttributedString *commentText;
     self.promptLabel.hidden = NO;
     self.promptLabel.text = commentPointer[@"prompt"];
     NSArray *voters = object[@"voters"];
-    CommentsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Comment" forIndexPath:indexPath];
+    CommentsCell *cell;
+    
+    //PFFile *file = object[@"image"];
+    //cell.imageView.file = file;
+    //[cell.imageView loadInBackground];
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
+    if(object[@"image"])
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ImageComment"];
+        PFFile *file = object[@"image"];
+        [file getDataInBackgroundWithBlock:^(NSData *myData, NSError *error)
+         {
+             UIImage *image = [UIImage imageWithData:myData];
+             cell.commentImageView.image = image;
+             [cell.commentImageView setupImageViewer];
+             //[cell.commentImageView setup]
+         }];
+        
+    
+    }
+    [cell.commentText sizeToFit];
+    //cell.commentImageView.hidden = YES;
+
+    
     [self styleCell:cell];
     [self styleCellAfterVote:cell];
     
@@ -228,14 +269,15 @@
     }
     else
     {
-    [self styleCell:cell];
-    [self styleCellAfterVote:cell];
+        [self normalStyle:cell];
     }
+    [cell.contentView sizeToFit];
     
 
     
     return cell;
 }
+
 -(void)prepareProfile:(id)sender
 {
     UIButton *button = (UIButton *)sender;
@@ -278,34 +320,45 @@
     [cell.dogTag setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     cell.dogTag.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:11];
 }
-
+-(void)normalStyle:(CommentsCell *)cell
+{
+    cell.tagView.backgroundColor = [UIColor blackColor];
+    
+    [cell.dogTag setTitleColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forState:UIControlStateNormal];
+    cell.dogTag.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:9];
+}
 -(NSMutableAttributedString *)styleComment:(NSString *)comment ownComment:(BOOL)own
 {
     NSArray *words = [comment componentsSeparatedByString:@" "];
     NSMutableAttributedString *formattedString = [[NSMutableAttributedString alloc] initWithString:comment];
     
+    //[formattedString setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:14]} range:[comment rangeOfString:comment]];
+    
     if(own)
     {
-        [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName] range:[comment rangeOfString:comment]];
+        [formattedString setAttributes:[NSDictionary dictionaryWithObjects:@[[UIColor blackColor], [UIFont fontWithName:@"HelveticaNeue" size:12]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]] range:[comment rangeOfString:comment]];
+        
     }
     else
     {
-        [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forKey:NSForegroundColorAttributeName] range:[comment rangeOfString:comment]];
+        [formattedString setAttributes:[NSDictionary dictionaryWithObjects:@[[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1], [UIFont fontWithName:@"HelveticaNeue" size:12]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]] range:[comment rangeOfString:comment]];
     }
     for(NSString *word in words)
     {
         if([word hasPrefix:@"@"])
         {
             NSRange range = [comment rangeOfString:word];
-            [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor blueColor] forKey:NSForegroundColorAttributeName] range:range];
+           [formattedString setAttributes:[NSDictionary dictionaryWithObjects:@[[UIColor blueColor], [UIFont fontWithName:@"HelveticaNeue" size:12]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]] range:range];
             if(!own)
             {
-               [formattedString setAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName] range:range];
+               [formattedString setAttributes:[NSDictionary dictionaryWithObjects:@[[UIColor whiteColor], [UIFont fontWithName:@"HelveticaNeue" size:12]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]] range:range];
             }
             
         }
+        
 
     }
+    
     return formattedString;
 }
 
@@ -363,6 +416,7 @@
     {
         BeepSendVC *beepSend = segue.destinationViewController;
         beepSend.commentObject = commentPointer;
+        beepSend.hidesBottomBarWhenPushed = YES;
     }
     if([segue.identifier isEqualToString:@"goToProfile"])
     {
@@ -382,10 +436,21 @@
 
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
 {
+    if([self isSponsor])
+    {
+        return nil;
+    }
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:17],
                                  NSForegroundColorAttributeName: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]};
-    
     return [[NSAttributedString alloc] initWithString:@"Start the Conversation" attributes:attributes];
+}
+-(BOOL)isSponsor
+{
+    if([commentPointer[@"sponsor"] boolValue] == true)
+    {
+        return true;
+    }
+    return false;
 }
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
