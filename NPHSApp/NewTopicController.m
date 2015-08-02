@@ -120,7 +120,7 @@
         topicObject[@"imageName"] = imageName;
         topicObject[@"live"] = [NSNumber numberWithBool:NO];
         topicObject[@"sponsor"] = [NSNumber numberWithBool:NO];
-
+        topicObject[@"approved"] = [NSNumber numberWithBool:NO];
         
         [topicObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
         {

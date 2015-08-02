@@ -19,4 +19,5 @@
 @property NSString *person;
 @property UIButton *banButton;
 @property (weak, nonatomic) IBOutlet UIButton *approveButton;
+@property (weak, nonatomic) IBOutlet UIImageView *commentImageView;
 @end

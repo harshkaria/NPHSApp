@@ -74,7 +74,7 @@
 -(void)beepList
 {
     self.title = @"Send";
-    [self performSegueWithIdentifier:@"Beeps" sender:self];
+    [self performSegueWithIdentifier:@"GoToMantilla" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {

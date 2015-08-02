@@ -109,10 +109,19 @@
 
 -(PFQuery *)queryForTable
 {
-    PFQuery *queryOne = [PFQuery queryWithClassName:@"Comments"];
-    [queryOne whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    PFQuery *queryOneApproved = [PFQuery queryWithClassName:@"Comments"];
+    [queryOneApproved whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [queryOneApproved whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
+    queryOneApproved.cachePolicy = kPFCachePolicyNetworkElseCache;
+    
+    PFQuery *queryOneSelf = [PFQuery queryWithClassName:@"Comments"];
+    [queryOneSelf whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [queryOneSelf whereKey:@"approved" equalTo:[NSNumber numberWithBool:NO]];
+    [queryOneSelf whereKey:@"creator" equalTo:[PFInstallation currentInstallation].objectId];
+    queryOneSelf.cachePolicy = kPFCachePolicyNetworkElseCache;
+    
+    PFQuery *queryOne = [PFQuery orQueryWithSubqueries:@[queryOneApproved, queryOneSelf]];
     [queryOne orderByDescending:@"createdAt"];
-    queryOne.cachePolicy = kPFCachePolicyNetworkElseCache;
     
     PFQuery *queryTwo = [PFQuery queryWithClassName:@"Comments"];
     [queryTwo whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
@@ -166,12 +175,9 @@
     self.promptLabel.text = commentPointer[@"prompt"];
     NSArray *voters = object[@"voters"];
     CommentsCell *cell;
-    
-    //PFFile *file = object[@"image"];
-    //cell.imageView.file = file;
-    //[cell.imageView loadInBackground];
     cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
-    if(object[@"image"])
+    
+    if([object[@"hasImage"] boolValue])
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"ImageComment"];
         PFFile *file = object[@"image"];
@@ -180,11 +186,11 @@
              UIImage *image = [UIImage imageWithData:myData];
              cell.commentImageView.image = image;
              [cell.commentImageView setupImageViewer];
-             //[cell.commentImageView setup]
          }];
         
     
     }
+    
     [cell.commentText sizeToFit];
     //cell.commentImageView.hidden = YES;
 
@@ -205,8 +211,8 @@
     if(indexPath.row == 0)
     {
         cell.countButtton.backgroundColor = [UIColor redColor];
-        cell.countButtton.layer.borderWidth = 1;
-        cell.countButtton.layer.borderColor = [[UIColor whiteColor] CGColor];
+        //cell.countButtton.layer.borderWidth = 1;
+        //cell.countButtton.layer.borderColor = [[UIColor whiteColor] CGColor];
         [cell.countButtton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
         cell.fireLabel.hidden = NO;
         cell.agreeButton.hidden = YES;
@@ -234,6 +240,8 @@
     if([voters containsObject:currentInstallation.objectId])
     {
         cell.agreeButton.hidden = YES;
+        [cell.countButtton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+        [cell.countButtton setBackgroundColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
     }
     else if(cell.voted)
     {
@@ -241,6 +249,8 @@
         cell.agreeButton.hidden = YES;
         
         [cell.countButtton setTitle:[self getAmountOfComments:numberVote] forState:UIControlStateDisabled];
+        [cell.countButtton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+        [cell.countButtton setBackgroundColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
     }
     if([object[@"dogTag"] isEqualToString:@""])
     {
@@ -379,6 +389,8 @@
          cell.voted = YES;
         [self sendBumpNotification:cell.dogTag.titleLabel.text];
          [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateDisabled];
+        [cell.countButtton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+            [cell.countButtton setBackgroundColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
         }
      }];
     

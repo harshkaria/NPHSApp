@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <ParseUI/ParseUI.h>
-@interface BeepViewController : PFQueryTableViewController
+#import "MHFacebookImageViewer.h"
+@interface BeepViewController : PFQueryTableViewController<MHFacebookImageViewerDatasource>
+@property PFObject *topicObject;
 
 @end

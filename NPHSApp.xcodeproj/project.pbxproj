@@ -74,6 +74,8 @@
 		AE4350DC1B6B5D7900E03956 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4350CB1B6B5D7900E03956 /* IQToolbar.m */; };
 		AE4350DD1B6B5D7900E03956 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4350CD1B6B5D7900E03956 /* IQUIView+IQKeyboardToolbar.m */; };
 		AE4350DE1B6B5D7900E03956 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE4350D01B6B5D7900E03956 /* IQKeyboardManager.bundle */; };
+		AE4350E21B6DF62200E03956 /* MantillaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4350E11B6DF62200E03956 /* MantillaViewController.m */; };
+		AE4350E51B6DF64A00E03956 /* MantillaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4350E41B6DF64A00E03956 /* MantillaCell.m */; };
 		AE4463FF1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4463FE1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m */; };
 		AE44B71419DFB34E003776AC /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44B71319DFB34E003776AC /* RKDropdownAlert.m */; };
 		AE451EC11A319A5E00399E1C /* CreditsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE451EC01A319A5E00399E1C /* CreditsCell.m */; };
@@ -327,6 +329,10 @@
 		AE4350CD1B6B5D7900E03956 /* IQUIView+IQKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIView+IQKeyboardToolbar.m"; sourceTree = "<group>"; };
 		AE4350CE1B6B5D7900E03956 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
 		AE4350D01B6B5D7900E03956 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		AE4350E01B6DF62200E03956 /* MantillaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MantillaViewController.h; sourceTree = "<group>"; };
+		AE4350E11B6DF62200E03956 /* MantillaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MantillaViewController.m; sourceTree = "<group>"; };
+		AE4350E31B6DF64A00E03956 /* MantillaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MantillaCell.h; sourceTree = "<group>"; };
+		AE4350E41B6DF64A00E03956 /* MantillaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MantillaCell.m; sourceTree = "<group>"; };
 		AE4463FD1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		AE4463FE1B0EF34A002A2B45 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		AE44B71219DFB34E003776AC /* RKDropdownAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKDropdownAlert.h; sourceTree = "<group>"; };
@@ -659,6 +665,7 @@
 				AEB5646E1B64CD1A00B0E394 /* Profile */,
 				AED71DFC1B674DDE0040B465 /* Sponsors */,
 				AE4350AC1B6B5D7900E03956 /* IQKeyBoardManager */,
+				AE4350DF1B6DF5FA00E03956 /* Mantilla */,
 				AE56139D1B68CEE500B0FD73 /* CustomizableCamera */,
 				AE1A21E219C66EEF009D5019 /* AppDelegate.h */,
 				AE1A21E319C66EEF009D5019 /* AppDelegate.m */,
@@ -940,6 +947,18 @@
 				AE4350D01B6B5D7900E03956 /* IQKeyboardManager.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		AE4350DF1B6DF5FA00E03956 /* Mantilla */ = {
+			isa = PBXGroup;
+			children = (
+				AE4350E01B6DF62200E03956 /* MantillaViewController.h */,
+				AE4350E11B6DF62200E03956 /* MantillaViewController.m */,
+				AE4350E31B6DF64A00E03956 /* MantillaCell.h */,
+				AE4350E41B6DF64A00E03956 /* MantillaCell.m */,
+			);
+			name = Mantilla;
+			path = CustomizableCamera;
 			sourceTree = "<group>";
 		};
 		AE56139D1B68CEE500B0FD73 /* CustomizableCamera */ = {
@@ -1445,6 +1464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEA0A21A1B69DC570026D9D6 /* TGAlbum.m in Sources */,
+				AE4350E51B6DF64A00E03956 /* MantillaCell.m in Sources */,
 				AEA0A2271B69DC570026D9D6 /* TGCameraSlideDownView.m in Sources */,
 				AE2849C61AC8DF20003E7C62 /* BeepSendVC.m in Sources */,
 				AEA0A2291B69DC570026D9D6 /* TGCameraSlideView.m in Sources */,
@@ -1464,6 +1484,7 @@
 				AEA0A2181B69DC570026D9D6 /* TGCameraViewController.m in Sources */,
 				AE3B5AF019D7BCF8002207E1 /* NotificationViewController.m in Sources */,
 				AE818ECA1A20444C0054631E /* FBShimmeringView.m in Sources */,
+				AE4350E21B6DF62200E03956 /* MantillaViewController.m in Sources */,
 				AE5613BB1B68CEE500B0FD73 /* CameraFlashButton.m in Sources */,
 				AE4350DB1B6B5D7900E03956 /* IQTitleBarButtonItem.m in Sources */,
 				AE4350DD1B6B5D7900E03956 /* IQUIView+IQKeyboardToolbar.m in Sources */,
@@ -1700,7 +1721,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "f70414f7-7b42-4d26-87a4-04dab143d93d";
+				PROVISIONING_PROFILE = "4dc3d751-1c9a-4a93-bb30-a14cc05b9bf0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1721,7 +1742,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "f70414f7-7b42-4d26-87a4-04dab143d93d";
+				PROVISIONING_PROFILE = "4dc3d751-1c9a-4a93-bb30-a14cc05b9bf0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

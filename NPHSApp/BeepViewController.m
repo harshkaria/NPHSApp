@@ -11,6 +11,8 @@
 #import "FBShimmeringView.h"
 #import "BeepCell.h"
 #import "RKDropdownAlert.h"
+#import "UIImageView+MHFacebookImageViewer.h"
+#import "MHFacebookImageViewer.h"
 
 @interface BeepViewController ()
 @property NSString *beepString;
@@ -21,7 +23,7 @@
 @end
 
 @implementation BeepViewController
-@synthesize beepString, objectID, ban, banId;
+@synthesize beepString, objectID, ban, banId, topicObject;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -61,7 +63,9 @@
 }*/
 -(PFQuery *)queryForTable
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"sentBeeps"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
+    [query whereKey:@"topicObjectId" equalTo:self.topicObject.objectId];
+    [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:false]];
     [query orderByDescending:@"createdAt"];
     return query;
 }
@@ -82,13 +86,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
-    BeepCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Beeped"];
-    beepString = object[@"beepText"];
-    UIButton *check = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    [check setTintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
-    [check addTarget:self action:@selector(sendBeep:) forControlEvents:UIControlEventTouchUpInside];
-    cell.accessoryView = check;
-    [cell.contentView addSubview:check];
+    BeepCell *cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Beeped"];
+    
+    if([object[@"hasImage"] boolValue])
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ImageComment"];
+        PFFile *file = object[@"image"];
+        [file getDataInBackgroundWithBlock:^(NSData *myData, NSError *error)
+         {
+             UIImage *image = [UIImage imageWithData:myData];
+             cell.commentImageView.image = image;
+             [cell.commentImageView setupImageViewer];
+         }];
+    }
+    beepString = object[@"text"];
     
     cell.banButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [cell.banButton setTitle:@"Ban" forState:UIControlStateNormal];
@@ -104,23 +116,13 @@
     [cell.contentView addSubview:cell.approveButton];
     
     
-    cell.person = object[@"person"];
+    cell.person = object[@"creator"];
     
     //[cell.contentView addSubview:cell.banButton];
     
-    
-  
-    if([object[@"live"]boolValue] == true)
-    {
-        cell.titleLabel.text = @"LIVE";
-        cell.titleLabel.textColor = [UIColor redColor];
-        
-    }
-    else
-    {
-        cell.titleLabel.text = @"Beep";
+        cell.titleLabel.text = object[@"dogTag"];
         cell.titleLabel.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
-    }
+    
     cell.beepText.text = beepString;
     cell.myObject = object.objectId;
    
@@ -159,11 +161,9 @@
     // Gets/Casts BeepCell from tableview using path
     BeepCell *cell = (BeepCell *)[self.tableView cellForRowAtIndexPath:path];
     
-    PFObject *object = [PFObject objectWithoutDataWithClassName:@"sentBeeps" objectId:cell.myObject];
+    PFObject *object = [PFObject objectWithoutDataWithClassName:@"Comments" objectId:cell.myObject];
     object[@"approved"] = [NSNumber numberWithBool:YES];
     [object save];
-    [RKDropdownAlert show];
-    [RKDropdownAlert title:@"Approved." message: @"It's on the feed" backgroundColor:[UIColor greenColor] textColor:[UIColor redColor] time:2];
     [self loadObjects];
     
     

@@ -75,6 +75,7 @@
     
     // Do any additional setup after loading the view.
 }
+
 -(void)addGesture
 {
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImageActions)];
@@ -171,7 +172,7 @@
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    NSInteger amount = (220 - [newString length] + 1);
+    NSInteger amount = (199 - [newString length] + 1);
     self.characterLabel.textColor = [UIColor whiteColor];
     self.characterLabel.text = [NSString stringWithFormat:@"%lu", amount];
     if(amount == -1)
@@ -222,10 +223,13 @@
         object[@"topicObjectId"] = commentObject.objectId;
         object[@"voteNumber"] = [NSNumber numberWithInt:0];
         object[@"topic"] = commentObject[@"topic"];
+        object[@"hasImage"] = [NSNumber numberWithBool:false];
+        
         if(self.parseImageData)
         {
         PFFile *imageFile = [PFFile fileWithName:@"image.png" data:parseImageData];
         object[@"image"] = imageFile;
+        object[@"hasImage"] = [NSNumber numberWithBool:true];
         }
         
         //PFInstallation *installation = [PFInstallation currentInstallation];
@@ -352,6 +356,12 @@
         commentsVC.commentPointer = commentObject;
     }
 }
+- (IBAction)removeImage:(id)sender {
+    NSLog(@"Pressed");
+    self.parseImageData = nil;
+    self.beepImage.hidden = YES;
+    self.removeImageButton.hidden = YES;
+}
 
 /*
 #pragma mark - Navigation
@@ -363,10 +373,5 @@
 }
 */
 
-- (IBAction)removeImage:(id)sender {
-    NSLog(@"Pressed");
-    self.parseImageData = nil;
-    self.beepImage.hidden = YES;
-    self.removeImageButton.hidden = YES;
-}
+
 @end

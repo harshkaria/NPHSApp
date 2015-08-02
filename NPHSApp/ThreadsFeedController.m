@@ -24,11 +24,12 @@
 @property NSArray *liveData;
 @property NSArray *sponsoredData;
 @property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
+@property PFInstallation *currentInstallation;
 
 @end
 
 @implementation ThreadsFeedController
-@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData;
+@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData, currentInstallation;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -45,7 +46,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    PFInstallation *installation = [PFInstallation currentInstallation];
+    currentInstallation = [PFInstallation currentInstallation];
     NSString *dogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
      //[self loadObjects];
     [super viewWillAppear:YES];
@@ -53,7 +54,7 @@
     
     UIBarButtonItem *dogTagButton = [[UIBarButtonItem alloc] initWithTitle:dogTag style:UIBarButtonItemStyleDone target:self action:@selector(goToProfile)];
     
-    if([installation[@"dtOn"]boolValue] == true)
+    if([currentInstallation[@"dtOn"]boolValue] == true)
     {
     self.navigationItem.leftBarButtonItem = dogTagButton;
     }
@@ -101,6 +102,7 @@
 -(PFQuery *)queryForTable
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Topics"];
+    [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
     [query orderByDescending:@"createdAt"];
     
     PFQuery *liveQuery = [PFQuery queryWithClassName:@"Topics"];
@@ -110,8 +112,9 @@
     
     PFQuery *queryTwo = [PFQuery queryWithClassName:@"Topics"];
     [queryTwo orderByDescending:@"commentCount"];
-    [queryTwo whereKey:@"live" equalTo:[NSNumber numberWithBool:false]];
-    [queryTwo whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:false]];
+    [queryTwo whereKey:@"live" equalTo:[NSNumber numberWithBool:NO]];
+    [queryTwo whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:NO]];
+    [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
     [queryTwo setLimit:3 - countLive];
     
     
@@ -130,7 +133,7 @@
 
 -(void)sortObjects
 {
-    
+    NSLog(currentInstallation.objectId);
     NSMutableArray *preData = [[NSMutableArray alloc] init];
     NSMutableArray *hotPreData = [[NSMutableArray alloc] init];
     NSMutableArray *recentData = [[NSMutableArray alloc] init];
@@ -154,11 +157,19 @@
         [hotPreData addObject:sponsoredObject.objectId];
     }
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Topics"];
-    [query whereKey:@"objectId" notContainedIn:hotPreData];
-    [query orderByDescending:@"createdAt"];
-    //query.cachePolicy = kp;
-    recentData = [query findObjects];
+    PFQuery *queryOne = [PFQuery queryWithClassName:@"Topics"];
+    [queryOne whereKey:@"objectId" notContainedIn:hotPreData];
+    [queryOne whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
+    
+    PFQuery *queryTwo = [PFQuery queryWithClassName:@"Topics"];
+    [queryTwo whereKey:@"objectId" notContainedIn:hotPreData];
+    [queryTwo whereKey:@"approved" equalTo:[NSNumber numberWithBool:NO]];
+    [queryTwo whereKey:@"creator" equalTo:[PFInstallation currentInstallation].objectId];
+    
+    PFQuery *queryThree = [PFQuery orQueryWithSubqueries:@[queryOne, queryTwo]];
+    [queryThree orderByDescending:@"createdAt"];
+    
+    recentData = [queryThree findObjects];
     
     preData3 = [preData arrayByAddingObjectsFromArray:recentData];
     NSOrderedSet *set = [NSOrderedSet orderedSetWithArray:preData3];
