@@ -10,15 +10,17 @@
 #import "ImageCellTableViewController.h"
 #import "ImageCell.h"
 #import "NewTopicController.h"
-
+#import "RKDropdownAlert.h"
+#import <Parse/Parse.h>
 @interface ImageCellTableViewController ()
 
 @property NSMutableArray *images;
 @property NSString *imageName;
+@property BOOL selectedImageBool;
 @end
 
 @implementation ImageCellTableViewController
-@synthesize topic, prompt, images, imageName;
+@synthesize topic, prompt, images, imageName, isLive, selectedImageBool;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,8 +78,8 @@
 {
     ImageCell *cell = (ImageCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     self.navigationItem.title = @"Image Selected";
-    NSLog(@"luv you too fam");
     imageName = cell.imageName;
+    self.selectedImageBool = YES;
     
     NSLog(imageName);
 }
@@ -85,8 +87,44 @@
 -(void)selectedImage
 {
     NewTopicController *newTopicVC = [[NewTopicController alloc] init];
-    [newTopicVC createTopic:topic prompt:prompt imageNamed:imageName];
-    [self performSegueWithIdentifier:@"BackToThreads" sender:self];
+    if(!self.selectedImageBool)
+    {
+        [RKDropdownAlert show];
+        [RKDropdownAlert title:@"Select an image" message:@"Please pick an image" backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:3];
+    }
+    if(!isLive && selectedImageBool)
+    {
+        [newTopicVC createTopic:topic prompt:prompt imageNamed:imageName isLive:NO];
+        [self performSegueWithIdentifier:@"BackToThreads" sender:self];
+        PFPush *push = [[PFPush alloc] init];
+        PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
+        [query whereKey:@"authorized" equalTo:[NSNumber numberWithBool:YES]];
+        [push setQuery:query];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [NSString stringWithFormat:@"#%@ needs approval.", topic], @"alert",
+                                    @"default", @"sound",
+                                    nil];
+        [push setData:dictionary];
+        [push sendPushInBackground];
+
+    }
+    else if(selectedImageBool)
+    {
+        [newTopicVC createTopic:topic prompt:prompt imageNamed:imageName isLive:YES];
+        [self performSegueWithIdentifier:@"BackToThreads" sender:self];
+        PFPush *push = [[PFPush alloc] init];
+        PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
+        [query whereKey:@"authorized" equalTo:[NSNumber numberWithBool:YES]];
+        [push setQuery:query];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [NSString stringWithFormat:@"#%@ needs approval.", topic], @"alert",
+                                    @"default", @"sound",
+                                    nil];
+        [push setData:dictionary];
+        [push sendPushInBackground];
+
+    }
+    
 }
 /*
 // Override to support conditional editing of the table view.

@@ -27,12 +27,13 @@
 @property NSMutableAttributedString *commentString;
 @property (nonatomic, strong) CameraSessionView *cameraView;
 @property NSData *parseImageData;
+@property BOOL shouldHideStatusBar;
 
 
 @end
 
 @implementation BeepSendVC
-@synthesize beepTextView, finalString, badWords, timer, timeInt, commentObject, characterLabel, commentString, cameraView, parseImageData, beepImage;
+@synthesize beepTextView, finalString, badWords, timer, timeInt, commentObject, characterLabel, commentString, cameraView, parseImageData, beepImage, shouldHideStatusBar;
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -45,6 +46,7 @@
     self.navigationItem.title = commentObject[@"topic"];
     [super viewDidLoad];
     //self.navigationItem.title = nil;
+    shouldHideStatusBar = NO;
 
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
@@ -108,6 +110,8 @@
             cameraView = [[CameraSessionView alloc] initWithFrame:self.navigationController.view.bounds];
             cameraView.delegate = self;
             [cameraView setTopBarColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
+            [cameraView hideCameraToogleButton];
+            [cameraView prefersStatusBarHidden];
             [self.navigationController.view addSubview:cameraView];
 
             break;
@@ -248,6 +252,17 @@
             [RKDropdownAlert title:@"Beeped" message:@"Your beep was sent." time:3];
             //beepTextView.text = @"Enter Beep Here";
             NSMutableArray *mentionsArray = [self findMentions:beepTextView.text];
+                PFPush *push = [[PFPush alloc] init];
+                PFQuery *query = [PFQuery queryWithClassName:@"_Installation"];
+                [query whereKey:@"authorized" equalTo:[NSNumber numberWithBool:YES]];
+                [push setQuery:query];
+                NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [NSString stringWithFormat:@"\"%@\" needs approval.", beepTextView.text], @"alert",
+                                            @"default", @"sound",
+                                            nil];
+                [push setData:dictionary];
+                [push sendPushInBackground];
+
             
             if([mentionsArray count] > 0)
             {
@@ -262,8 +277,13 @@
             [push setData:dictionary];
             [push sendPushInBackground];
             }
+            
                 self.characterLabel.text = @"";
-                [self performSegueWithIdentifier:@"doneCommenting" sender:self];
+                //CommentsViewController *commentsVC = [[CommentsViewController alloc] init];
+                //[commentsVC endAnimationHandle];
+                //commentsVC.commentPointer = commentObject;
+                [self.navigationController popViewControllerAnimated:YES];
+                //[self performSegueWithIdentifier:@"doneCommenting" sender:self];
                 
             }
             beepTextView.text = @"Enter Beep Here";
@@ -351,9 +371,8 @@
     if([segue.identifier isEqualToString:@"doneCommenting"])
     {
         CommentsViewController *commentsVC = segue.destinationViewController;
-        //commentsVC.navigationItem.backBarButtonItem = nil;
-        //commentsVC.navigationItem.leftBarButtonItem = commentsVC.back;
         commentsVC.commentPointer = commentObject;
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 - (IBAction)removeImage:(id)sender {
@@ -363,6 +382,10 @@
     self.removeImageButton.hidden = YES;
 }
 
+-(BOOL)prefersStatusBarHidden
+{
+    return shouldHideStatusBar;
+}
 /*
 #pragma mark - Navigation
 

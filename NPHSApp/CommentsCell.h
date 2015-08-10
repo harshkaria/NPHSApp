@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *dogTag;
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *commentImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *commentImageView;
 
 
 @property NSString *currentComment;

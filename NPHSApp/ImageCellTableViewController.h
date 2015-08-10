@@ -12,6 +12,7 @@
 
 @property NSString *topic;
 @property NSString *prompt;
+@property BOOL isLive;
 
 
 @end

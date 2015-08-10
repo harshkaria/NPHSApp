@@ -43,7 +43,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,7 +75,8 @@
     if(indexPath.row == 1)
     {
     
-    cell.settingsPrompt.text = @"Display Dog Tag on Topics Page";
+    cell.settingsPrompt.text = @"Display Dog Tag";
+    cell.detailsLabel.text = @"Display Dog Tag on Topics page?";
     UISwitch *settingsSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
     
     settingsSwitch.tintColor = [UIColor whiteColor];
@@ -94,10 +95,21 @@
     cell.accessoryView = settingsSwitch;
     [cell.contentView addSubview:settingsSwitch];
     }
+    if(indexPath.row == 2)
+    {
+        cell.settingsPrompt.text = @"Rules & Info";
+        cell.detailsLabel.text = @"Guidlines to follow at all times on Beep.";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     
     // Configure the cell...
     
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 2)
+    [self performSegueWithIdentifier:@"GoToRules" sender:self];
 }
 
 -(void)changeDogTag:(id)sender

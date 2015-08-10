@@ -17,6 +17,9 @@
 #import "SplashViewController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "OnboardingViewController.h"
+#import "OnboardingContentViewController.h"
+#import "ThreadsFeedController.h"
 @interface AppDelegate ()
 @property UINavigationController *navController;
 @property UITabBarController *tabBarController;
@@ -48,6 +51,7 @@
     //[Parse setApplicationId:@"zScBzNliDkwbRIOwiuLY71s31ZWBkb6Gd2pDTtAr"
     //clientKey:@"UeIZ0ilVrYrYkKIXsNExpsmCfsFvME0f58X5xFZD"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    //[application setStatusBarHidden:NO];
     
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -84,11 +88,19 @@
     
     [[UINavigationBar appearance]setBackgroundColor:[UIColor blackColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor blackColor]];
-    [[UINavigationBar appearance]setTranslucent:NO];
+    if([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        
+        [[UINavigationBar appearance]setTranslucent:NO];
+        [[UITabBar appearance]setTranslucent:NO];
+    }
     
-    
-    [[UITabBar appearance]setTranslucent:NO];
-    [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
+    else
+    {
+        [[UIToolbar appearance] setBackgroundColor:[UIColor colorWithRed:219.0/255.0 green:67.0/255.0 blue:67.0/255.0 alpha:1.0]];
+        
+        [[UIToolbar appearance] setBackgroundImage:[[UIImage alloc] init] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    }
+        [[UITabBar appearance]setBarTintColor:[UIColor blackColor]];
     //UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
    
     
@@ -112,8 +124,9 @@
     [self createDogTag];
     }
     
+    
 
-    // SPOTLIGHT BEEP
+    /* // SPOTLIGHT BEEP
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if([notificationPayload objectForKey:@"id"])
     {
@@ -133,7 +146,7 @@
 
         [feed loadObjects];
         
-    }
+    }*/
     
     return YES;
 }
@@ -172,6 +185,7 @@
 
     
 }
+
 -(NSMutableArray *)getTags
 {
     PFQuery *usageQuery = [PFQuery queryWithClassName:@"Tags"];

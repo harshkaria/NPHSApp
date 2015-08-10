@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
-    effectView.frame = CGRectMake(0, 0, 380, 100);
+    effectView.frame = CGRectMake(0, 0, 400, 100);
     [self.customImage addSubview:effectView];
 }
 

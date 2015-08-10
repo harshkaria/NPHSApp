@@ -82,6 +82,8 @@
 
     //cell.creditLabel.textAlignment = NSTextAlignmentCenter;
     cell.creditLabel.text = object[@"name"];
+    cell.creditLabel.textAlignment = NSTextAlignmentCenter;
+    cell.object = object;
     person = cell.creditLabel.text;
    // cell.biography.text = object[@"bio"];
     cell.backgroundColor = [UIColor blackColor];
@@ -100,6 +102,7 @@
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
         CreditsCell *cell = (CreditsCell *)[self.tableView cellForRowAtIndexPath:path];
         personVC.name = cell.creditLabel.text;
+        personVC.personObject = cell.object;
     }
     
 }

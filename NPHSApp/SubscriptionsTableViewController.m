@@ -89,7 +89,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.clubLabel.text = [object objectForKey:@"clubName"];
-    cell.clubLabel.font = [UIFont fontWithName:@"Copperplate" size:16];
+    cell.clubLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
     cell.clubLabel.textColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     cell.username = [object objectForKey:@"username"];
     

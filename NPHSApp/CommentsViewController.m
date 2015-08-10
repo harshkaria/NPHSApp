@@ -16,6 +16,10 @@
 #import "YALSunnyRefreshControl.h"
 #import "MHFacebookImageViewer.h"
 #import "UIImageView+MHFacebookImageViewer.h"
+#import "LiveScoresVC.h"
+#import "JHTickerView.h"
+#import "DGActivityIndicatorView.h"
+#import "DGActivityIndicatorAnimationProtocol.h"
 @interface CommentsViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, MHFacebookImageViewerDatasource>
 
 @property NSString *trueString;
@@ -32,10 +36,12 @@
 @property NSString *hotObjectId;
 @property NSString *dogTagString;
 @property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
+@property UIImage *cellImage;
+@property DGActivityIndicatorView *activityIndicatorView;
 @end
 
 @implementation CommentsViewController
-@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId, sunnyRefreshControl, dogTagString, imagesPreData;
+@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId, sunnyRefreshControl, dogTagString, imagesPreData, promptView, cellImage, activityIndicatorView;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -56,9 +62,17 @@
    // back = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(backToThreads)];
    // self.navigationItem.leftBarButtonItem = back;
     self.promptLabel.hidden = YES;
+    
+    
   
     
 
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self refreshMe];
+    //activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeRotatingSquares tintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] size:60.0f];
+    [super viewDidAppear:NO];
 }
 -(void)viewDidLoad
 {
@@ -74,6 +88,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     
     UIBarButtonItem *beepButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"new@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(comment)];
+    UIBarButtonItem *liveScoreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notepadicon@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(updateScore)];
     
     if([self isSponsor])
     {
@@ -81,9 +96,24 @@
     }
     [self setUpRefresh];
     self.navigationItem.rightBarButtonItem = beepButton;
+    
+   
+        self.navigationItem.rightBarButtonItems = @[beepButton, liveScoreButton];
+    
+    
     self.tableView.estimatedRowHeight = 105; // for example. Set your average height
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.tableView reloadData];
+}
+-(void)updateScore
+{
+    if(([[[PFUser currentUser] username] isEqualToString:@"athletics"] ||[[[PFUser currentUser] username] isEqualToString:@"appclub"] || [[[PFUser currentUser] username] isEqualToString:@"appclub"]) && commentPointer[@"sportGame"] == [NSNumber numberWithBool:YES])
+        [self performSegueWithIdentifier:@"UpdateScore" sender:self];
+    
+    else
+    {
+        [self performSegueWithIdentifier:@"GoToRules" sender:self];
+    }
 }
 -(void)setUpRefresh
 {
@@ -99,9 +129,14 @@
 -(void)endAnimationHandle{
     
     [self.sunnyRefreshControl endRefreshing];
+    [self.commentPointer fetchInBackground];
     [self loadObjects];
 }
-
+-(void)refreshMe
+{
+    [self.commentPointer fetchInBackground];
+    //[self loadObjects];
+}
 -(void)backToThreads
 {
     [self performSegueWithIdentifier:@"backToThreads" sender:self];
@@ -122,21 +157,23 @@
     
     PFQuery *queryOne = [PFQuery orQueryWithSubqueries:@[queryOneApproved, queryOneSelf]];
     [queryOne orderByDescending:@"createdAt"];
+    queryOne.cachePolicy = kPFCachePolicyNetworkElseCache;
     
     PFQuery *queryTwo = [PFQuery queryWithClassName:@"Comments"];
     [queryTwo whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
     [queryTwo orderByDescending:@"voteNumber"];
     [queryTwo setLimit:1];
+    queryTwo.cachePolicy = kPFCachePolicyNetworkElseCache;
     
-    PFQuery *queryThree = [PFQuery queryWithClassName:@"Comments"];
-    [queryThree whereKeyExists:@"image"];
-    [queryThree orderByDescending:@"createdAt"];
+    //PFQuery *queryThree = [PFQuery queryWithClassName:@"Comments"];
+    //[queryThree whereKeyExists:@"image"];
+    //[queryThree orderByDescending:@"createdAt"];
     
     //PFObject *hotComment = [queryTwo getFirstObject];
     //preData1 = [query findObjects];1
     preData1 = [queryOne findObjects];
     preData2 = [[NSMutableArray alloc] initWithObjects:[queryTwo getFirstObject], nil];
-    imagesPreData = [queryThree findObjects];
+  //  imagesPreData = [queryThree findObjects];
     //preData2[0] = [queryTwo getFirstObject];
    // hotObjectId = hotComment.objectId;
     [self sortComments];
@@ -169,38 +206,59 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-   
+    
+    if([commentPointer[@"sportGame"] boolValue] == YES)
+    {
+        promptView = [[JHTickerView alloc] initWithFrame:[promptLabel frame]];
+        promptView.layer.cornerRadius = 0;
+        promptView.backgroundColor = [UIColor blackColor];
+        [promptView setDirection:JHTickerDirectionLTR];
+        [promptView setTickerText:@[[NSString stringWithFormat:@"%@                   Eat at Cronies", commentPointer[@"prompt"]]]];
+        [promptView setTickerFont:[UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:21.0f]];
+        [promptView setTickerSpeed:110];
+        [promptView start];
+        [self.tableView addSubview:promptView];
+    }
+    else
+    {
+        self.promptLabel.hidden = NO;
+        self.promptLabel.text = commentPointer[@"prompt"];
+    }
     NSMutableAttributedString *commentText;
-    self.promptLabel.hidden = NO;
-    self.promptLabel.text = commentPointer[@"prompt"];
+   
+    
     NSArray *voters = object[@"voters"];
     CommentsCell *cell;
     cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
+    cell.accessoryView = UITableViewCellAccessoryNone;
     
     if([object[@"hasImage"] boolValue])
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"ImageComment"];
         PFFile *file = object[@"image"];
-        [file getDataInBackgroundWithBlock:^(NSData *myData, NSError *error)
-         {
-             UIImage *image = [UIImage imageWithData:myData];
-             cell.commentImageView.image = image;
-             [cell.commentImageView setupImageViewer];
-         }];
-        
+        //UIImage *cellImage;
+        cell.commentImageView.file = file;
+        [cell.commentImageView loadInBackground];
+        //[cell.commentImageView setupImageViewer];
     
     }
     
     [cell.commentText sizeToFit];
     //cell.commentImageView.hidden = YES;
 
-    
+     BOOL staff = [object[@"staff"] boolValue];
     [self styleCell:cell];
     [self styleCellAfterVote:cell];
-    
+    if(staff)
+    {
+        [self staffStyle:cell];
+    }
+    else
+    {
+        [self normalStyle:cell];
+    }
     
     cell.agreeButton.hidden = NO;
-    BOOL staff = [object[@"staff"] boolValue];
     
     [cell.countButtton setTitle:[self getAmountOfComments:object[@"voteNumber"]] forState:UIControlStateDisabled];
     
@@ -258,7 +316,13 @@
         cell.tagView.hidden = YES;
         
     }
-   
+    else
+    {
+        [cell.dogTag setTitle:object[@"dogTag"] forState:UIControlStateNormal];
+        cell.dogTag.tag = indexPath.row;
+        [cell.dogTag addTarget:self action:@selector(prepareProfile:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
 
     
     self.tableView.separatorColor = [UIColor clearColor];
@@ -270,17 +334,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.commentText.attributedText = commentText;
     cell.currentComment = object.objectId;
-    [cell.dogTag setTitle:object[@"dogTag"] forState:UIControlStateNormal];
-    cell.dogTag.tag = indexPath.row;
-    [cell.dogTag addTarget:self action:@selector(prepareProfile:) forControlEvents:UIControlEventTouchUpInside];
-    if(staff)
-    {
-        [self staffStyle:cell];
-    }
-    else
-    {
-        [self normalStyle:cell];
-    }
     [cell.contentView sizeToFit];
     
 
@@ -435,6 +488,11 @@
         ProfileTableViewController *profileVC = segue.destinationViewController;
         profileVC.dogTag = self.dogTagString;
     }
+    if([segue.identifier isEqualToString:@"UpdateScore"])
+    {
+        LiveScoresVC *scoresVC = segue.destinationViewController;
+        scoresVC.liveObject = self.commentPointer;
+    }
 }
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
@@ -467,6 +525,12 @@
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
     [self comment];
+}
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    [super viewWillDisappear:animated];
 }
 
 - (void)dealloc

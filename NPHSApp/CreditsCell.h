@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <Parse/Parse.h>
 @interface CreditsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *cellView;
 @property (weak, nonatomic) IBOutlet UILabel *creditLabel;
 @property (weak, nonatomic) IBOutlet UITextView *biography;
+@property PFObject *object;
 
 @end

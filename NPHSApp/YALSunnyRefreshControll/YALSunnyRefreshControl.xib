@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,13 +15,13 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sky.png" translatesAutoresizingMaskIntoConstraints="NO" id="4k7-i8-1v9">
                     <rect key="frame" x="-72" y="-61" width="500" height="200"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="3Vs-vw-onD"/>
+                        <constraint firstAttribute="width" constant="500" id="YV6-lf-PS5"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gbu-7Z-vg6">
                     <rect key="frame" x="18" y="8" width="89" height="46"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="89" id="hES-8R-d40"/>
+                        <constraint firstAttribute="width" constant="89" id="L36-83-LQo"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buildings.png" translatesAutoresizingMaskIntoConstraints="NO" id="0YF-rR-4Bq">
@@ -31,25 +30,22 @@
             </subviews>
             <color key="backgroundColor" red="0.43089535361842107" green="0.50984272203947367" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="Gbu-7Z-vg6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="1h9-wK-iQg"/>
-                <constraint firstItem="4k7-i8-1v9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-61" id="D0u-Qx-aV1"/>
-                <constraint firstItem="0YF-rR-4Bq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HsL-5J-dmE"/>
-                <constraint firstItem="4k7-i8-1v9" firstAttribute="left" secondItem="iN0-l3-epB" secondAttribute="left" multiplier="1.2" constant="-72" id="N0J-j0-zoT"/>
-                <constraint firstItem="0YF-rR-4Bq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PyV-NO-bdb"/>
-                <constraint firstAttribute="bottom" secondItem="Gbu-7Z-vg6" secondAttribute="bottom" constant="46" id="Zaz-s6-Kxm"/>
-                <constraint firstItem="0YF-rR-4Bq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-71" id="aaB-BL-DVJ"/>
-                <constraint firstAttribute="right" secondItem="4k7-i8-1v9" secondAttribute="right" constant="-108" id="hkk-XQ-48r"/>
-                <constraint firstAttribute="bottom" secondItem="0YF-rR-4Bq" secondAttribute="bottom" constant="5" id="ifc-3c-Lby"/>
-                <constraint firstItem="Gbu-7Z-vg6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="yK7-q3-kPO"/>
+                <constraint firstItem="Gbu-7Z-vg6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="0Ub-va-C8l"/>
+                <constraint firstItem="0YF-rR-4Bq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="J8O-T4-zPH"/>
+                <constraint firstItem="4k7-i8-1v9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-61" id="JmV-y3-My7"/>
+                <constraint firstItem="0YF-rR-4Bq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VUk-Wd-6YD"/>
+                <constraint firstAttribute="bottom" secondItem="0YF-rR-4Bq" secondAttribute="bottom" constant="5" id="Xj5-NZ-nDD"/>
+                <constraint firstAttribute="bottom" secondItem="4k7-i8-1v9" secondAttribute="bottom" constant="-39" id="eAs-Qj-CeE"/>
+                <constraint firstAttribute="bottom" secondItem="Gbu-7Z-vg6" secondAttribute="bottom" constant="46" id="jIw-kb-aWY"/>
+                <constraint firstItem="Gbu-7Z-vg6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="rrK-uw-ikP"/>
+                <constraint firstItem="0YF-rR-4Bq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-71" id="t8K-PP-3J0"/>
+                <constraint firstItem="4k7-i8-1v9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-72" id="uJO-A7-KHX"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="buildingsImageView" destination="0YF-rR-4Bq" id="Y4g-GA-mQz"/>
                 <outlet property="skyImageView" destination="4k7-i8-1v9" id="z5B-U9-wqm"/>
-                <outlet property="skyLeadingConstraint" destination="N0J-j0-zoT" id="FfP-g3-PwH"/>
-                <outlet property="skyTopConstraint" destination="D0u-Qx-aV1" id="BMN-JQ-E8g"/>
-                <outlet property="skyTrailingConstraint" destination="hkk-XQ-48r" id="SM4-p3-UBJ"/>
                 <outlet property="sunImageView" destination="Gbu-7Z-vg6" id="oQv-JN-Rg6"/>
             </connections>
             <point key="canvasLocation" x="-283" y="13"/>

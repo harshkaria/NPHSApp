@@ -15,6 +15,8 @@
 #import "FBShimmeringView.h"
 #import "ProfileTableViewController.h"
 #import "SponsorViewController.h"
+#import "OnboardingContentViewController.h"
+#import "OnboardingViewController.h"
 
 @interface ThreadsFeedController ()
 @property PFObject *correct;
@@ -46,9 +48,17 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstOnboard"]) {
+        NSLog(@"First launch");
+        [self presentViewController:[self onboard] animated:NO completion:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstOnboard"];
+    }
+    
     currentInstallation = [PFInstallation currentInstallation];
     NSString *dogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
      //[self loadObjects];
+    
+    
     [super viewWillAppear:YES];
     self.navigationItem.hidesBackButton = YES;
     
@@ -67,7 +77,49 @@
    
     
 }
-
+-(OnboardingViewController *)onboard
+{
+    OnboardingContentViewController *vcOne = [[OnboardingContentViewController alloc] initWithTitle:@"Hey." body:@"Welcome. This version has great updates to everything from the Club Feed, to Beep." image:nil buttonText:nil action:nil];
+    vcOne.topPadding = 20;
+    OnboardingContentViewController *vcTwo = [[OnboardingContentViewController alloc] initWithTitle:@"Express Your Views. Without being judged." body:@"On Beep, you now have the ability to anonymously express your opinions about any #Topic from #Food to the #2016Elections." image:nil buttonText:nil action:nil];
+    vcTwo.topPadding = 0;
+    vcTwo.bodyFontSize = 22;
+    vcTwo.underIconPadding = 0;
+    OnboardingContentViewController *vcThree = [[OnboardingContentViewController alloc] initWithTitle:@"Comment on the #Topics you love, like never before." body:@"You can now share your views by commenting in any #Topic you want. To have a better conversation, you can also post pictures with your comments." image:nil buttonText:nil action:nil];
+    vcThree.topPadding = 0;
+    vcThree.bodyFontSize = 22;
+    vcThree.underIconPadding = 0;
+    OnboardingContentViewController *vcFour = [[OnboardingContentViewController alloc] initWithTitle:@"LIVE #Topics - LIVE scores. Experience events as they happen." body:@"With LIVE #Topics, get the latest scores and updates from sports in an instant." image:nil buttonText:nil action:nil];
+    vcFour.topPadding = 0;
+    vcFour.bodyFontSize = 22;
+    vcFour.underIconPadding = 0;
+    OnboardingContentViewController *vcFive = [[OnboardingContentViewController alloc] initWithTitle:@"Connect with your clubs." body:@"On the club feed, you get all your club information in one place. You'll never miss a meeting again." image:nil buttonText:nil action:nil];
+    vcFive.topPadding = 30;
+    vcFive.bodyFontSize = 22;
+    vcFive.underIconPadding = 10;
+    OnboardingContentViewController *vcSix = [[OnboardingContentViewController alloc] initWithTitle:@"See you on the other side." body:@"You are a part of something new. Let's have great conversations. Welcome aboard." image:nil buttonText:@"Start Beeping" action:^{
+        ThreadsFeedController *threadsVC = [[ThreadsFeedController alloc] init];
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }];
+    vcSix.topPadding = 40;
+    vcSix.bodyFontSize = 22;
+    vcSix.underIconPadding = 35;
+    
+    if(![self has4InchDisplay])
+    vcSix.bottomPadding = 130;
+    else
+    vcSix.bottomPadding = 50;
+    
+    OnboardingViewController *onboardVC = [[OnboardingViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"bg4.jpg"] contents:@[vcOne, vcFive, vcTwo, vcThree, vcFour, vcSix]];
+    if(![self has4InchDisplay])
+    onboardVC.underTitlePadding = 80;
+    onboardVC.shouldFadeTransitions = YES;
+    return onboardVC;
+    
+}
+- (BOOL)has4InchDisplay {
+    return ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && [UIScreen mainScreen].bounds.size.height == 568.0);
+}
 -(void)goToProfile
 {
     [self performSegueWithIdentifier:@"goToProfile" sender:self];
@@ -81,6 +133,8 @@
     UIBarButtonItem *newThread = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newThread)];
     self.navigationItem.rightBarButtonItem = newThread;
     [self setUpRefresh];
+    
+    
     
 }
 -(void)setUpRefresh
@@ -235,6 +289,10 @@
     else
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"Thread"];
+    }
+    if(!cell)
+    {
+        [self loadObjects];
     }
     
   

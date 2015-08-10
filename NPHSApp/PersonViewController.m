@@ -7,34 +7,23 @@
 //
 
 #import "PersonViewController.h"
+#import <Parse/Parse.h>
 
 @interface PersonViewController ()
 
 @end
 
 @implementation PersonViewController
-@synthesize photoImage, name, nameLabel;
+@synthesize photoImage, name, nameLabel, personObject, bioText;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     name = @"";
 }
 - (void)viewDidLoad {
-    nameLabel.text = name;
     [super viewDidLoad];
-    self.navigationItem.backBarButtonItem.title = @"Back";
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = screenBound.size;
-    
-    // Do any additional setup after loading the view.
-    UIImage *image = [UIImage imageNamed:@"harsh.png"];
-    photoImage.layer.cornerRadius = photoImage.frame.size.width / 2;
-    photoImage.layer.borderWidth = 4.0f;
-    photoImage.layer.borderColor = [UIColor whiteColor].CGColor;
-    photoImage.clipsToBounds = YES;
-   // self.photoImage.layer.cornerRadius = image.size.width / 2;
-    photoImage.image = image;
-    [self.view addSubview:photoImage];
+    self.navigationItem.title = self.name;
+    self.bioText.text = personObject[@"bio"];
     
 
     

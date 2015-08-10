@@ -53,11 +53,13 @@
 {
     self.tableView.separatorInset = UIEdgeInsetsZero;
     MantillaCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TopicCell"];
+    
     cell.topicLabel.text = object[@"topic"];
     cell.approveButton.tag = indexPath.row;
     cell.declineButton.tag = indexPath.row;
     [cell.approveButton addTarget:self action:@selector(approveTopic:) forControlEvents:UIControlEventTouchUpInside];
     [cell.declineButton addTarget:self action:@selector(declineTopic:) forControlEvents:UIControlEventTouchUpInside];
+    
     cell.cellObject = object;
     cell.userInteractionEnabled = YES;
     
@@ -69,9 +71,19 @@
     {
         cell.approveButton.hidden = NO;
     }
+    cell.promptLabel.text = object[@"prompt"];
+   // cell.commentCount.text = [NSString stringWithFormat:@"%li", [self getUnapprovedComments:object.objectId]];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+-(NSInteger)getUnapprovedComments:(NSString *)objectId
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Comemnts"];
+    [query whereKey:@"topicObjectId" equalTo:objectId];
+    [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:NO]];
+    return [query countObjects];
 }
 -(void)approveTopic:(id)sender
 {
@@ -87,6 +99,13 @@
 -(void)declineTopic:(id)sender
 {
     NSLog(@"Declined");
+    UIButton *button = (UIButton *)sender;
+    NSIndexPath *path = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    MantillaCell *cell = (MantillaCell *)[self.tableView cellForRowAtIndexPath:path];
+    cell.cellObject[@"approved"] = [NSNumber numberWithBool:NO];
+    [cell.cellObject saveInBackground];
+    [self.tableView reloadData];
+    
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

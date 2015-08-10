@@ -8,11 +8,15 @@
 
 #import "CommentsCell.h"
 #import "MHFacebookImageViewer.h"
+#import "UIImageView+MHFacebookImageViewer.h"
 
 @implementation CommentsCell
 @synthesize commentText, tagView, dogTag, commentImageView;
 
-
+-(void)awakeFromNib
+{
+    [self.commentImageView setupImageViewer];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

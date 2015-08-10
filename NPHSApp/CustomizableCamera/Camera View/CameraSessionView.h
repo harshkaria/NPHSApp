@@ -24,6 +24,7 @@
 - (void)setTopBarColor:(UIColor *)topBarColor;
 - (void)hideFlashButton;
 - (void)hideCameraToogleButton;
+- (BOOL)prefersStatusBarHidden;
 - (void)hideDismissButton;
 
 @end

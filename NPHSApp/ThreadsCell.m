@@ -16,7 +16,7 @@
     // Initialization code
     UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blur];
-    effectView.frame = CGRectMake(0, 0, 380, 115);
+    effectView.frame = CGRectMake(0, 0, 400, 115);
     [self.bgView addSubview:effectView];
     
 }

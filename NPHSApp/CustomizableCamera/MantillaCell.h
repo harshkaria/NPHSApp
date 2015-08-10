@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property (weak, nonatomic) IBOutlet UIButton *approveButton;
 @property (weak, nonatomic) IBOutlet UIButton *declineButton;
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 @property PFObject *cellObject;
 @end

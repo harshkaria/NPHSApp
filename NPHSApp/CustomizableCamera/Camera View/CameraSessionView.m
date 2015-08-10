@@ -40,6 +40,7 @@
 @property (nonatomic, strong) CameraFocalReticule *focalReticule;
 @property (nonatomic, strong) UIView *topBarView;
 
+
 //Temporary/Diagnostic properties
 @property (nonatomic, strong) UILabel *ISOLabel, *apertureLabel, *shutterSpeedLabel;
 
@@ -47,6 +48,10 @@
 
 @implementation CameraSessionView
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {

@@ -36,10 +36,12 @@
     return self;
 }
 
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:NO];
     [self.tableView reloadData];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -91,7 +93,6 @@
     
     if([object[@"hasImage"] boolValue])
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ImageComment"];
         PFFile *file = object[@"image"];
         [file getDataInBackgroundWithBlock:^(NSData *myData, NSError *error)
          {
