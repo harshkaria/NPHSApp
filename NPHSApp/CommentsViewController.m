@@ -20,6 +20,7 @@
 #import "JHTickerView.h"
 #import "DGActivityIndicatorView.h"
 #import "DGActivityIndicatorAnimationProtocol.h"
+#import "AppDelegate.h"
 @interface CommentsViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, MHFacebookImageViewerDatasource>
 
 @property NSString *trueString;
@@ -29,19 +30,22 @@
 @property PFInstallation *currentInstallation;
 @property NSNumber *amountOfVotes;
 @property NSNumber *rowHeight;
-@property NSArray *preData1;
+@property NSMutableArray *preData1;
 @property NSMutableArray *preData2;
 @property NSArray *imagesPreData;
-@property NSArray *finalCommentsArray;
+@property NSMutableArray *finalCommentsArray;
 @property NSString *hotObjectId;
 @property NSString *dogTagString;
+@property NSArray *hotObjectArray;
+@property NSArray *otherCommentsArray;
 @property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
 @property UIImage *cellImage;
+@property PFObject *hotObject;
 @property DGActivityIndicatorView *activityIndicatorView;
 @end
 
 @implementation CommentsViewController
-@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId, sunnyRefreshControl, dogTagString, imagesPreData, promptView, cellImage, activityIndicatorView;
+@synthesize commentPointer, back, promptLabel, totalComments, creators, currentInstallation, amountOfVotes, data, rowHeight, finalCommentsArray, preData1, preData2, hotObjectId, sunnyRefreshControl, dogTagString, imagesPreData, promptView, cellImage, activityIndicatorView, hotObject, hotObjectArray, otherCommentsArray;
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -135,6 +139,7 @@
 -(void)refreshMe
 {
     [self.commentPointer fetchInBackground];
+    [self loadObjects];
     //[self loadObjects];
 }
 -(void)backToThreads
@@ -144,51 +149,57 @@
 
 -(PFQuery *)queryForTable
 {
-    PFQuery *queryOneApproved = [PFQuery queryWithClassName:@"Comments"];
-    [queryOneApproved whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
-    [queryOneApproved whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
-    queryOneApproved.cachePolicy = kPFCachePolicyNetworkElseCache;
+    preData1 = [[NSMutableArray alloc] init];
+    PFQuery *mainQuery = [PFQuery queryWithClassName:@"Comments"];
+    [mainQuery whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
     
-    PFQuery *queryOneSelf = [PFQuery queryWithClassName:@"Comments"];
-    [queryOneSelf whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
-    [queryOneSelf whereKey:@"approved" equalTo:[NSNumber numberWithBool:NO]];
-    [queryOneSelf whereKey:@"creator" equalTo:[PFInstallation currentInstallation].objectId];
-    queryOneSelf.cachePolicy = kPFCachePolicyNetworkElseCache;
     
-    PFQuery *queryOne = [PFQuery orQueryWithSubqueries:@[queryOneApproved, queryOneSelf]];
+    PFQuery *queryApproved = [PFQuery queryWithClassName:@"Comments"];
+    [queryApproved whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [queryApproved whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
+    //queryApproved.cachePolicy = kPFCachePolicyNetworkElseCache;
+    
+    PFQuery *querySelf = [PFQuery queryWithClassName:@"Comments"];
+    [querySelf whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [querySelf whereKey:@"creator" equalTo:[PFInstallation currentInstallation].objectId];
+    [querySelf whereKey:@"approved" equalTo:[NSNumber numberWithBool:NO]];
+    //queryOneSelf.cachePolicy = kPFCachePolicyNetworkElseCache;
+    
+    PFQuery *queryOne = [PFQuery orQueryWithSubqueries:@[querySelf, queryApproved]];
     [queryOne orderByDescending:@"createdAt"];
-    queryOne.cachePolicy = kPFCachePolicyNetworkElseCache;
+    [preData1 addObjectsFromArray:[queryOne findObjects]];
     
-    PFQuery *queryTwo = [PFQuery queryWithClassName:@"Comments"];
-    [queryTwo whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
-    [queryTwo orderByDescending:@"voteNumber"];
-    [queryTwo setLimit:1];
-    queryTwo.cachePolicy = kPFCachePolicyNetworkElseCache;
+    PFQuery *hotQueryApproved = [PFQuery queryWithClassName:@"Comments"];
+    [hotQueryApproved whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [hotQueryApproved whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
     
-    //PFQuery *queryThree = [PFQuery queryWithClassName:@"Comments"];
-    //[queryThree whereKeyExists:@"image"];
-    //[queryThree orderByDescending:@"createdAt"];
+    PFQuery *hotQuerySelf = [PFQuery queryWithClassName:@"Comments"];
+    [hotQuerySelf whereKey:@"topicObjectId" equalTo:commentPointer.objectId];
+    [hotQuerySelf whereKey:@"creator" equalTo:[PFInstallation currentInstallation].objectId];
+    [hotQuerySelf whereKey:@"approved" equalTo:[NSNumber numberWithBool:NO]];
     
-    //PFObject *hotComment = [queryTwo getFirstObject];
-    //preData1 = [query findObjects];1
-    preData1 = [queryOne findObjects];
-    preData2 = [[NSMutableArray alloc] initWithObjects:[queryTwo getFirstObject], nil];
-  //  imagesPreData = [queryThree findObjects];
-    //preData2[0] = [queryTwo getFirstObject];
-   // hotObjectId = hotComment.objectId;
+    PFQuery *hotQueryFinal = [PFQuery orQueryWithSubqueries:@[hotQueryApproved, hotQuerySelf]];
+    [hotQueryFinal orderByDescending:@"voteNumber"];
+    hotObject = [hotQueryFinal getFirstObject];
     [self sortComments];
     
+
     return queryOne;
 }
 -(void)sortComments
 {
-        NSArray *finalArray = [preData2 arrayByAddingObjectsFromArray:preData1];
-       // NSOrderedSet *set = [NSOrderedSet orderedSetWithArray:finalArray];
-         finalCommentsArray = finalArray;
+    if(hotObject)
+    [preData1 insertObject:hotObject atIndex:0];
 }
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [preData1 count];
+}
+
 -(PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath
 {
-    return finalCommentsArray[indexPath.row];
+    
+    return preData1[indexPath.row];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -242,6 +253,10 @@
         //[cell.commentImageView setupImageViewer];
     
     }
+    if(cell == nil)
+    {
+         cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
+    }
     
     [cell.commentText sizeToFit];
     //cell.commentImageView.hidden = YES;
@@ -276,11 +291,12 @@
         cell.agreeButton.hidden = YES;
         cell.customView.layer.borderWidth = 1;
         cell.customView.layer.borderColor = [[UIColor redColor] CGColor];
+        cell.customView.backgroundColor = [UIColor blackColor];
         
     }
     if([object[@"creator"] isEqualToString:currentInstallation.objectId])
     {
-        cell.customView.backgroundColor = [UIColor lightGrayColor];
+        cell.customView.backgroundColor = [AppDelegate lightGrayCustom];
         cell.commentText.textColor = [UIColor blackColor];
         cell.agreeButton.hidden = YES;
         commentText = [self styleComment:object[@"text"] ownComment:YES];
@@ -353,7 +369,7 @@
 -(void)styleCell:(CommentsCell *)cell
 {
     cell.customView.layer.borderWidth = 0;
-    cell.customView.backgroundColor = [UIColor darkGrayColor];;
+    cell.customView.backgroundColor = [AppDelegate darkGrayCustom];;
     
     [cell.agreeButton addTarget:self action:@selector(agreeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     cell.agreeButton.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
@@ -397,15 +413,11 @@
     
     //[formattedString setAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:14]} range:[comment rangeOfString:comment]];
     
-    if(own)
-    {
-        [formattedString setAttributes:[NSDictionary dictionaryWithObjects:@[[UIColor blackColor], [UIFont fontWithName:@"HelveticaNeue" size:12]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]] range:[comment rangeOfString:comment]];
+
+        [formattedString setAttributes:[NSDictionary dictionaryWithObjects:@[[AppDelegate whiteCustom], [UIFont fontWithName:@"HelveticaNeue" size:14]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]] range:[comment rangeOfString:comment]];
         
-    }
-    else
-    {
-        [formattedString setAttributes:[NSDictionary dictionaryWithObjects:@[[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1], [UIFont fontWithName:@"HelveticaNeue" size:12]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]] range:[comment rangeOfString:comment]];
-    }
+    
+    
     for(NSString *word in words)
     {
         if([word hasPrefix:@"@"])

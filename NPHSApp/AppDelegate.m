@@ -35,23 +35,37 @@
 @implementation AppDelegate
 // publicname:(type *)nameinthecode
 @synthesize navController, tabBarController, beepText, badWords;
-
++ (UIColor*)darkGrayCustom {
+    return [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:34.0f/255.0f alpha:1.0f];
+}
++ (UIColor*)lightGrayCustom {
+    return [UIColor colorWithRed:76.0f/255.0f green:76.0f/255.0f blue:76.0f/255.0f alpha:1.0f];
+}
++ (UIColor*)whiteCustom {
+    return [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1.0f];
+}
++ (UIColor*)redCustom {
+    return [UIColor colorWithRed:193.0f/255.0f green:43.0f/255.0f blue:43.0f/255.0f alpha:1.0f];
+}
++ (UIColor*)greenCustom {
+    return [UIColor colorWithRed:0.0f/255.0f green:163.0f/255.0f blue:122.0f/255.0f alpha:1.0f];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ParseCrashReporting enable];
     [Fabric with:@[CrashlyticsKit]];
         // Override point for customization after application launch.
     // NORMAL
-    //[Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
-    //            clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
+    [Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"
+                clientKey:@"HZYxCrJvEaTPvJFqVWjP1xvGzxjlF2cbEgEpaYQ2"];
 
      //THREADS
-    [Parse setApplicationId:@"7nKYjaRV0FKR1QeU74bT5RiVPuujLk1xuBOcYas8"
-                  clientKey:@"Q0Sq9hazXcLrKpTJ9Oe2KDlR1JZE9kXfEKH9G0dL"];
+    //[Parse setApplicationId:@"7nKYjaRV0FKR1QeU74bT5RiVPuujLk1xuBOcYas8"
+      //            clientKey:@"Q0Sq9hazXcLrKpTJ9Oe2KDlR1JZE9kXfEKH9G0dL"];
     //BETA
     //[Parse setApplicationId:@"zScBzNliDkwbRIOwiuLY71s31ZWBkb6Gd2pDTtAr"
     //clientKey:@"UeIZ0ilVrYrYkKIXsNExpsmCfsFvME0f58X5xFZD"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    //[application setStatusBarHidden:NO];
+    [application setStatusBarHidden:NO];
     
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

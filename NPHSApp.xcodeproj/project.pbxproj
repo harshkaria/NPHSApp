@@ -265,6 +265,10 @@
 		AEEF05051B25884700C6024B /* harsh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEF05041B25884700C6024B /* harsh.jpg */; };
 		AEEF733B1A535A2F00B79DFE /* feedIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733A1A535A2F00B79DFE /* feedIcon.png */; };
 		AEEF733D1A535B6100B79DFE /* rss-7.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF733C1A535B6100B79DFE /* rss-7.png */; };
+		AEF3C9351B798DF800DFAED3 /* User Groups-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF3C9341B798DF800DFAED3 /* User Groups-50.png */; };
+		AEF3C9371B798F9400DFAED3 /* Settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF3C9361B798F9400DFAED3 /* Settings@3x.png */; };
+		AEF3C9391B79903500DFAED3 /* usericons.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF3C9381B79903500DFAED3 /* usericons.png */; };
+		AEF3C93B1B79910F00DFAED3 /* creditsicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF3C93A1B79910F00DFAED3 /* creditsicon@3x.png */; };
 		AEF660431B75D20D007DF928 /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF660421B75D20D007DF928 /* MarqueeLabel.m */; };
 		AEF660471B75D97C007DF928 /* JHTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF660461B75D97C007DF928 /* JHTickerView.m */; };
 		AEFA46C61A88A72300AB634B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1A21E819C66EEF009D5019 /* Main.storyboard */; };
@@ -697,6 +701,10 @@
 		AEEF05041B25884700C6024B /* harsh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = harsh.jpg; sourceTree = "<group>"; };
 		AEEF733A1A535A2F00B79DFE /* feedIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedIcon.png; sourceTree = "<group>"; };
 		AEEF733C1A535B6100B79DFE /* rss-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rss-7.png"; sourceTree = "<group>"; };
+		AEF3C9341B798DF800DFAED3 /* User Groups-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User Groups-50.png"; sourceTree = "<group>"; };
+		AEF3C9361B798F9400DFAED3 /* Settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings@3x.png"; sourceTree = "<group>"; };
+		AEF3C9381B79903500DFAED3 /* usericons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = usericons.png; path = CustomizableCamera/Source/usericons.png; sourceTree = "<group>"; };
+		AEF3C93A1B79910F00DFAED3 /* creditsicon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsicon@3x.png"; sourceTree = "<group>"; };
 		AEF660411B75D20D007DF928 /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
 		AEF660421B75D20D007DF928 /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
 		AEF660451B75D97C007DF928 /* JHTickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHTickerView.h; sourceTree = "<group>"; };
@@ -776,10 +784,12 @@
 				AE818ECE1A2051EA0054631E /* Dekar Light.otf */,
 				AE818ECB1A204E890054631E /* AROMA-Light.ttf */,
 				AEA625E419DE9F4A00200AA6 /* notification.jpg */,
+				AEF3C9361B798F9400DFAED3 /* Settings@3x.png */,
 				AE0CEE661A54E35D00C32CB1 /* arrows_in@3x.png */,
 				AE1B0FB019DBD3E80061FD4D /* nphs2.jpg */,
 				AE3A962A1B33D170003F38D2 /* arrow.png */,
 				AE0CEE641A54E28A00C32CB1 /* top_charts@3x.png */,
+				AEF3C9341B798DF800DFAED3 /* User Groups-50.png */,
 				AEEAEF2D1B746E150031CF25 /* App Icons */,
 				AE949FE31B49E7E000C028C0 /* Backgrounds */,
 				AE0CEE621A54E1F000C32CB1 /* users_three_2@3x.png */,
@@ -797,7 +807,9 @@
 				AED71E001B67656C0040B465 /* chipotle-logo.jpg */,
 				AE4350961B6B3C8100E03956 /* gtk-close.png */,
 				AED71E021B676E4C0040B465 /* sportclipslogo.png */,
+				AEF3C93A1B79910F00DFAED3 /* creditsicon@3x.png */,
 				AED71E041B676E520040B465 /* cronieslogo.png */,
+				AEF3C9381B79903500DFAED3 /* usericons.png */,
 				AE43509A1B6B413800E03956 /* closeimage.png */,
 				AEA0A7231B6A1BB20026D9D6 /* JSImagePickerViewController.h */,
 				AEA0A7241B6A1BB20026D9D6 /* JSImagePickerViewController.m */,
@@ -1595,7 +1607,6 @@
 				AE1A21D719C66EEF009D5019 /* Sources */,
 				AE1A21D819C66EEF009D5019 /* Frameworks */,
 				AE1A21D919C66EEF009D5019 /* Resources */,
-				AE94A00C1B4A72AA00C028C0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1664,6 +1675,7 @@
 				AECA85231B3A60C200236C7D /* whitearrow.png in Resources */,
 				AEA0A1B61B69BFD70026D9D6 /* Done@2x.png in Resources */,
 				AEEAEF401B746E150031CF25 /* iPadSpotlight@1x.png in Resources */,
+				AEF3C93B1B79910F00DFAED3 /* creditsicon@3x.png in Resources */,
 				AEEAEF431B746E150031CF25 /* iPhoneApp@3x.png in Resources */,
 				AE949FFD1B4A0EDA00C028C0 /* bg13.jpg in Resources */,
 				AE4350991B6B40F400E03956 /* closeimage.svg in Resources */,
@@ -1676,6 +1688,7 @@
 				AE0BE5D31B755BF0003706B6 /* notepadicon@3x.png in Resources */,
 				AEA0A22F1B69DC570026D9D6 /* TGCameraViewController.bundle in Resources */,
 				AE94A0071B4A113E00C028C0 /* bg18.jpg in Resources */,
+				AEF3C9371B798F9400DFAED3 /* Settings@3x.png in Resources */,
 				AE1B0FB119DBD3E80061FD4D /* nphs2.jpg in Resources */,
 				AEEAEF3D1B746E150031CF25 /* iPadApp@2x.png in Resources */,
 				AE63B4721ACD0F1500CA2967 /* rsz_appicon.png in Resources */,
@@ -1704,6 +1717,7 @@
 				AE6FBA601B59C0BF006C2128 /* sky.png in Resources */,
 				AEEAEF2C1B746C850031CF25 /* Images-2.xcassets in Resources */,
 				AEEAEF3A1B746E150031CF25 /* Icon-Small@2x.png in Resources */,
+				AEF3C9351B798DF800DFAED3 /* User Groups-50.png in Resources */,
 				AECEB7811B420C2B00CA2258 /* YALSunnyRefreshControl.xib in Resources */,
 				AE7E08331AC254410063DB63 /* new@3x.png in Resources */,
 				AECEB77B1B412CA600CA2258 /* bg3.jpg in Resources */,
@@ -1717,6 +1731,7 @@
 				AE949FF91B4A0E7400C028C0 /* bg11.jpg in Resources */,
 				AEEAEF3E1B746E150031CF25 /* iPadSettings@1x.png in Resources */,
 				AEFA46C61A88A72300AB634B /* Main.storyboard in Resources */,
+				AEF3C9391B79903500DFAED3 /* usericons.png in Resources */,
 				AEEAEF411B746E150031CF25 /* iPadSpotlight@2x.png in Resources */,
 				AE5C07D91AC9288F00B73832 /* note-write-7.png in Resources */,
 				AE21077D1AD52E2800CBC8C0 /* hacking.png in Resources */,
@@ -1741,22 +1756,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		AE94A00C1B4A72AA00C028C0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 2ebd78fb899d70e4342185831dd5822bb5f8def5 271a73c1aba378873c8083790d2b09a200cb404abc503e5186cef134e2c111cb";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AE1A21D719C66EEF009D5019 /* Sources */ = {
@@ -2002,7 +2001,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4d8d79a6-32f2-4ba7-aebe-f9b0fae64624";
+				PROVISIONING_PROFILE = "20d52d87-aba4-40c9-9b9a-1c7ecf27694a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2038,7 +2037,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "4d8d79a6-32f2-4ba7-aebe-f9b0fae64624";
+				PROVISIONING_PROFILE = "20d52d87-aba4-40c9-9b9a-1c7ecf27694a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2049,8 +2048,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-4";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -2060,7 +2059,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20d52d87-aba4-40c9-9b9a-1c7ecf27694a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2070,8 +2069,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-4";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/harshkaria/Downloads/parse-library-1.3.0",
@@ -2081,7 +2080,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = NPHSApp;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20d52d87-aba4-40c9-9b9a-1c7ecf27694a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

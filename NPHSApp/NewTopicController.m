@@ -62,11 +62,12 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [topicField resignFirstResponder];
+    [promptField resignFirstResponder];
     //[self.view endEditing:YES];
     return YES;
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range  cementString:(NSString *)string
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     BeepSendVC *beepVC = [[BeepSendVC alloc] init];
     self.characterLabel.textColor = [UIColor whiteColor];
@@ -74,7 +75,8 @@
     if([topicField isFirstResponder])
     {
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        NSInteger amount = (15 - [newString length]);
+        NSInteger amount = (23 - [newString length]);
+        
         self.characterLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)amount];
         if([beepVC containsBadWords:[newString lowercaseString]])
         {
@@ -182,7 +184,7 @@
     
     NSString *topic = topicField.text;
     NSString  *prompt = promptField.text;
-    if(![beepVC containsBadWords:[topic lowercaseString]] && ![beepVC containsBadWords:[prompt lowercaseString]] && ![self seeIfExists:[NSString stringWithFormat:@"#%@", topic]] && topic.length >= 3 && prompt.length >= 5 && ![topic containsString:@"#"])
+    if(![beepVC containsBadWords:[topic lowercaseString]] && ![beepVC containsBadWords:[prompt lowercaseString]] && ![self seeIfExists:[NSString stringWithFormat:@"#%@", topic]] && topic.length >= 3 && prompt.length >= 15 && ![topic containsString:@"#"])
     {
         return true;
     }
@@ -205,10 +207,10 @@
         return false;
 
     }
-    else if(prompt.length < 5)
+    else if(prompt.length < 15)
     {
         [RKDropdownAlert show];
-        [RKDropdownAlert title:@"Prompt Length" message:@"You need at least 5 characters for the prompt." backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:3];
+        [RKDropdownAlert title:@"Prompt Length" message:@"You need at least 15 characters for the prompt." backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:3];
         return false;
         
     }

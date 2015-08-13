@@ -17,6 +17,7 @@
 @synthesize sponsoredObject, sponsorLogo, discountText, addressText, phoneNumberText;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"yo");
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
     self.navigationItem.title = sponsoredObject[@"topic"];
     PFObject *adObject = [self getObject];

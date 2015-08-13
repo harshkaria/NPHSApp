@@ -9,6 +9,7 @@
 #import "ProfileTableViewController.h"
 #import "ProfileCell.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "AppDelegate.h"
 @interface ProfileTableViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end

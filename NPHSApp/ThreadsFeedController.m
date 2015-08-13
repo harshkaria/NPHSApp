@@ -17,6 +17,8 @@
 #import "SponsorViewController.h"
 #import "OnboardingContentViewController.h"
 #import "OnboardingViewController.h"
+#import "AppDelegate.h"
+#import "SplashViewController.h"
 
 @interface ThreadsFeedController ()
 @property PFObject *correct;
@@ -27,11 +29,12 @@
 @property NSArray *sponsoredData;
 @property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
 @property PFInstallation *currentInstallation;
+@property NSInteger totalCount;
 
 @end
 
 @implementation ThreadsFeedController
-@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData, currentInstallation;
+@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData, currentInstallation, totalCount, comingBack;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -48,11 +51,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstOnboard"]) {
-        NSLog(@"First launch");
-        [self presentViewController:[self onboard] animated:NO completion:nil];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstOnboard"];
-    }
+    
     
     currentInstallation = [PFInstallation currentInstallation];
     NSString *dogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
@@ -79,17 +78,17 @@
 }
 -(OnboardingViewController *)onboard
 {
-    OnboardingContentViewController *vcOne = [[OnboardingContentViewController alloc] initWithTitle:@"Hey." body:@"Welcome. This version has great updates to everything from the Club Feed, to Beep." image:nil buttonText:nil action:nil];
+    OnboardingContentViewController *vcOne = [[OnboardingContentViewController alloc] initWithTitle:@"Hey." body:@"Welcome to the NPHS app. This version has great updates to everything from the Club Feed to Beep." image:nil buttonText:nil action:nil];
     vcOne.topPadding = 20;
-    OnboardingContentViewController *vcTwo = [[OnboardingContentViewController alloc] initWithTitle:@"Express Your Views. Without being judged." body:@"On Beep, you now have the ability to anonymously express your opinions about any #Topic from #Food to the #2016Elections." image:nil buttonText:nil action:nil];
+    OnboardingContentViewController *vcTwo = [[OnboardingContentViewController alloc] initWithTitle:@"Express your views. Without being judged." body:@"On Beep, you now have the ability to anonymously express your opinions about any #Topic." image:nil buttonText:nil action:nil];
     vcTwo.topPadding = 0;
     vcTwo.bodyFontSize = 22;
     vcTwo.underIconPadding = 0;
-    OnboardingContentViewController *vcThree = [[OnboardingContentViewController alloc] initWithTitle:@"Comment on the #Topics you love, like never before." body:@"You can now share your views by commenting in any #Topic you want. To have a better conversation, you can also post pictures with your comments." image:nil buttonText:nil action:nil];
+    OnboardingContentViewController *vcThree = [[OnboardingContentViewController alloc] initWithTitle:@"Comment on the #Topics you love. Now with @ Tags." body:@"To have a better conversation, you can now post pictures in your comments. If you like a comment, Bump it to the top. Each user is given a Dog Tag (e.g. ABC) and can notify others." image:nil buttonText:nil action:nil];
     vcThree.topPadding = 0;
     vcThree.bodyFontSize = 22;
     vcThree.underIconPadding = 0;
-    OnboardingContentViewController *vcFour = [[OnboardingContentViewController alloc] initWithTitle:@"LIVE #Topics - LIVE scores. Experience events as they happen." body:@"With LIVE #Topics, get the latest scores and updates from sports in an instant." image:nil buttonText:nil action:nil];
+    OnboardingContentViewController *vcFour = [[OnboardingContentViewController alloc] initWithTitle:@"LIVE #Topics & LIVE scores. Experience events as they happen." body:@"With LIVE #Topics, get the latest scores and updates from sports in an instant. Yes, even during away games." image:nil buttonText:nil action:nil];
     vcFour.topPadding = 0;
     vcFour.bodyFontSize = 22;
     vcFour.underIconPadding = 0;
@@ -97,7 +96,7 @@
     vcFive.topPadding = 30;
     vcFive.bodyFontSize = 22;
     vcFive.underIconPadding = 10;
-    OnboardingContentViewController *vcSix = [[OnboardingContentViewController alloc] initWithTitle:@"See you on the other side." body:@"You are a part of something new. Let's have great conversations. Welcome aboard." image:nil buttonText:@"Start Beeping" action:^{
+    OnboardingContentViewController *vcSix = [[OnboardingContentViewController alloc] initWithTitle:@"Let's talk. Let's Beep." body:@"You are now a part of something really cool. Let's have great conversations." image:nil buttonText:@"Start Beeping" action:^{
         ThreadsFeedController *threadsVC = [[ThreadsFeedController alloc] init];
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
@@ -110,7 +109,7 @@
     else
     vcSix.bottomPadding = 50;
     
-    OnboardingViewController *onboardVC = [[OnboardingViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"bg4.jpg"] contents:@[vcOne, vcFive, vcTwo, vcThree, vcFour, vcSix]];
+    OnboardingViewController *onboardVC = [[OnboardingViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"bg4.jpg"] contents:@[vcOne, vcTwo, vcThree, vcFour, vcFive, vcSix]];
     if(![self has4InchDisplay])
     onboardVC.underTitlePadding = 80;
     onboardVC.shouldFadeTransitions = YES;
@@ -127,6 +126,15 @@
 }
 
 - (void)viewDidLoad {
+    
+    if(!comingBack)
+    {
+    UIViewController *splash = [[SplashViewController alloc] init];
+    [self presentViewController:splash animated:NO completion:nil];
+    [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
+    }
+    
+
     [[UINavigationBar appearance]setTintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
     self.navigationItem.title = @"Beep";
     [super viewDidLoad];
@@ -135,6 +143,17 @@
     [self setUpRefresh];
     
     
+    
+}
+-(void)hideMe
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"BeepFirstLaunch"]) {
+        NSLog(@"First launch");
+        [self presentViewController:[self onboard] animated:NO completion:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BeepFirstLaunch"];
+    }
+    // fixes bug where objects didn't load when app was loaded for the first time
     
 }
 -(void)setUpRefresh
@@ -170,6 +189,9 @@
     [queryTwo whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:NO]];
     [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
     [queryTwo setLimit:3 - countLive];
+    NSInteger hotCount = [queryTwo countObjects];
+    totalCount = countLive + hotCount;
+    NSLog([NSString stringWithFormat:@"%i", totalCount]);
     
     
     
@@ -267,7 +289,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row <= 2)
+    if(indexPath.row < totalCount - 1)
     {
         return 115;
     }
@@ -282,7 +304,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     self.tableView.separatorColor = [UIColor clearColor];
     ThreadsCell *cell;
-    if(indexPath.row <= 2)
+    if(indexPath.row < totalCount - 1)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"HotThread"];
     }
@@ -307,19 +329,13 @@
     cell.custom.layer.borderWidth = 1;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSNumber *commentCount = object[@"commentCount"];
-    if(indexPath.row <= 2)
+    if(indexPath.row < totalCount - 1)
     {
-    cell.custom.layer.borderColor = [[UIColor redColor]CGColor];
+    cell.custom.layer.borderColor = [AppDelegate redCustom].CGColor;
     }
-    else if(sponsored)
-    {
-        cell.custom.layer.borderColor = [[UIColor colorWithRed:(0) green:(153.0/255.0) blue:(0) alpha:1]CGColor];
-        cell.custom.layer.borderWidth = 2;
-    }
-    
     else
     {
-        cell.custom.layer.borderColor = [[UIColor whiteColor]CGColor];
+        cell.custom.layer.borderColor = [AppDelegate whiteCustom].CGColor;
     }
     if (live) {
         cell.liveView.hidden = NO;
@@ -339,6 +355,8 @@
     }
     if(sponsored)
     {
+        cell.custom.layer.borderColor = [AppDelegate greenCustom].CGColor;
+        cell.custom.layer.borderWidth = 2;
         cell.sponsoredView.hidden = NO;
         cell.sponsoredLabel.hidden = NO;
         cell.sponsor = YES;

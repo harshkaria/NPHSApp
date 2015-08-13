@@ -10,5 +10,5 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 @interface ThreadsFeedController : PFQueryTableViewController
-
+@property BOOL comingBack;
 @end

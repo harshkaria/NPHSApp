@@ -81,8 +81,8 @@
 }
 
 - (void)viewDidLoad {
-    [self addSegmented];
-    [self addGestures];
+    //[self addSegmented];
+    //[self addGestures];
     installation = [PFInstallation currentInstallation];
 
     self.tableView.separatorColor = [UIColor whiteColor];
@@ -103,19 +103,7 @@
     
     
     [super viewDidLoad];
-    if(!comingBack)
-    {
-
-    [self presentViewController:splash animated:NO completion:nil];
-
-    [self performSelector:@selector(hideMe) withObject:nil afterDelay:2];
-    }
-    if(comingBack)
-    {
-        self.navigationItem.hidesBackButton = YES;
-        segmentedControl.selectedSegmentIndex = 1;
-    }
-    
+        
     
 
    
@@ -209,7 +197,7 @@
         
     }
     [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:)  forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = segmentedControl;
+    self.navigationItem.title = @"Club Feed";
 }
 -(void)addGestures
 {

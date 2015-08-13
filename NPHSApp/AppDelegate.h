@@ -13,6 +13,12 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property NSString *beepText;
++ (UIColor*)darkGrayCustom;
++ (UIColor*)lightGrayCustom;
++ (UIColor*)whiteCustom;
++ (UIColor*)redCustom;
++ (UIColor*)greenCustom;
+
 
 
 @end
