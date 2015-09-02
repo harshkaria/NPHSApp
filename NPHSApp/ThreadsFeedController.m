@@ -30,11 +30,12 @@
 @property (nonatomic,strong) YALSunnyRefreshControl *sunnyRefreshControl;
 @property PFInstallation *currentInstallation;
 @property NSInteger totalCount;
+@property NSArray *specialData;
 
 @end
 
 @implementation ThreadsFeedController
-@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData, currentInstallation, totalCount, comingBack;
+@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData, currentInstallation, totalCount, comingBack, specialData;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -198,10 +199,13 @@
     PFQuery *sponsoredQuery = [PFQuery queryWithClassName:@"Topics"];
     [sponsoredQuery whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:YES]];
     
+    PFQuery *specialQuery = [PFQuery queryWithClassName:@"Topics"];
+    [specialQuery whereKey:@"specialUser" equalTo:[NSNumber numberWithBool:YES]];
+    
     data = [query findObjects];
     hotData = [queryTwo findObjects];
     liveData = [liveQuery findObjects];
-    sponsoredData = [sponsoredQuery findObjects];
+   
     [self sortObjects];
     return query;
 
@@ -289,7 +293,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row < totalCount - 1)
+    if(indexPath.row < 3)
     {
         return 115;
     }
@@ -304,7 +308,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     self.tableView.separatorColor = [UIColor clearColor];
     ThreadsCell *cell;
-    if(indexPath.row < totalCount - 1)
+    if(indexPath.row < 3)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"HotThread"];
     }
@@ -329,7 +333,7 @@
     cell.custom.layer.borderWidth = 1;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSNumber *commentCount = object[@"commentCount"];
-    if(indexPath.row < totalCount - 1)
+    if(indexPath.row < 3)
     {
     cell.custom.layer.borderColor = [AppDelegate redCustom].CGColor;
     }

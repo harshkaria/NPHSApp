@@ -56,6 +56,8 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
     [query whereKey:@"dogTag" equalTo:dogTag];
+    [query whereKeyDoesNotExist:@"specialComment"];
+    [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
     [query orderByDescending:@"createdAt"];
     return query;
 }

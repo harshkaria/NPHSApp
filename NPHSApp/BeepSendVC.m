@@ -142,7 +142,7 @@
   }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *chosenImage = info[UIImagePickerControllerCropRect];
     self.parseImageData = UIImagePNGRepresentation(chosenImage);
     
     [picker dismissViewControllerAnimated:YES completion:NULL];

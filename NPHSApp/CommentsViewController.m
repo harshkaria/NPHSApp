@@ -253,25 +253,14 @@
         //[cell.commentImageView setupImageViewer];
     
     }
-    if(cell == nil)
-    {
-         cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
-    }
-    
+       
     [cell.commentText sizeToFit];
     //cell.commentImageView.hidden = YES;
 
      BOOL staff = [object[@"staff"] boolValue];
     [self styleCell:cell];
     [self styleCellAfterVote:cell];
-    if(staff)
-    {
-        [self staffStyle:cell];
-    }
-    else
-    {
-        [self normalStyle:cell];
-    }
+    
     
     cell.agreeButton.hidden = NO;
     
@@ -337,6 +326,16 @@
         [cell.dogTag setTitle:object[@"dogTag"] forState:UIControlStateNormal];
         cell.dogTag.tag = indexPath.row;
         [cell.dogTag addTarget:self action:@selector(prepareProfile:) forControlEvents:UIControlEventTouchUpInside];
+        if(staff)
+        {
+            [self staffStyle:cell];
+        }
+        else if(!staff)
+        {
+            [self normalStyle:cell];
+        }
+        cell.dogTag.hidden = NO;
+        cell.tagView.hidden = NO;
 
     }
 

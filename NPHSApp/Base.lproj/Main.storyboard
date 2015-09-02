@@ -363,12 +363,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prompt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xie-wr-bKX" customClass="MarqueeLabel">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prompt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xie-wr-bKX">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="16"/>
                             <color key="textColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="tapToScroll" value="NO"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="holdScrolling" value="NO"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="labelize" value="NO"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageComment" rowHeight="299" id="t0R-KO-qni" customClass="CommentsCell">
@@ -1179,11 +1184,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Bwl-Rm-Vh9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nCG-tj-CjD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqw-i7-nYj">
-                                <rect key="frame" x="5" y="89" width="366" height="266"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqw-i7-nYj">
+                                <rect key="frame" x="5" y="89" width="311" height="266"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1203,11 +1208,11 @@
                                     <outlet property="delegate" destination="nCG-tj-CjD" id="DgP-YQ-U6S"/>
                                 </connections>
                             </textView>
-                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wQF-le-guk">
-                                <rect key="frame" x="40" y="420" width="295" height="128"/>
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wQF-le-guk">
+                                <rect key="frame" x="40" y="420" width="240" height="128"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ct-bE-0cg">
-                                <rect key="frame" x="28" y="378" width="307" height="28"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ct-bE-0cg">
+                                <rect key="frame" x="28" y="378" width="252" height="28"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="tintColor" red="0.83137254900000002" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Remove">
@@ -1217,7 +1222,7 @@
                                     <action selector="removeImage:" destination="trM-Yk-Rqt" eventType="touchUpInside" id="Mnx-7F-oj1"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZy-uF-myi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZy-uF-myi">
                                 <rect key="frame" x="7" y="52" width="103" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="103" id="hVM-tp-F3c"/>
@@ -1771,10 +1776,10 @@
         <segue reference="XpY-Nv-dhg"/>
         <segue reference="XxN-vJ-CSO"/>
         <segue reference="3m2-qw-8om"/>
-        <segue reference="d50-b3-Mrk"/>
-        <segue reference="SuR-fX-OI5"/>
+        <segue reference="jks-xs-whA"/>
         <segue reference="aY3-pk-XhA"/>
-        <segue reference="8e9-sc-9QT"/>
+        <segue reference="VNo-BJ-BUk"/>
         <segue reference="HKH-g9-nox"/>
+        <segue reference="afF-ya-ZU0"/>
     </inferredMetricsTieBreakers>
 </document>

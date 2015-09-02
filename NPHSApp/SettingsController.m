@@ -46,11 +46,12 @@
     return 3;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor blackColor];
-    NSString *currentDogTag = [currentInstallation objectForKey:@"dogTag"];
+    NSString *currentDogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
     cell.detailsLabel.text = @"";
     
     // Creates Switch
@@ -91,6 +92,7 @@
     else
     {
         settingsSwitch.thumbTintColor = [UIColor redColor];
+        [settingsSwitch setOn:NO];
     }
     cell.accessoryView = settingsSwitch;
     [cell.contentView addSubview:settingsSwitch];
@@ -127,12 +129,14 @@
     if([settingsSwitch isOn])
     {
         [currentInstallation setObject:[NSNumber numberWithBool:YES] forKey:@"dtOn"];
+        [currentInstallation saveInBackground];
         [self.tableView reloadData];
     }
     else
     {
         NSLog(@"False");
         [currentInstallation setObject:[NSNumber numberWithBool:NO] forKey:@"dtOn"];
+        [currentInstallation saveInBackground];
         [self.tableView reloadData];
     }
     
@@ -142,7 +146,7 @@
     BOOL keepGoing = true;
     NSMutableArray *existingTags = [self getTags];
     while (keepGoing) {
-        badWords = [[NSMutableArray alloc] initWithObjects:@"ASS", @"AZN",  @"BBW", @"BJS", @"BLK", @"BRA", @"BUD", @"BUM", @"BUN", @"COC", @"COK", @"COX", @"CUM", @"DIK", @"DIX", @"FAG", @"FAP", @"FDB", @"FGT", @"FKU", @"FTB", @"FTP", @"FUK", @"FUQ",  @"GAI", @"GAY", @"GEY", @"GOD", @"GUN", @"HOE", @"JAP", @"JEW", @"JIZ", @"KEV", @"KMS", @"KKK", @"KOK", @"KOX", @"KUM", @"LES",  @"LEZ", @"LIK", @"LSD", @"NGR", @"NIG", @"NIP", @"NUT", @"PEE", @"PIG", @"PISS", @"PMS", @"POO", @"POT", @"PRN", @"PSY",  @"PUS", @"RAK", @"SAK", @"SIP", @"SMA", @"SMD", @"SOB", @"STD", @"SUK", @"SXY", @"THC", @"TIT", @"VAG",  @"VAJ", @"WTF", @"WTH", @"XXX",  nil];
+        badWords = [[NSMutableArray alloc] initWithObjects:@"ASS", @"AZN",  @"BBW", @"BJS", @"BLK", @"BRA", @"BUD", @"BUM", @"BUN", @"COC", @"COK", @"COX", @"CUM", @"DIK", @"DIX", @"FAG", @"FAP", @"FDB", @"FGT", @"FKU", @"FTB", @"FTP", @"FUK", @"FUQ",  @"GAI", @"GAY", @"GEY", @"GOD", @"GUN", @"HOE", @"JAP", @"JEW", @"JIZ", @"KEV", @"KMS", @"KKK", @"KOK", @"KOX", @"KUM", @"LES",  @"LEZ", @"LIK", @"LSD", @"NGR", @"NIG", @"NIP", @"NUT", @"PEE", @"PIG", @"PISS", @"PMS", @"POO", @"POT", @"PRN", @"PSY",  @"PUS", @"RAK", @"SAK", @"SEX", @"SIP", @"SMA", @"SMD", @"SOB", @"STD", @"SUK", @"SXY", @"THC", @"TIT", @"VAG",  @"VAJ", @"WTF", @"WTH", @"XXX",  nil];
         
         PFInstallation *installation = [PFInstallation currentInstallation];
         NSString *alpha = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
