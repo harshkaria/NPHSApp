@@ -190,6 +190,7 @@
     [queryTwo whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:NO]];
     [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
     [queryTwo setLimit:3 - countLive];
+    
     NSInteger hotCount = [queryTwo countObjects];
     totalCount = countLive + hotCount;
     NSLog([NSString stringWithFormat:@"%i", totalCount]);
@@ -205,6 +206,7 @@
     data = [query findObjects];
     hotData = [queryTwo findObjects];
     liveData = [liveQuery findObjects];
+    sponsoredData = [sponsoredQuery findObjects];
    
     [self sortObjects];
     return query;

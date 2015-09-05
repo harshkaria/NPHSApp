@@ -171,7 +171,10 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     //commentString = [[NSMutableAttributedString alloc] initWithString:@""];
-    beepTextView.text = @"";
+    if([beepTextView.text isEqualToString:@"Enter Beep Here"])
+    {
+        beepTextView.text = @"";
+    }
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
