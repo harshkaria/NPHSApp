@@ -12,6 +12,10 @@
 	<dict/>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key><true/>
+    </dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.NPHSApp.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

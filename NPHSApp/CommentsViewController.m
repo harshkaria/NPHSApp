@@ -270,7 +270,7 @@
     cell.countButtton.layer.masksToBounds = YES;
     
 
-    if(indexPath.row == 0)
+    if(indexPath.row == 0 )
     {
         cell.countButtton.backgroundColor = [UIColor redColor];
         //cell.countButtton.layer.borderWidth = 1;
@@ -281,6 +281,7 @@
         cell.customView.layer.borderWidth = 1;
         cell.customView.layer.borderColor = [[UIColor redColor] CGColor];
         cell.customView.backgroundColor = [UIColor blackColor];
+        cell.deleteButton.hidden = YES;
         
     }
     if([object[@"creator"] isEqualToString:currentInstallation.objectId])
@@ -288,12 +289,17 @@
         cell.customView.backgroundColor = [AppDelegate lightGrayCustom];
         cell.commentText.textColor = [UIColor blackColor];
         cell.agreeButton.hidden = YES;
+        cell.deleteButton.hidden = NO;
+        [cell.deleteButton addTarget:self action:@selector(deleteComment:) forControlEvents:UIControlEventTouchUpInside];
+        cell.cellObject = object;
+        cell.deleteButton.tag = indexPath.row;
         commentText = [self styleComment:object[@"text"] ownComment:YES];
     }
     else if(![object[@"creator"] isEqualToString:currentInstallation.objectId])
     {
         [cell.agreeButton setTitleColor: [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forState:UIControlStateNormal];
         commentText = [self styleComment:object[@"text"] ownComment:NO];
+        cell.deleteButton.hidden = YES;
     }
     else if([voters containsObject:currentInstallation.objectId] || [object[@"creator"] isEqualToString:currentInstallation.objectId])
     {
@@ -338,6 +344,7 @@
         cell.tagView.hidden = NO;
 
     }
+    
 
     
     self.tableView.separatorColor = [UIColor clearColor];
@@ -354,6 +361,21 @@
 
     
     return cell;
+}
+
+-(void)deleteComment:(id)sender
+{
+    UIButton *deleteButton = (UIButton *)sender;
+    NSIndexPath *path = [NSIndexPath indexPathForRow:deleteButton.tag inSection:0];
+    CommentsCell *cell = (CommentsCell *)[self.tableView cellForRowAtIndexPath:path];
+    [cell.cellObject deleteInBackground];
+    int decrement = -1;
+    [self.commentPointer incrementKey:@"commentCount" byAmount:[NSNumber numberWithInt:decrement]];
+    [self.commentPointer saveInBackground];
+    cell.hidden = YES;
+    [self loadObjects];
+    
+    
 }
 
 -(void)prepareProfile:(id)sender

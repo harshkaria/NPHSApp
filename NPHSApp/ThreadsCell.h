@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIView *sponsoredView;
 @property (weak, nonatomic) IBOutlet UILabel *sponsoredLabel;
 @property BOOL sponsor;
+@property UIVisualEffectView *effectView;
+-(void)removeBlur;
 
 
 @end

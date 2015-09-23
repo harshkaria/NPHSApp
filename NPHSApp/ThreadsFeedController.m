@@ -31,11 +31,12 @@
 @property PFInstallation *currentInstallation;
 @property NSInteger totalCount;
 @property NSArray *specialData;
-
+@property NSArray *recentTopicsData;
+@property PFObject *newestObject;
 @end
 
 @implementation ThreadsFeedController
-@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData, currentInstallation, totalCount, comingBack, specialData;
+@synthesize correct, data, finalData, hotData, liveData, sunnyRefreshControl, sponsoredData, currentInstallation, totalCount, comingBack, specialData, recentTopicsData, newestObject;
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -56,7 +57,7 @@
     
     currentInstallation = [PFInstallation currentInstallation];
     NSString *dogTag = [[PFInstallation currentInstallation] objectForKey:@"dogTag"];
-     //[self loadObjects];
+    //[self loadObjects];
     
     
     [super viewWillAppear:YES];
@@ -66,7 +67,7 @@
     
     if([currentInstallation[@"dtOn"]boolValue] == true)
     {
-    self.navigationItem.leftBarButtonItem = dogTagButton;
+        self.navigationItem.leftBarButtonItem = dogTagButton;
     }
     else
     {
@@ -74,7 +75,7 @@
     }
     
     //self.navigationItem.leftBarButtonItem.enabled = NO;
-   
+    
     
 }
 -(OnboardingViewController *)onboard
@@ -106,13 +107,13 @@
     vcSix.underIconPadding = 35;
     
     if(![self has4InchDisplay])
-    vcSix.bottomPadding = 130;
+        vcSix.bottomPadding = 130;
     else
-    vcSix.bottomPadding = 50;
+        vcSix.bottomPadding = 50;
     
     OnboardingViewController *onboardVC = [[OnboardingViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"bg4.jpg"] contents:@[vcOne, vcTwo, vcThree, vcFour, vcFive, vcSix]];
     if(![self has4InchDisplay])
-    onboardVC.underTitlePadding = 80;
+        onboardVC.underTitlePadding = 80;
     onboardVC.shouldFadeTransitions = YES;
     return onboardVC;
     
@@ -130,12 +131,12 @@
     
     if(!comingBack)
     {
-    UIViewController *splash = [[SplashViewController alloc] init];
-    [self presentViewController:splash animated:NO completion:nil];
-    [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
+        UIViewController *splash = [[SplashViewController alloc] init];
+        [self presentViewController:splash animated:NO completion:nil];
+        [self performSelector:@selector(hideMe) withObject:nil afterDelay:3];
     }
     
-
+    
     [[UINavigationBar appearance]setTintColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1]];
     self.navigationItem.title = @"Beep";
     [super viewDidLoad];
@@ -189,28 +190,38 @@
     [queryTwo whereKey:@"live" equalTo:[NSNumber numberWithBool:NO]];
     [queryTwo whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:NO]];
     [query whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
-    [queryTwo setLimit:3 - countLive];
+    [queryTwo setLimit:2 - countLive];
     
     NSInteger hotCount = [queryTwo countObjects];
     totalCount = countLive + hotCount;
     NSLog([NSString stringWithFormat:@"%i", totalCount]);
     
+    PFQuery *recentObjectApproved = [PFQuery queryWithClassName:@"Topics"];
+    [recentObjectApproved whereKey:@"approved" equalTo:[NSNumber numberWithBool:YES]];
+    
+    
+    PFQuery *recentObjectOwn = [PFQuery queryWithClassName:@"Topics"];
+    [recentObjectOwn whereKey:@"approved" equalTo:[NSNumber numberWithBool:NO]];
+    [recentObjectOwn whereKey:@"creator" equalTo:[PFInstallation currentInstallation].installationId];
+    
+    PFQuery *finalRecentQuery = [PFQuery orQueryWithSubqueries:@[recentObjectApproved, recentObjectOwn]];
+    [finalRecentQuery whereKey:@"live" equalTo:[NSNumber numberWithBool:NO]];
+    [finalRecentQuery orderByDescending:@"createdAt"];
+    [finalRecentQuery setLimit:1];
     
     
     PFQuery *sponsoredQuery = [PFQuery queryWithClassName:@"Topics"];
     [sponsoredQuery whereKey:@"sponsor" equalTo:[NSNumber numberWithBool:YES]];
     
-    PFQuery *specialQuery = [PFQuery queryWithClassName:@"Topics"];
-    [specialQuery whereKey:@"specialUser" equalTo:[NSNumber numberWithBool:YES]];
-    
     data = [query findObjects];
     hotData = [queryTwo findObjects];
     liveData = [liveQuery findObjects];
     sponsoredData = [sponsoredQuery findObjects];
-   
+    newestObject = [finalRecentQuery getFirstObject];
+    
     [self sortObjects];
     return query;
-
+    
 }
 
 -(void)sortObjects
@@ -227,12 +238,15 @@
         [hotPreData addObject:liveObject.objectId];
     }
     
+    [preData addObject:newestObject];
+    [hotPreData addObject:newestObject.objectId];
+    
     for(PFObject *hotObject in hotData)
     {
         [preData addObject:hotObject];
         [hotPreData addObject:hotObject.objectId];
     }
-   
+    
     for(PFObject *sponsoredObject in sponsoredData)
     {
         [preData addObject:sponsoredObject];
@@ -249,7 +263,7 @@
     [queryTwo whereKey:@"creator" equalTo:[PFInstallation currentInstallation].objectId];
     
     PFQuery *queryThree = [PFQuery orQueryWithSubqueries:@[queryOne, queryTwo]];
-    [queryThree orderByDescending:@"createdAt"];
+    [queryThree orderByDescending:@"updatedAt"];
     
     recentData = [queryThree findObjects];
     
@@ -260,14 +274,14 @@
     //NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:preData];
     finalData = preData4;
     
-
+    
 }
 
 
 
 -(PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath
 {
-   // [self sortObjects];
+    // [self sortObjects];
     PFObject *object = finalData[indexPath.row];
     return object;
 }
@@ -323,7 +337,7 @@
         [self loadObjects];
     }
     
-  
+    
     cell.bgView.image = [UIImage imageNamed:object[@"imageName"]];
     cell.commentCountLabel.hidden = YES;
     cell.liveView.hidden = YES;
@@ -335,17 +349,47 @@
     cell.custom.layer.borderWidth = 1;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSNumber *commentCount = object[@"commentCount"];
-    if(indexPath.row < 3)
+    cell.custom.layer.borderColor = [AppDelegate whiteCustom].CGColor;
+    
+    if([object.objectId isEqualToString:newestObject.objectId])
     {
-    cell.custom.layer.borderColor = [AppDelegate redCustom].CGColor;
-    }
-    else
-    {
-        cell.custom.layer.borderColor = [AppDelegate whiteCustom].CGColor;
-    }
-    if (live) {
+        cell.custom.layer.borderColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1].CGColor;
         cell.liveView.hidden = NO;
+        cell.liveView.backgroundColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
+        
         cell.liveLabel.hidden = NO;
+        cell.liveLabel.text = @"NEW";
+        FBShimmeringView *shimmer = [[FBShimmeringView alloc] initWithFrame:CGRectMake(12, 17, 35, 21)];
+        shimmer.contentView = cell.liveLabel;
+        shimmer.shimmering = YES;
+        shimmer.shimmeringSpeed = 40;
+        shimmer.shimmeringOpacity = 1.0;
+        [cell.contentView addSubview:shimmer];
+        
+    }
+    
+    if(indexPath.row < 3 && ![object.objectId isEqualToString:newestObject.objectId] && !live)
+    {
+        cell.custom.layer.borderColor = [AppDelegate redCustom].CGColor;
+        cell.liveView.hidden = NO;
+        cell.liveView.backgroundColor = [UIColor redColor];
+        
+        cell.liveLabel.hidden = NO;
+        cell.liveLabel.text = @"HOT";
+        
+    }
+    
+    if (live) {
+        [cell removeBlur];
+        cell.bgView.hidden = YES;
+        cell.custom.backgroundColor = [UIColor blackColor];
+        cell.custom.layer.borderColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1].CGColor;;
+        
+        cell.liveView.hidden = NO;
+        cell.liveView.backgroundColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
+        
+        cell.liveLabel.hidden = NO;
+        cell.liveLabel.text = @"LIVE";
         FBShimmeringView *shimmer = [[FBShimmeringView alloc] initWithFrame:CGRectMake(12, 17, 35, 21)];
         shimmer.contentView = cell.liveLabel;
         shimmer.shimmering = YES;
@@ -375,7 +419,7 @@
         cell.sponsor = NO;
     }
     
-
+    
     
     cell.topicLabel.text = object[@"topic"];
     cell.currentThread = object;
@@ -385,6 +429,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     ThreadsCell *cell = (ThreadsCell *)[tableView cellForRowAtIndexPath:indexPath];
     correct = cell.currentThread;
     if(cell.sponsor)
@@ -393,7 +438,7 @@
     }
     else
     {
-    [self performSegueWithIdentifier:@"showComments" sender:self];
+        [self performSegueWithIdentifier:@"showComments" sender:self];
     }
 }
 

@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *fireLabel;
 @property (weak, nonatomic) IBOutlet UIButton *dogTag;
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property (weak, nonatomic) IBOutlet PFImageView *commentImageView;
 
@@ -29,6 +30,7 @@
 @property NSString *currentComment;
 @property (weak, nonatomic) IBOutlet UIButton *countButtton;
 -(void)staffStyle;
+@property PFObject *cellObject;
 @end
 
 
