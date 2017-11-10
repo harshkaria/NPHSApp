@@ -14,29 +14,7 @@
 @end
 
 @implementation SponsorViewController
-@synthesize sponsoredObject, sponsorLogo, discountText, addressText, phoneNumberText;
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    NSLog(@"yo");
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
-    self.navigationItem.title = sponsoredObject[@"topic"];
-    PFObject *adObject = [self getObject];
-    discountText.text = adObject[@"text"];
-    PFFile *logo = adObject[@"companyLogo"];
-    [logo getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
-     {
-         UIImage *logo = [UIImage imageWithData:data];
-         sponsorLogo.image = logo;
-     }];
-    discountText.layer.cornerRadius = 4;
-    discountText.layer.borderWidth = 2;
-    discountText.layer.borderColor = [[UIColor whiteColor]CGColor];
-    addressText.text = adObject[@"address"];
-    phoneNumberText.text = adObject[@"phone"];
-    
-    
-    // Do any additional setup after loading the view.
-}
+@synthesize sponsoredObject, sponsorLogo, discountText, addressText, phoneNumberText, websiteText, emailText;
 -(PFObject *)getObject
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Ads"];
@@ -44,6 +22,37 @@
     PFObject *adObject = [query getFirstObject];
     return adObject;
 }
+- (void)viewDidLoad {
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [super viewDidLoad];
+    
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1];
+    self.navigationItem.title = sponsoredObject[@"topic"];
+    
+    PFObject *adObject = [self getObject];
+    
+    discountText.text = adObject[@"text"];
+    PFFile *logo = adObject[@"companyLogo"];
+    [logo getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+     {
+         UIImage *logo = [UIImage imageWithData:data];
+         sponsorLogo.image = logo;
+     }];
+    
+    [discountText setContentOffset:CGPointZero];
+    discountText.layer.cornerRadius = 4;
+    discountText.layer.borderWidth = 2;
+    discountText.layer.borderColor = [[UIColor whiteColor]CGColor];
+    
+    websiteText.text = adObject[@"website"];
+    emailText.text = adObject[@"email"];
+    addressText.text = adObject[@"address"];
+    phoneNumberText.text = adObject[@"phone"];
+    
+    
+    // Do any additional setup after loading the view.
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

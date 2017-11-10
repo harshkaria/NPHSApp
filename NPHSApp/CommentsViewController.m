@@ -80,6 +80,7 @@
 }
 -(void)viewDidLoad
 {
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.currentInstallation = [PFInstallation currentInstallation];
     self.navigationItem.title = commentPointer[@"topic"];
     [super viewDidLoad];
@@ -242,6 +243,7 @@
     CommentsCell *cell;
     cell = [tableView dequeueReusableCellWithIdentifier:@"Comment"];
     cell.accessoryView = UITableViewCellAccessoryNone;
+    [cell.commentText setContentOffset:CGPointZero];
     
     if([object[@"hasImage"] boolValue])
     {
@@ -407,7 +409,7 @@
 -(void)styleCellAfterVote:(CommentsCell *)cell
 {
     cell.countButtton.layer.borderWidth = 0;
-    cell.countButtton.layer.cornerRadius = 7;
+    cell.countButtton.layer.cornerRadius = 6;
     cell.countButtton.backgroundColor = [UIColor blackColor];
     cell.countButtton.enabled = NO;
     [cell.countButtton setTitleColor:[UIColor colorWithRed:(212.0/255.0) green:(175.0/255.0) blue:(55.0/255.0) alpha:1] forState:UIControlStateDisabled];
@@ -463,6 +465,7 @@
     UIButton *agreeButton = (UIButton *)sender;
     NSIndexPath *path = [NSIndexPath indexPathForRow:agreeButton.tag inSection:0];
     CommentsCell *cell = (CommentsCell *)[self.tableView cellForRowAtIndexPath:path];
+    cell.agreeButton.hidden = YES;
     PFObject *object = [PFObject objectWithoutDataWithClassName:@"Comments" objectId:cell.currentComment];
     [object addUniqueObject:currentInstallation.objectId forKey:@"voters"];
     [object incrementKey:@"voteNumber"];
@@ -471,7 +474,6 @@
         if(succeeded)
         {
          amountOfVotes = object[@"voteNumber"];
-         cell.agreeButton.hidden = YES;
          cell.voted = YES;
         [self sendBumpNotification:cell.dogTag.titleLabel.text];
          [cell.countButtton setTitle:[self getAmountOfComments:amountOfVotes] forState:UIControlStateDisabled];

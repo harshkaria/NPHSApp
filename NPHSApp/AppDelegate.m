@@ -12,11 +12,11 @@
 //#import "OnboardingContentViewController.h"
 #import "FeedController.h"
 #import "RKDropdownAlert.h"
-#import <ParseCrashReporting/ParseCrashReporting.h>
+//#import <ParseCrashReporting/ParseCrashReporting.h>
 #import "BeepSpotlightVC.h"
 #import "SplashViewController.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 #import "OnboardingViewController.h"
 #import "OnboardingContentViewController.h"
 #import "ThreadsFeedController.h"
@@ -51,8 +51,8 @@
     return [UIColor colorWithRed:0.0f/255.0f green:163.0f/255.0f blue:122.0f/255.0f alpha:1.0f];
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [ParseCrashReporting enable];
-    [Fabric with:@[CrashlyticsKit]];
+   // [ParseCrashReporting enable];
+   // [Fabric with:@[CrashlyticsKit]];
         // Override point for customization after application launch.
     // NORMAL
     [Parse setApplicationId:@"ca45HTXpVgPlUi1w0kfUR1rcU4p56g398F2N1UBa"

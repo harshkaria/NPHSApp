@@ -99,8 +99,8 @@
     }
     if(indexPath.row == 2)
     {
-        cell.settingsPrompt.text = @"Rules & Info";
-        cell.detailsLabel.text = @"Guidlines to follow at all times on Beep.";
+        cell.settingsPrompt.text = @"Rules";
+        cell.detailsLabel.text = @"Guidelines to follow at all times on Beep.";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -157,7 +157,7 @@
         NSString *stringB = [alpha substringWithRange:NSMakeRange(b, 1)];
         int c = arc4random() % 26;
         NSString *stringC = [alpha substringWithRange:NSMakeRange(c, 1)];
-        final = [NSString stringWithFormat:@"%@%@%@", stringA, stringB, stringC];
+        final = @"H";
         if(![badWords containsObject:final] && ![existingTags containsObject:final])
         {
             [self removeTag];
@@ -165,7 +165,7 @@
             tagObject[@"dogTag"] = final;
             [tagObject saveInBackground];
             [installation setObject:final forKey:@"dogTag"];
-            [installation setObject:[NSNumber numberWithBool:NO] forKey:@"authorized"];
+            [installation setObject:[NSNumber numberWithBool:YES] forKey:@"authorized"];
             [installation saveInBackground];
             keepGoing = false;
         }

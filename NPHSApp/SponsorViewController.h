@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *discountText;
 @property (weak, nonatomic) IBOutlet UITextView *addressText;
 @property (weak, nonatomic) IBOutlet UITextView *phoneNumberText;
+@property (weak, nonatomic) IBOutlet UITextView *emailText;
+@property (weak, nonatomic) IBOutlet UITextView *websiteText;
 
 @end

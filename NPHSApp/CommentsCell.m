@@ -15,7 +15,13 @@
 
 -(void)awakeFromNib
 {
+    
     [self.commentImageView setupImageViewer];
+    CGPoint offset = CGPointMake(0, self.commentText.contentSize.height - self.commentText.frame.size.height);
+  //  [self.commentText setContentOffset: CGPointMake(0,0) animated:NO];
+    //[self.commentText setContentOffset:offset animated:YES];
+    //commentText.textContainerInset = UIEdgeInsetsZero;
+    //commentText.textContainer.lineFragmentPadding = 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
